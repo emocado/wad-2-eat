@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import ForumView from '../views/ForumView.vue'
 import GameCardsStackComponent from "../components/GameCardsStackComponent.vue";
+import MapView from "../components/MapView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
