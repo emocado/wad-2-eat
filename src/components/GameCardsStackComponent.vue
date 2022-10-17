@@ -115,8 +115,7 @@ export default {
     },
     handleCardAccepted() {
       console.log("handleCardAccepted");
-      // navigate to home page
-      this.$router.push({ name: "map" });
+      this.$router.push({ path: `/map/lat/${this.post[0].latitude}/lng/${this.post[0].longitude}` });
     },
     handleCardRejected() {
       console.log("handleCardRejected");

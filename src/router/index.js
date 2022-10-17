@@ -30,6 +30,11 @@ const router = createRouter({
       name:'forum',
       component: ForumView
     },
+    {
+      path: '/map/lat/:lat/lng/:lng',
+      name: 'map',
+      component: MapView
+    },
   ]
 })
 
