@@ -1,31 +1,14 @@
 <template>
-  <GMapMap
-      :center="center"
-      :zoom="17"
-      map-type-id="terrain"
-      style="width: 100vw; height: 100vh"
-  >
-    <GMapCluster>
-      <GMapMarker
-          :key="index"
-          v-for="(m, index) in markers"
-          :position="m.position"
-          :clickable="true"
-          :draggable="true"
-          @click="center=m.position"
-      />
-    </GMapCluster>
-  </GMapMap>
+  <div id="map" ref="map" style="position: unset;height: 100vh; width:100vw"></div>
 </template>
 
 <script>
 
 export default {
-  name: 'MapView',
-
   data() {
     return {
-      center: {lat: 1.296568, lng: 103.852119},
+      center: { lat: 1.3099, lng: 103.8765 },
+      map: null,
       markers: [
         {
           position: {
@@ -33,10 +16,11 @@ export default {
           },
         }
         , // Along list of clusters
-      ]
+      ],
     }
   },
-  created() {
+
+  mounted() {
     navigator.geolocation.watchPosition(
       (pos) => {
         this.center = {
@@ -58,6 +42,49 @@ export default {
         },
       }
     ]
+
+    this.map = new window.google.maps.Map(this.$refs["map"], {
+      center: this.center,
+      zoom: 17,
+    });
+
+    const directionsService = new window.google.maps.DirectionsService();
+    const directionsRenderer = new window.google.maps.DirectionsRenderer();
+    directionsRenderer.setMap(this.map);
+
+    directionsService
+      .route({
+        origin: this.center,
+        destination: { lat: lat, lng: lng },
+        travelMode: window.google.maps.TravelMode['DRIVING'],
+      })
+      .then((response) => {
+        directionsRenderer.setDirections(response);
+      })
+      .catch((e) => console.log(e));
   },
+  created() {
+    // const api_key = "AIzaSyDJx4A_FqpmuCF40Tm-gs4F0Z3we45UH6c"
+    // const proxyurl = "https://cors-anywhere.herokuapp.com/";
+    // const url = `https://maps.googleapis.com/maps/api/directions/json?origin=Aljunied+Cres&destination=Singapore+Management+University&key=${api_key}`
+    // fetch(proxyurl + url)
+    //   .then(response => response.json())
+    //   .then(data => {
+    //     console.log(data)
+    //     const stepsArr = data.routes[0].legs[0].steps
+    //     console.log(stepsArr);
+    //     this.path = stepsArr.map(step => {
+    //       return {
+    //         lat: step.start_location.lat,
+    //         lng: step.start_location.lng,
+    //       }
+    //     })
+    //     this.path.push({
+    //       lat: stepsArr[stepsArr.length - 1].end_location.lat,
+    //       lng: stepsArr[stepsArr.length - 1].end_location.lng,
+    //     })
+    //     // this.path = data.routes[0].overview_polyline.points
+    //   })
+  }
 }
 </script>
