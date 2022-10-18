@@ -1,10 +1,19 @@
 <template>
-  <div id="map" ref="map" style="position: unset;height: 100vh; width:100vw"></div>
+  <div id="map" ref="map" style="position: unset;height: 100vh; width:100vw">
+    <MapInfoWindow :lat="center.lat" :lng="center.lng">
+      hello world
+    </MapInfoWindow>
+  </div>
 </template>
 
 <script>
+import MapInfoWindow from './MapInfoWindow.vue';
 
 export default {
+  components: {
+    MapInfoWindow
+  },
+
   data() {
     return {
       center: { lat: 1.3099, lng: 103.8765 },
@@ -12,51 +21,44 @@ export default {
       markers: [
         {
           position: {
-            lat: 1.296568, lng: 103.852119
+            lat: 1.296568,
+            lng: 103.852119
           },
-        }
-        , // Along list of clusters
+        }, // Along list of clusters
       ],
-    }
+    };
   },
-
   mounted() {
-    navigator.geolocation.watchPosition(
-      (pos) => {
-        this.center = {
-          lat: pos.coords.latitude,
-          lng: pos.coords.longitude
-        }
-      },
-      (err) => {
-        console.log(err);
-      }
-    )
-
+    navigator.geolocation.watchPosition((pos) => {
+      this.center = {
+        lat: pos.coords.latitude,
+        lng: pos.coords.longitude
+      };
+    }, (err) => {
+      console.log(err);
+    });
     const lat = Number(this.$route.params.lat);
     const lng = Number(this.$route.params.lng);
     this.markers = [
       {
         position: {
-          lat: lat, lng: lng
+          lat: lat,
+          lng: lng
         },
       }
-    ]
-
+    ];
     this.map = new window.google.maps.Map(this.$refs["map"], {
       center: this.center,
       zoom: 17,
     });
-
     const directionsService = new window.google.maps.DirectionsService();
     const directionsRenderer = new window.google.maps.DirectionsRenderer();
     directionsRenderer.setMap(this.map);
-
     directionsService
       .route({
         origin: this.center,
         destination: { lat: lat, lng: lng },
-        travelMode: window.google.maps.TravelMode['DRIVING'],
+        travelMode: window.google.maps.TravelMode["DRIVING"],
       })
       .then((response) => {
         directionsRenderer.setDirections(response);
@@ -69,37 +71,35 @@ export default {
       newVal = {
         lat: Math.round(newVal.lat * 10000) / 10000,
         lng: Math.round(newVal.lng * 10000) / 10000
-      }
+      };
       // round oldVal to 4 dp
       oldVal = {
         lat: Math.round(oldVal.lat * 10000) / 10000,
         lng: Math.round(oldVal.lng * 10000) / 10000
-      }
+      };
       if (newVal.lat !== oldVal.lat && newVal.lng !== oldVal.lng) {
         const lat = Number(this.$route.params.lat);
         const lng = Number(this.$route.params.lng);
         this.markers = [
           {
             position: {
-              lat: lat, lng: lng
+              lat: lat,
+              lng: lng
             },
           }
-        ]
-
+        ];
         this.map = new window.google.maps.Map(this.$refs["map"], {
           center: this.center,
           zoom: 17,
         });
-
         const directionsService = new window.google.maps.DirectionsService();
         const directionsRenderer = new window.google.maps.DirectionsRenderer();
         directionsRenderer.setMap(this.map);
-
         directionsService
           .route({
             origin: this.center,
             destination: { lat: lat, lng: lng },
-            travelMode: window.google.maps.TravelMode['DRIVING'],
+            travelMode: window.google.maps.TravelMode["DRIVING"],
           })
           .then((response) => {
             directionsRenderer.setDirections(response);
@@ -108,6 +108,18 @@ export default {
       }
     }
   },
+
+  methods: {
+    getMap(callback) {
+      let vm = this
+      function checkForMap() {
+        if (vm.map) callback(vm.map)
+        else setTimeout(checkForMap, 200)
+      }
+      checkForMap()
+    }
+  },
+
   created() {
     // const api_key = "AIzaSyDJx4A_FqpmuCF40Tm-gs4F0Z3we45UH6c"
     // const proxyurl = "https://cors-anywhere.herokuapp.com/";
@@ -130,6 +142,6 @@ export default {
     //     })
     //     // this.path = data.routes[0].overview_polyline.points
     //   })
-  }
+  },
 }
 </script>
