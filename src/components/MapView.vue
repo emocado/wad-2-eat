@@ -63,6 +63,51 @@ export default {
       })
       .catch((e) => console.log(e));
   },
+  watch: {
+    center: function (newVal, oldVal) {
+      // round newVal to 4 dp
+      newVal = {
+        lat: Math.round(newVal.lat * 10000) / 10000,
+        lng: Math.round(newVal.lng * 10000) / 10000
+      }
+      // round oldVal to 4 dp
+      oldVal = {
+        lat: Math.round(oldVal.lat * 10000) / 10000,
+        lng: Math.round(oldVal.lng * 10000) / 10000
+      }
+      if (newVal.lat !== oldVal.lat && newVal.lng !== oldVal.lng) {
+        const lat = Number(this.$route.params.lat);
+        const lng = Number(this.$route.params.lng);
+        this.markers = [
+          {
+            position: {
+              lat: lat, lng: lng
+            },
+          }
+        ]
+
+        this.map = new window.google.maps.Map(this.$refs["map"], {
+          center: this.center,
+          zoom: 17,
+        });
+
+        const directionsService = new window.google.maps.DirectionsService();
+        const directionsRenderer = new window.google.maps.DirectionsRenderer();
+        directionsRenderer.setMap(this.map);
+
+        directionsService
+          .route({
+            origin: this.center,
+            destination: { lat: lat, lng: lng },
+            travelMode: window.google.maps.TravelMode['DRIVING'],
+          })
+          .then((response) => {
+            directionsRenderer.setDirections(response);
+          })
+          .catch((e) => console.log(e));
+      }
+    }
+  },
   created() {
     // const api_key = "AIzaSyDJx4A_FqpmuCF40Tm-gs4F0Z3we45UH6c"
     // const proxyurl = "https://cors-anywhere.herokuapp.com/";
