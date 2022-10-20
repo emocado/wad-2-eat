@@ -34,6 +34,17 @@
               <li><a class="dropdown-item" href="#">Something else here</a></li>
             </ul>
           </li>
+
+          <div v-if="isLogin" class="login">
+            <button class="btn btn-primary" @click="signOut">
+              Sign Out
+            </button>
+          </div>
+
+          <button v-else class="btn btn-primary" @click="signIn">
+            Sign in
+          </button>
+
         </ul>
       </div>
     </div>
@@ -42,11 +53,16 @@
 
 <script>
 import { RouterLink } from 'vue-router'
+import { useAuth } from '@/firebase'
 
 export default {
   components: {
     RouterLink,
   },
+  setup() {
+    const { user, isLogin, signOut, signIn } = useAuth()
+    return { user, isLogin, signOut, signIn }
+  }
 }
 </script>
 <style lang="">

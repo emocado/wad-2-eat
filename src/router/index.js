@@ -3,6 +3,7 @@ import HomeView from '../views/HomeView.vue'
 import ForumView from '../views/ForumView.vue'
 import GameCardsStackComponent from "../components/GameCardsStackComponent.vue";
 import MapView from "../components/MapView.vue";
+import ChatBox from "../components/ChatBox.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -34,6 +35,11 @@ const router = createRouter({
       path: '/map/lat/:lat/lng/:lng',
       name: 'map',
       component: MapView
+    },
+    {
+      path: '/chat',
+      name: 'chat',
+      component: ChatBox
     },
   ]
 })
