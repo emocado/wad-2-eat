@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import ForumView from '../views/ForumView.vue'
 import GameCardsStackComponent from "../components/GameCardsStackComponent.vue";
 
 const router = createRouter({
@@ -22,7 +23,12 @@ const router = createRouter({
       path: '/swipe',
       name: 'swipe',
       component: GameCardsStackComponent
-    }
+    },
+    {
+      path: '/forum',
+      name:'forum',
+      component: ForumView
+    },
   ]
 })
 
