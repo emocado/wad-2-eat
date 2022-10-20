@@ -2,7 +2,7 @@
   <header>
 
     <div class="wrapper">
-      <NavBar/>
+      <NavbarDefault light/>
     </div>
   </header>
 
@@ -11,13 +11,13 @@
 
 <script>
 import { RouterView } from 'vue-router'
-import NavBar from './components/NavBar.vue'
+import NavbarDefault from './components/NavbarDefault.vue'
 
 export default {
   name: "App",
   components: {
     RouterView,
-    NavBar
+    NavbarDefault
   },
 };
 </script>
