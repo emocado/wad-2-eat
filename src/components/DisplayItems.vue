@@ -41,6 +41,7 @@
   border-radius: 20px;
   border-color: rgba(234, 156, 169,0.5) ;
   opacity: 80%;
+  transition:0.3s;
 }
 
 .card:hover{
@@ -48,6 +49,7 @@
   border-radius: 20px;
   opacity: 100%; 
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6);
+  transition:0.3s
 }
 
 </style>

@@ -7,7 +7,7 @@
                 <button class="btn btn-primary btn-sm">Search</button>
             </div> -->
             <div class="search-bar input-group">
-                <input type="text" class="form-control" placeholder="Search for areas, food type"
+                <input type="text" class="input-search form-control" placeholder="Search for areas, food type"
                     aria-label="Recipient's username" aria-describedby="button-addon2">
                 <button class="btn btn-outline-secondary search" type="button" id="button-addon2"><img id="search-icon" src="src/assets/findFood.png"></button>
             </div>
@@ -35,6 +35,10 @@
     margin-left: 10px;
     margin-right: 10px;
     width: 100px;
+}
+.input-search:focus{
+    box-shadow: 0 10px 20px rgba(245, 164, 164, 0.6);
+    border-color: rgb(234, 156, 169) ;
 }
 .search{
     height:50px;

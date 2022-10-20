@@ -70,6 +70,7 @@ export default {
       self.error = self.post = null
       self.loading = true
 
+      // eslint-disable-next-line no-unused-vars
       const options = {
         method: "GET",
         url: "https://travel-advisor.p.rapidapi.com/restaurants/list-by-latlng",
