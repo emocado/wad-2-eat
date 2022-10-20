@@ -71,25 +71,26 @@ export default {
       
       // comment out axios as the limit for api is only 500 per month
 
-      // const options = {
-      //   method: "GET",
-      //   url: "https://travel-advisor.p.rapidapi.com/restaurants/list-by-latlng",
-      //   params: {
-      //     latitude: "1.296568",
-      //     longitude: "103.852119",
-      //     limit: "10",
-      //     currency: "SGD",
-      //     distance: "1",
-      //     open_now: "false",
-      //     lunit: "km",
-      //     lang: "en_US",
-      //   },
-      //   headers: {
-      //     "X-RapidAPI-Key":
-      //       import.meta.env.VITE_TRAVEL_ADVISOR_API_KEY,
-      //     "X-RapidAPI-Host": "travel-advisor.p.rapidapi.com",
-      //   },
-      // };
+      // eslint-disable-next-line no-unused-vars
+      const options = {
+        method: "GET",
+        url: "https://travel-advisor.p.rapidapi.com/restaurants/list-by-latlng",
+        params: {
+          latitude: "1.296568",
+          longitude: "103.852119",
+          limit: "10",
+          currency: "SGD",
+          distance: "1",
+          open_now: "false",
+          lunit: "km",
+          lang: "en_US",
+        },
+        headers: {
+          "X-RapidAPI-Key":
+            import.meta.env.VITE_TRAVEL_ADVISOR_API_KEY,
+          "X-RapidAPI-Host": "travel-advisor.p.rapidapi.com",
+        },
+      };
 
 
       // axios
