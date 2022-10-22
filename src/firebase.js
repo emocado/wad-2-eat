@@ -35,20 +35,22 @@ const firestore = firebase.firestore()
 const messagesCollection = firestore.collection('messages')
 const messagesQuery = messagesCollection.orderBy('createdAt', 'desc').limit(100)
 
-export function useChat() {
+export function useChat(chatRoomId) {
   const messages = ref([])
   const unsubscribe = messagesQuery.onSnapshot(snapshot => {
     messages.value = snapshot.docs
       .map(doc => ({ id: doc.id, ...doc.data() }))
+      .filter(doc => doc.chatRoomId === chatRoomId)
       .reverse()
   })
   onUnmounted(unsubscribe)
 
   const { user, isLogin } = useAuth()
-  const sendMessage = text => {
+  const sendMessage = (text, chatRoomId) => {
     if (!isLogin.value) return
     const { photoURL, uid, displayName } = user.value
     messagesCollection.add({
+      chatRoomId: chatRoomId,
       userName: displayName,
       userId: uid,
       userPhotoURL: photoURL,

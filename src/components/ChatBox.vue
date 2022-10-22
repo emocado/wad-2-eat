@@ -30,13 +30,18 @@
 <script>
 import { ref, watch, nextTick } from 'vue'
 import { useAuth, useChat } from '@/firebase'
+import { useRoute } from 'vue-router'
 import MessageComponent from './MessageComponent.vue'
 export default {
   components: { MessageComponent },
   setup() {
     const { user, isLogin } = useAuth()
-    const { messages, sendMessage } = useChat()
+    const route = useRoute()
+    const chatRoomId = route.params.chatroomid;
+    const { messages, sendMessage } = useChat(chatRoomId)
+
     console.log(messages);
+  
     const bottom = ref(null)
     watch(
       messages,
@@ -49,7 +54,7 @@ export default {
     )
     const message = ref('')
     const send = () => {
-      sendMessage(message.value)
+      sendMessage(message.value, chatRoomId)
       message.value = ''
     }
     return { user, isLogin, messages, bottom, message, send }

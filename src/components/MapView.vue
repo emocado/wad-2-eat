@@ -37,7 +37,7 @@ export default {
     }, (err) => {
       console.log(err);
     });
-    const lat = Number(this.$route.params.lat);
+    const lat = Number(this.$route.params.lat); 
     const lng = Number(this.$route.params.lng);
     this.markers = [
       {
