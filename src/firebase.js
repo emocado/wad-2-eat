@@ -61,3 +61,18 @@ export function useChat(chatRoomId) {
 
   return { messages, sendMessage }
 }
+
+// export function addRestaurant(restaurant) {
+//   const { user, isLogin } = useAuth()
+//   if (!isLogin.value) return
+//   const { photoURL, uid, displayName } = user.value
+//   firestore.collection('restaurants').add({
+//     name: restaurant.name,
+//     location: restaurant.location,
+//     photoURL: restaurant.photoURL,
+//     userId: uid,
+//     userName: displayName,
+//     userPhotoURL: photoURL,
+//     createdAt: firebase.firestore.FieldValue.serverTimestamp()
+//   })
+// }

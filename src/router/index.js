@@ -4,6 +4,8 @@ import ForumView from '../views/ForumView.vue'
 import GameCardsStackComponent from "../components/GameCardsStackComponent.vue";
 import MapView from "../components/MapView.vue";
 import ChatBox from "../components/ChatBox.vue";
+import GroupPage from "../components/GroupPage.vue";
+import GroupRoom from "../components/GroupRoom.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -27,6 +29,11 @@ const router = createRouter({
       component: GameCardsStackComponent
     },
     {
+      path: '/chat/:chatroomid/swipe',
+      name: 'swipeGroup',
+      component: GroupPage
+    },
+    {
       path: '/forum',
       name:'forum',
       component: ForumView
@@ -40,6 +47,11 @@ const router = createRouter({
       path: '/chat/:chatroomid',
       name: 'chat',
       component: ChatBox
+    },
+    {
+      path: '/group',
+      name: 'group',
+      component: GroupRoom
     },
   ]
 })

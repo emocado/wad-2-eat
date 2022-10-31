@@ -1,51 +1,87 @@
 <template>
   <nav class="navbar navbar-expand-lg bg-light">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">Navbar</a>
+      <a class="navbar-brand" href="#">WAD-2-EAT</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcancasNavbar"
         aria-controls="offcanvasNavbar" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="offcanvas offcanvas-start" id="offcancasNavbar" tabindex="-1">
-        <ul class="navbar-nav px-3">
-          <li class="nav-item">
-            <!-- <a class="nav-link active" aria-current="page" href="#">Home</a> -->
-            <RouterLink class="nav-link active" to="/">Home</RouterLink>
-          </li>
-          <li class="nav-item">
-            <!-- <a class="nav-link" href="#">Features</a> -->
-            <RouterLink class="nav-link active" to="/about">About</RouterLink>
-          </li>
-          <li class="nav-item">
-            <!-- <a class="nav-link" href="#">Pricing</a> -->
-            <RouterLink class="nav-link active" to="/swipe">Swipe</RouterLink>
-          </li>
-          <li class="nav-item">
-            <!-- <a class="nav-link" href="#">Pricing</a> -->
-            <RouterLink class="nav-link active" to="/forum">Forum</RouterLink>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Dropdown link
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Action</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
-            </ul>
-          </li>
 
-          <div v-if="isLogin" class="login">
-            <button class="btn btn-primary" @click="signOut">
+      <div v-if="isMobile" class="offcanvas offcanvas-start" id="offcancasNavbar" tabindex="-1">
+        <div class="d-flex justify-content-between align-items-center">
+          <ul class="navbar-nav px-3 ">
+            
+            <li class="nav-item p-2" data-bs-toggle="offcanvas" data-bs-target="#offcancasNavbar">
+              <!-- <a class="nav-link active" aria-current="page" href="#">Home</a> -->
+              <RouterLink class="nav-link active" to="/">Home</RouterLink>
+            </li>
+            <li class="nav-item p-2" data-bs-toggle="offcanvas" data-bs-target="#offcancasNavbar">
+              <!-- <a class="nav-link" href="#">Features</a> -->
+              <RouterLink class="nav-link active" to="/about">About</RouterLink>
+            </li>
+            <li class="nav-item p-2" data-bs-toggle="offcanvas" data-bs-target="#offcancasNavbar">
+              <!-- <a class="nav-link" href="#">Pricing</a> -->
+              <RouterLink class="nav-link active" to="/swipe">Swipe</RouterLink>
+            </li>
+            <li class="nav-item p-2" data-bs-toggle="offcanvas" data-bs-target="#offcancasNavbar">
+              <!-- <a class="nav-link" href="#">Pricing</a> -->
+              <RouterLink class="nav-link active" to="/forum">Forum</RouterLink>
+            </li>
+            <li class="nav-item p-2" data-bs-toggle="offcanvas" data-bs-target="#offcancasNavbar">
+              <MultiLevelDrawerVue/>
+            </li>
+            <li class="nav-item p-2" data-bs-toggle="offcanvas" data-bs-target="#offcancasNavbar">
+              <RouterLink class="nav-link active" to="/group">Room</RouterLink>
+            </li>
+          </ul>
+          
+          <span class="p-2">
+            <button v-if="isLogin" class="btn btn-primary" @click="signOut">
               Sign Out
             </button>
-          </div>
+            
+            <button v-else class="btn btn-primary" @click="signIn">
+              Sign in
+            </button>
+          </span>
+        </div>
+      </div>
 
-          <button v-else class="btn btn-primary" @click="signIn">
-            Sign in
-          </button>
+      <div v-else class="offcanvas offcanvas-start" id="offcancasNavbar" tabindex="-1">
+        <div class="d-flex justify-content-between align-items-center">
+          <ul class="navbar-nav px-3 ">
+            
+            <li class="nav-item p-2">
+              <!-- <a class="nav-link active" aria-current="page" href="#">Home</a> -->
+              <RouterLink class="nav-link active" to="/">Home</RouterLink>
+            </li>
+            <li class="nav-item p-2">
+              <!-- <a class="nav-link" href="#">Features</a> -->
+              <RouterLink class="nav-link active" to="/about">About</RouterLink>
+            </li>
+            <li class="nav-item p-2">
+              <!-- <a class="nav-link" href="#">Pricing</a> -->
+              <RouterLink class="nav-link active" to="/swipe">Swipe</RouterLink>
+            </li>
+            <li class="nav-item p-2">
+              <!-- <a class="nav-link" href="#">Pricing</a> -->
+              <RouterLink class="nav-link active" to="/forum">Forum</RouterLink>
+            </li>
+            <li class="nav-item p-2">
+              <RouterLink class="nav-link active" to="/group">Room</RouterLink>
+            </li>
+          </ul>
 
-        </ul>
+          <span class="p-2">
+            <button v-if="isLogin" class="btn btn-primary" @click="signOut">
+              Sign Out
+            </button>
+            
+            <button v-else class="btn btn-primary" @click="signIn">
+              Sign in
+            </button>
+          </span>
+        </div>
       </div>
     </div>
   </nav>
@@ -54,10 +90,28 @@
 <script>
 import { RouterLink } from 'vue-router'
 import { useAuth } from '@/firebase'
+import MultiLevelDrawerVue from './MultiLevelDrawer.vue';
 
 export default {
   components: {
     RouterLink,
+    MultiLevelDrawerVue,
+  },
+  data() {
+    return {
+      isMobile: false,
+    }
+  },
+  mounted() {
+    window.addEventListener("resize", this.myEventHandler);
+  },
+  beforeUnmount() {
+    window.removeEventListener("resize", this.myEventHandler);
+  },
+  methods: {
+    myEventHandler() {
+      this.isMobile = window.innerWidth < 992
+    },
   },
   setup() {
     const { user, isLogin, signOut, signIn } = useAuth()
@@ -65,6 +119,16 @@ export default {
   }
 }
 </script>
-<style lang="">
-    
+<style scoped>
+  @media (max-width: 992px) {
+    #offcancasNavbar {
+      width: 200px;
+    }
+    #offcancasNavbar > div {
+      flex-direction: column;
+      align-items: start !important;
+      padding: 10px;
+    }
+  }
+
 </style>
