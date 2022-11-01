@@ -28,9 +28,6 @@
               <RouterLink class="nav-link active" to="/forum">Forum</RouterLink>
             </li>
             <li class="nav-item p-2" data-bs-toggle="offcanvas" data-bs-target="#offcancasNavbar">
-              <MultiLevelDrawerVue/>
-            </li>
-            <li class="nav-item p-2" data-bs-toggle="offcanvas" data-bs-target="#offcancasNavbar">
               <RouterLink class="nav-link active" to="/group">Room</RouterLink>
             </li>
           </ul>
@@ -90,12 +87,10 @@
 <script>
 import { RouterLink } from 'vue-router'
 import { useAuth } from '@/firebase'
-import MultiLevelDrawerVue from './MultiLevelDrawer.vue';
 
 export default {
   components: {
     RouterLink,
-    MultiLevelDrawerVue,
   },
   data() {
     return {

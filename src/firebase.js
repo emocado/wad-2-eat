@@ -34,6 +34,8 @@ export function useAuth() {
 const firestore = firebase.firestore()
 const messagesCollection = firestore.collection('messages')
 const messagesQuery = messagesCollection.orderBy('createdAt', 'desc').limit(100)
+const restaurantsCollection = firestore.collection('restaurants')
+const restaurantsQuery = restaurantsCollection.orderBy('likes', 'desc').limit(100)
 
 export function useChat(chatRoomId) {
   const messages = ref([])
@@ -62,17 +64,44 @@ export function useChat(chatRoomId) {
   return { messages, sendMessage }
 }
 
-// export function addRestaurant(restaurant) {
-//   const { user, isLogin } = useAuth()
-//   if (!isLogin.value) return
-//   const { photoURL, uid, displayName } = user.value
-//   firestore.collection('restaurants').add({
-//     name: restaurant.name,
-//     location: restaurant.location,
-//     photoURL: restaurant.photoURL,
-//     userId: uid,
-//     userName: displayName,
-//     userPhotoURL: photoURL,
-//     createdAt: firebase.firestore.FieldValue.serverTimestamp()
-//   })
-// }
+export function useRestaurant(chatRoomId) {
+  const restaurants = ref([])
+  const unsubscribe = restaurantsQuery.onSnapshot(snapshot => {
+    restaurants.value = snapshot.docs
+    .map(doc => ({ id: doc.id, ...doc.data() }))
+    .filter(doc => doc.chatRoomId === chatRoomId)
+    .reverse()
+  })
+  onUnmounted(unsubscribe)
+
+  const { user, isLogin } = useAuth()
+  const addRestaurants = (restaurant, chatRoomId) => {
+    if (!isLogin.value) return
+    const { uid, displayName } = user.value
+    restaurantsCollection.where('name', '==', restaurant.name).get().then((querySnapshot) => {
+      if (querySnapshot.empty) {
+        restaurantsCollection.add({
+          name: restaurant.name,
+          address: restaurant.address,
+          photoURL: restaurant.photo?.images.original ?? "",
+          userId: uid,
+          userName: displayName,
+          chatRoomId: chatRoomId,
+          likes: 1,
+          locationId: restaurant.location_id,
+          webURL: restaurant.web_url,
+          createdAt: firebase.firestore.FieldValue.serverTimestamp()
+        })
+      } else {
+        // update doc likes by 1
+        querySnapshot.forEach((doc) => {
+          restaurantsCollection.doc(doc.id).update({
+            likes: firebase.firestore.FieldValue.increment(1)
+          })
+        })
+      }
+    })
+  }
+
+  return { restaurants, addRestaurants }
+}

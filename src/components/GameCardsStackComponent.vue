@@ -116,7 +116,10 @@ export default {
     },
     handleCardAccepted() {
       console.log("handleCardAccepted");
-      this.$router.push({ path: `/map/locationid/${this.post[0].location_id}` });
+      if (!this.$route.params.chatroomid) {
+        this.$router.push({ path: `/map/locationid/${this.post[0].location_id}` });
+      }
+      this.$emit("cardAccepted", this.post[0]);
     },
     handleCardRejected() {
       console.log("handleCardRejected");

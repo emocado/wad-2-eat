@@ -1,6 +1,6 @@
 <template>
   <div class="container-fluid chat-container">
-    <div class="mx-5">
+    <div>
       <MessageComponent v-for="{ id, text, userPhotoURL, userName, userId } in messages" :key="id" :name="userName"
         :photo-url="userPhotoURL" :sender="userId === user?.uid">
         {{ text }}
