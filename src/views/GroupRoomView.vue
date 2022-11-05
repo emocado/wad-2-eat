@@ -56,7 +56,7 @@
   </div>
 </template>
 <script>
-import DoorOpen from './icons/DoorOpen.vue'
+import DoorOpen from '../components/icons/DoorOpen.vue'
 import { RouterLink } from 'vue-router';
 export default {
   components: {

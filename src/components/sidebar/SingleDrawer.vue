@@ -12,7 +12,7 @@
 <script>
 import { defineComponent, ref } from 'vue';
 import { TeamOutlined } from '@ant-design/icons-vue'
-import ChatIcon from './icons/ChatIcon.vue'
+import ChatIcon from '../icons/ChatIcon.vue'
 export default defineComponent({
   components: {
     TeamOutlined,

@@ -29,9 +29,9 @@
   
 <script>
 import GameCardsStack from "./GameCardsStack.vue";
-import HalfCircleSpinner from "./HalfCircleSpinner.vue";
+import HalfCircleSpinner from "../HalfCircleSpinner.vue";
 // import axios from "axios";
-import data from "./data.js";
+import data from "../data.js";
 
 export default {
   components: {

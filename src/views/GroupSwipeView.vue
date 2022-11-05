@@ -71,12 +71,12 @@
 </template>
 <script>
 import { defineComponent, ref } from 'vue';
-import GameCardsStackComponentVue from './GameCardsStackComponent.vue';
-import MultiLevelDrawerVue from './MultiLevelDrawer.vue';
-import FoodCard from './FoodCard.vue';
-import ChatBox from './ChatBox.vue';
-import SingleDrawer from './SingleDrawer.vue';
-import DrawerTabs from './DrawerTabs.vue';
+import GameCardsStackComponentVue from '../components/swipe/GameCardsStackComponent.vue';
+import MultiLevelDrawerVue from '../components/sidebar/MultiLevelDrawer.vue';
+import FoodCard from '../components/sidebar/FoodCard.vue';
+import ChatBox from '../components/sidebar/chat/ChatBox.vue';
+import SingleDrawer from '../components/sidebar/SingleDrawer.vue';
+import DrawerTabs from '../components/sidebar/DrawerTabs.vue';
 import { useRoute } from 'vue-router';
 import { useRestaurant } from '@/firebase'
 export default defineComponent({

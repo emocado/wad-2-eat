@@ -7,9 +7,9 @@
 </template>
 
 <script>
-import MapInfoWindow from './MapInfoWindow.vue';
-import MapInfoContent from './MapInfoContent.vue';
-import data from './data.js'
+import MapInfoWindow from '../components/map/MapInfoWindow.vue';
+import MapInfoContent from '../components/map/MapInfoContent.vue';
+import data from '../components/data.js'
 
 export default {
   components: {
