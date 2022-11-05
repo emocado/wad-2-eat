@@ -1,7 +1,7 @@
 <template>
-  <nav class="navbar navbar-expand-lg bg-light">
+  <nav id="navbar" class="navbar navbar-expand-lg bg-light">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">WAD-2-EAT</a>
+      <RouterLink class="navbar-brand" to="/">WAD-2-EAT</RouterLink>
       <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcancasNavbar"
         aria-controls="offcanvasNavbar" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -118,4 +118,7 @@ export default {
     }
   }
 
+  #navbar {
+    z-index: 15;
+  }
 </style>
