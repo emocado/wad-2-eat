@@ -15,12 +15,18 @@
   </a-tabs>
 </template>
 <script>
-import { defineComponent, ref } from 'vue';
+import { defineComponent } from 'vue';
 export default defineComponent({
-  setup() {
+  props: {
+    selectedKey: {
+      type: String,
+      default: '1',
+    },
+  },
+  data() {
     return {
-      activeKey: ref('1'),
-    };
+      activeKey: this.selectedKey,
+    }
   },
 
 });

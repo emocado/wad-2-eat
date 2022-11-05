@@ -6,7 +6,6 @@ import MapView from "../components/MapView.vue";
 import ChatBox from "../components/ChatBox.vue";
 import GroupPage from "../components/GroupPage.vue";
 import GroupRoom from "../components/GroupRoom.vue";
-import SiderPage from "../components/SiderPage.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -62,7 +61,7 @@ const router = createRouter({
     {
       path: '/chat/:chatroomid/swipe/test',
       name: 'sider',
-      component: SiderPage
+      component: GroupRoom
     },
   ]
 })

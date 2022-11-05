@@ -1,5 +1,9 @@
 <template>
-  <menu-fold-outlined @click="showDrawer" class="trigger" />
+  <div @click="showDrawer">
+    <TeamOutlined v-if="titleIcon === 'group'" />
+    <ChatIcon v-if="titleIcon === 'chat'" />
+    <span>{{titleIcon}}</span>
+  </div>
   <a-drawer width="100%" v-model:visible="visible" placement="right"
     @after-visible-change="afterVisibleChange">
     <slot></slot>
@@ -7,15 +11,17 @@
 </template>
 <script>
 import { defineComponent, ref } from 'vue';
-import { MenuFoldOutlined } from '@ant-design/icons-vue'
+import { TeamOutlined } from '@ant-design/icons-vue'
+import ChatIcon from './icons/ChatIcon.vue'
 export default defineComponent({
   components: {
-    MenuFoldOutlined,
+    TeamOutlined,
+    ChatIcon,
   },
   props: {
-    title: {
+    titleIcon: {
       type: String,
-      default: 'Single-level drawer',
+      default: 'chat',
     },
   },
   setup() {
@@ -34,6 +40,15 @@ export default defineComponent({
       afterVisibleChange,
       showDrawer,
     };
+  },
+
+  computed: {
+    title() {
+      return this.titleIcon === 'group' ? 'Group Selection' : 'Chat Group';
+    },
+    altTitle() {
+      return this.titleIcon === 'group' ? 'Chat Group' : 'Group Selection';
+    },
   },
 
 });

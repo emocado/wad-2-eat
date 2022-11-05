@@ -1,27 +1,40 @@
 <template>
-  <menu-fold-outlined @click="showDrawer" class="trigger" />
+  <div @click="showDrawer">
+    <TeamOutlined v-if="titleIcon === 'group'" class="trigger" />
+    <ChatIcon v-if="titleIcon === 'chat'" class="trigger" />
+    <span>{{title}}</span>
+  </div>
   <a-drawer v-model:visible="visible" title="Chat Group" :closable="false"
     :footer-style="{ textAlign: 'right' }" @close="onClose">
-    <slot name="chatBox"></slot>
+    <slot name="firstDrawer"></slot>
     <a-drawer v-model:visible="childrenDrawer" title="Group Selection" :closable="false">
-      <slot name="groupSelection"></slot>
-      <!-- <a-button type="primary" @click="showChildrenDrawer">This is two-level drawer</a-button> -->
+      <slot name="SeconDrawer"></slot>
     </a-drawer>
 
     <template #footer>
       <a-button style="margin-right: 8px" @click="onClose">Cancel</a-button>
-      <a-button type="primary" @click="showChildrenDrawer">Group Selection</a-button>
+      <a-button type="primary" @click="showChildrenDrawer">{{altTitle}}</a-button>
     </template>
   </a-drawer>
 </template>
 <script>
 import { defineComponent, ref } from 'vue';
-import { MenuFoldOutlined } from '@ant-design/icons-vue'
+import { TeamOutlined } from '@ant-design/icons-vue'
+import ChatIcon from './icons/ChatIcon.vue'
 
 export default defineComponent({
   components: {
-    MenuFoldOutlined,
+    TeamOutlined,
+    ChatIcon,
   },
+
+  props: {
+    titleIcon: {
+      type: String,
+      default: 'chat',
+    },
+  },
+
   setup() {
     const visible = ref(false);
 
@@ -44,14 +57,18 @@ export default defineComponent({
       showChildrenDrawer,
     };
   },
+
+  computed: {
+    title() {
+      return this.titleIcon === 'group' ? 'Group Selection' : 'Chat Group';
+    },
+    altTitle() {
+      return this.titleIcon === 'group' ? 'Chat Group' : 'Group Selection';
+    },
+  },
 });
 </script>
   
 <style scoped>
-  .trigger {
-    font-size: 30px;
-    padding: 20px;
-    cursor: pointer;
-  }
 </style>
   
