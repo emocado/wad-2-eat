@@ -1,10 +1,10 @@
 <template>
-  <div class="section">
+  <div class="section full-height" id="section">
     <div class="container">
-      <div class="row full-height justify-content-center">
+      <div class="row justify-content-center">
         <div class="col-12 text-center align-self-center py-5">
-          <div class="section pb-5 pt-5 pt-sm-2 text-center">
-            <h6 class="mb-0 pb-3"><span>Enter Room </span><span>Create Room</span></h6>
+          <div class="text-center" id="innerCard">
+            <h3 class="mb-0 py-3 text-light"><span>Enter Room </span><span>Create Room</span></h3>
             <input class="checkbox" type="checkbox" id="reg-log" name="reg-log" />
             <label for="reg-log"></label>
             
@@ -104,10 +104,15 @@ h4 {
   font-weight: 600;
 }
 
-h6 span {
+h3 span {
   padding: 0 20px;
   text-transform: uppercase;
   font-weight: 700;
+}
+@media (max-width: 767px) {
+  h3 span {
+    font-size: 18px;
+  }
 }
 
 .section {
@@ -115,9 +120,22 @@ h6 span {
   width: 100%;
   display: block;
 }
+#section {
+  background-image: url(/src/assets/foodbackground.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+#innerCard {
+  max-width: 500px;
+  margin: auto;
+  border-radius: 10px;
+  backdrop-filter: blur(8px);
+}
 
 .full-height {
-  min-height: 100vh;
+  min-height: calc(100vh - 70px);
 }
 
 [type="checkbox"]:checked,

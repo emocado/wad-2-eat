@@ -2,8 +2,11 @@
   <div v-if="isShowing" ref="interactElement" :class="{
     isAnimating: isInteractAnimating,
     isCurrent: isCurrent
-  }" class="card" :style="{ transform: transformString, backgroundImage: card.photo ? `url(${card.photo.images.medium.url})` : `url(https://www.foodserviceandhospitality.com/wp-content/uploads/2016/09/Restaurant-Placeholder-001.jpg)` }">
-    <h3 class="cardTitle">{{ card.name }}</h3>
+  }" class="card" :style="{ transform: transformString, backgroundImage: card.photo ? `url(${card.photo.images.medium.url})` : `url(/src/assets/food-default.png)` }">
+    <div class="cardInfo">
+      <h3>{{ card.name }}</h3>
+      <h5>{{ card.distance_string }} away</h5>
+    </div>
   </div>
 </template>
   
@@ -242,6 +245,21 @@ $fs-card-title: 1.125em;
 .cardTitle {
   margin: 0 0 15px;
   font-size: $fs-card-title;
+}
+
+.cardInfo {
+  position: absolute;
+  bottom: 0px;
+  background-color: rgb(255 255 255 / 40%);
+  width: 100%;
+  padding: 10px 15px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  backdrop-filter: blur(8px);
+}
+
+h3, h5 {
+  margin: 0;
 }
 
 @for $i from 1 through $cardsTotal {
