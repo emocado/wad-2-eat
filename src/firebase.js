@@ -78,7 +78,7 @@ export function useRestaurant(chatRoomId) {
   const addRestaurants = (restaurant, chatRoomId) => {
     if (!isLogin.value) return
     const { uid, displayName } = user.value
-    restaurantsCollection.where('name', '==', restaurant.name).get().then((querySnapshot) => {
+    restaurantsCollection.where('name', '==', restaurant.name).where('chatRoomId', '==', chatRoomId).get().then((querySnapshot) => {
       if (querySnapshot.empty) {
         restaurantsCollection.add({
           name: restaurant.name,

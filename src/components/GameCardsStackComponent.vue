@@ -38,6 +38,7 @@ export default {
     GameCardsStack,
     HalfCircleSpinner,
   },
+  emits: ["cardAccepted", "cardRejected", "cardSkipped", "hideCard"],
 
   data() {
     return {

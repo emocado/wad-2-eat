@@ -5,7 +5,7 @@
         <GameCardsStackComponentVue @cardAccepted="handleCardAccepted" />
       </div>
       <div class="col-1 sider">
-        <MultiLevelDrawerVue v-if="width >= 320" title="Show Group Selection and Chat">
+        <MultiLevelDrawerVue v-if="width >= 320">
           <template v-slot:chatBox>
             <div class="chatBoxParent">
               <ChatBox />
@@ -82,6 +82,7 @@ export default {
   setup() {
     const route = useRoute()
     const chatRoomId = route.params.chatroomid;
+    console.log(chatRoomId);
     const { restaurants, addRestaurants } = useRestaurant(chatRoomId)
     return { restaurants, addRestaurants, chatRoomId }
   },
