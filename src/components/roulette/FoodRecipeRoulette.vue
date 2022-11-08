@@ -44,52 +44,61 @@ export default {
                     }
 
                     // Build output
+                    // splice the ${meal.strIntructions} in list format and display inside the card div as steps to cook
+
+                    const newInstructions = meal.strInstructions.split(". ");
+                    const newInstructionsList = newInstructions.map((instruction) => {
+                        return `<li>${instruction}</li>`;
+                    });
+                    // console.log(newInstructionsList);
 
                     const newInnerHTML = `
-                        
-                        <div class="row">
-                          <div class="columns five">
-                            <img class="rounded mx-auto d-block" src="${meal.strMealThumb}" alt="Meal Image">
-                            ${meal.strCategory
-                            ? `<p><strong>Category:</strong> ${meal.strCategory}</p>`
-                            : ""
-                        }
-                            ${meal.strArea
-                            ? `<p><strong>Area:</strong> ${meal.strArea}</p>`
-                            : ""
-                        }
-                            ${meal.strTags
-                            ? `<p><strong>Tags:</strong> ${meal.strTags
-                                .split(",")
-                                .join(", ")}</p>`
-                            : ""
-                        }
-                            <h5>Ingredients:</h5>
-                            <ul>
-                              ${ingredients
-                            .map((ingredient) => `<li>${ingredient}</li>`)
-                            .join("")}
-                            </ul>
-                          </div>
-                          <div class="columns seven">
-                            <h4>${meal.strMeal}</h4>
-                            <p>${meal.strInstructions}</p>
-                          </div>
-                        </div>
-                        ${meal.strYoutube
-                            ? `
-                        <div class="row">
-                          <h5>Video Recipe</h5>
-                          <div class="videoWrapper">
-                            <iframe width="420" height="315"
-                            src="https://www.youtube.com/embed/${meal.strYoutube.slice(
-                                -11
-                            )}">
-                            </iframe>
-                          </div>
-                        </div>`
-                            : ""
-                        }
+                            <div class="card mt-3 mb-3" style="max-width: 100%;">
+                                <div class="row g-0">
+                                    <div class="col-md-8">
+                                        <img src="${meal.strMealThumb}" class="img-fluid rounded-start" alt="MealImage">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card-body">
+                                            <h5 class="card-title">${meal.strMeal}</h5>
+                                            ${meal.strCategory ? `<p class="card-text"><strong>Category:</strong> ${meal.strCategory}</p>` : ''}
+                                            ${meal.strArea ? `<p class="card-text"><strong>Area:</strong> ${meal.strArea}</p>` : ''}
+                                            ${meal.strTags ? `<p class="card-text"><strong>Tags:</strong> ${meal.strTags.split(',').join(', ')}</p>` : ''}
+                                            <h5>Ingredients:</h5>
+                                            <ul>
+                                                ${ingredients.map(ing => `<li>${ing}</li>`).join('')}
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card mb-3" style="max-width: 100%;">
+                                <div class="row g-0">
+                                    <div class="col-md-12">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Instructions</h5>
+                                            <ol>
+                                                ${newInstructionsList.join('')}
+                                            </ol>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            ${meal.strYoutube
+                                ? `
+                            <div class="modal-dialog modal-xl">
+                                <h5>Video Recipe</h5>
+                                <div class="videoWrapper">
+                                <iframe width="420" height="315"
+                                src="https://www.youtube.com/embed/${meal.strYoutube.slice(
+                                    -11
+                                )}">
+                                </iframe>
+                                </div>
+                            </div>`
+                                : ""
+                            }
                     `;
 
                     document.getElementById("displayDiv").innerHTML = newInnerHTML;
