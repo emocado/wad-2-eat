@@ -128,6 +128,10 @@ export default {
     margin: 4px 2px;
     cursor: pointer;
 }
+
+.displayMeal {
+    margin-top: 50px;
+}
 </style>
 
 <style lang="scss">
