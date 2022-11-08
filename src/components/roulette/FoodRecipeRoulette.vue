@@ -107,10 +107,6 @@ export default {
     margin-top: 50px;
 }
 
-.meal {
-    margin-top: 50px;
-}
-
 .button-primary {
     background-color: #4caf50;
     border: none;
