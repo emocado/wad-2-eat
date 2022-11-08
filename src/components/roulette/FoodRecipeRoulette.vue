@@ -129,6 +129,10 @@ export default {
     cursor: pointer;
 }
 
+.button-primary:hover {
+    background-color: lightblue;
+}
+
 .displayMeal {
     margin-top: 50px;
 }
