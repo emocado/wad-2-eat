@@ -11,7 +11,7 @@
           <RouterLink class="link" to="/swipe">Eat Alone Outside?</RouterLink>
         </div>
         <div class="menu-item">
-          <RouterLink class="link" to="/">Eat At Home?</RouterLink>
+          <RouterLink class="link" to="/foodreciperoulette">Eat At Home?</RouterLink>
         </div>
         <div class="menu-item">
           <RouterLink class="link" to="/group">Eat with Friends?</RouterLink>

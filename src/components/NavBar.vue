@@ -20,6 +20,10 @@
               <RouterLink class="nav-link active" to="/swipe">Swipe</RouterLink>
             </li>
             <li class="nav-item p-2" data-bs-toggle="offcanvas" data-bs-target="#offcancasNavbar">
+              <!-- <a class="nav-link" href="#">foodreciperoulette</a> -->
+              <RouterLink class="nav-link active" to="/foodreciperoulette">Food Recipe Roulette</RouterLink>
+            </li>
+            <li class="nav-item p-2" data-bs-toggle="offcanvas" data-bs-target="#offcancasNavbar">
               <!-- <a class="nav-link" href="#">Pricing</a> -->
               <RouterLink class="nav-link active" to="/forum">Forum</RouterLink>
             </li>
@@ -51,6 +55,10 @@
             <li class="nav-item p-2">
               <!-- <a class="nav-link" href="#">Pricing</a> -->
               <RouterLink class="nav-link active" to="/swipe">Swipe</RouterLink>
+            </li>
+            <li class="nav-item p-2">
+              <!-- <a class="nav-link" href="#">foodreciperoulette</a> -->
+              <RouterLink class="nav-link active" to="/foodreciperoulette">Food Recipe Roulette</RouterLink>
             </li>
             <li class="nav-item p-2">
               <!-- <a class="nav-link" href="#">Pricing</a> -->

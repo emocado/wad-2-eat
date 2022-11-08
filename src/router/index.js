@@ -5,6 +5,7 @@ import GameCardsStackComponent from "../components/swipe/GameCardsStackComponent
 import MapView from "../views/MapView.vue";
 import GroupSwipeView from "../views/GroupSwipeView.vue";
 import GroupRoomView from "../views/GroupRoomView.vue";
+import FoodRecipeRoulette from "../components/roulette/FoodRecipeRoulette.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -18,6 +19,11 @@ const router = createRouter({
       path: '/swipe',
       name: 'swipe',
       component: GameCardsStackComponent
+    },
+    {
+      path: '/foodreciperoulette',
+      name: 'foodreciperoulette',
+      component: FoodRecipeRoulette
     },
     {
       path: '/chat/:chatroomid/swipe',
