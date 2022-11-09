@@ -2,6 +2,17 @@
   <div class="rouletteMain" data-theme="garden">
 
     <h1 class="text-4xl">Meal Roulette</h1>
+    <!-- display the wheel results here  -->
+    <div class="rouletteResults" v-if="result">
+      <div class="rouletteResult">
+        <h2 class="text-2xl">Final Results:</h2>
+        <!-- format the results into json format -->
+        <!-- underline the results.name -->
+
+        <h3 class="text-2xl"><span style="text-decoration:underline">{{ result.name }}</span></h3>
+      </div>
+    </div>
+
     <div class="py-10 relative">
       <div class="wheel-anim" :class="{'wheel-anim-started': startAnim}">
         <Roulette
