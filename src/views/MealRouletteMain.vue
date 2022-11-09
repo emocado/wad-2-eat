@@ -53,8 +53,8 @@
         v-show="result"
         class="absolute bottom-2 left-1/2 transform -translate-x-1/2"
       >
-        <button class="btn btn-xs mx-2" @click="onHardReset()">Hard reset</button>
-        <button class="btn btn-xs mx-2" @click="onSoftReset()">Soft reset</button>
+        <button class="btn btn-xs mx-2" @click="onHardReset()">Refresh Roulette Session</button>
+        <button class="btn btn-xs mx-2" @click="onSoftReset()">Re-spin from the beginning</button>
       </div>
     </div>
 
