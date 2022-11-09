@@ -2,13 +2,13 @@
 
     <div class="container">
         <div class="row text-center">
-            <h3>Stuck at Home and Feeling Hungry?</h3>
-            <h5>Cook up a random meal by clicking below</h5>
+            <h2>Stuck at Home and Feeling Hungry?</h2>
+            <h4>Cook up a random meal by clicking below</h4>
             <button class="button-primary" @click="retriveResult()">
-                Get Meal 🍔
+                Meal Roulette 🍔
             </button>
         </div>
-        <div id="displayDiv" class="displayMeal"></div>
+        <div v-html="displayDiv" class="displayMeal"></div>
     </div>
 
 </template>
@@ -17,11 +17,11 @@
 import axios from "axios";
 export default {
     name: "random_food_generator",
-    // data() {
-    //     return {
-
-    //     };
-    // },
+    data() {
+        return {
+            displayDiv: "",
+        };
+    },
     methods: {
         retriveResult() {
             axios
@@ -88,7 +88,7 @@ export default {
                             ${meal.strYoutube
                                 ? `
                             <div class="modal-dialog modal-xl">
-                                <h5>Video Recipe</h5>
+                                <h3 class="text-center">Video Recipe</h3>
                                 <div class="videoWrapper">
                                 <iframe width="420" height="315"
                                 src="https://www.youtube.com/embed/${meal.strYoutube.slice(
@@ -101,7 +101,7 @@ export default {
                             }
                     `;
 
-                    document.getElementById("displayDiv").innerHTML = newInnerHTML;
+                    this.displayDiv = newInnerHTML;
                 })
                 .catch((error) => {
                     console.log(error);
@@ -134,7 +134,7 @@ export default {
 }
 
 .displayMeal {
-    margin-top: 50px;
+    margin-top: 30px;
 }
 </style>
 
