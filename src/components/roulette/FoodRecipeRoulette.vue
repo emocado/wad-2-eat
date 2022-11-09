@@ -64,7 +64,7 @@ export default {
                                             ${meal.strCategory ? `<p class="card-text"><strong>Category:</strong> ${meal.strCategory}</p>` : ''}
                                             ${meal.strArea ? `<p class="card-text"><strong>Area:</strong> ${meal.strArea}</p>` : ''}
                                             ${meal.strTags ? `<p class="card-text"><strong>Tags:</strong> ${meal.strTags.split(',').join(', ')}</p>` : ''}
-                                            <h5>Ingredients:</h5>
+                                            <h4><strong>Ingredients:</strong></h4>
                                             <ul>
                                                 ${ingredients.map(ing => `<li>${ing}</li>`).join('')}
                                             </ul>
