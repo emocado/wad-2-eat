@@ -60,7 +60,7 @@ export default {
                                     </div>
                                     <div class="col-md-4">
                                         <div class="card-body">
-                                            <h5 class="card-title">${meal.strMeal}</h5>
+                                            <h5 class="card-title"><mark>${meal.strMeal}</mark></h5>
                                             ${meal.strCategory ? `<p class="card-text"><strong>Category:</strong> ${meal.strCategory}</p>` : ''}
                                             ${meal.strArea ? `<p class="card-text"><strong>Area:</strong> ${meal.strArea}</p>` : ''}
                                             ${meal.strTags ? `<p class="card-text"><strong>Tags:</strong> ${meal.strTags.split(',').join(', ')}</p>` : ''}
@@ -76,7 +76,7 @@ export default {
                                 <div class="row g-0">
                                     <div class="col-md-12">
                                         <div class="card-body">
-                                            <h5 class="card-title d-flex justify-content-center">Instructions</h5>
+                                            <h5 class="card-title d-flex justify-content-center"><mark>Instructions</mark></h5>
                                             <div class="d-flex justify-content-center">
                                                 <ol class="space-y-5 max-w-md list-decimal list-inside text-gray-500 dark:text-gray-400">
                                                     ${newInstructionsList.join('')}
@@ -90,7 +90,7 @@ export default {
                                 <div class="row g-0">
                                     <div class="col-md-12">
                                         <div class="card-body">
-                                            <div class="card-title d-flex justify-content-center">Video Recipe</div>
+                                            <div class="card-title d-flex justify-content-center"><mark>Video Recipe</mark></div>
                                             <div class="card-body text-secondary">
                                                 ${meal.strYoutube
                                             ? `
