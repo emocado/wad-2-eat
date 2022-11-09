@@ -149,11 +149,6 @@ export default {
   }
 }
 
-@import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap");
-@import url("https://cdn.jsdelivr.net/npm/daisyui@2.38.1/dist/full.css");
-@import url("https://cdn.jsdelivr.net/npm/tailwindcss@2.2/dist/tailwind.min.css");
-
-
   .rouletteMain {
     font-family: 'Ubuntu', sans-serif;
     -webkit-font-smoothing: antialiased;
