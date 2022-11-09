@@ -6,6 +6,7 @@ import MapView from "../views/MapView.vue";
 import GroupSwipeView from "../views/GroupSwipeView.vue";
 import GroupRoomView from "../views/GroupRoomView.vue";
 import FoodRecipeRoulette from "../components/roulette/FoodRecipeRoulette.vue";
+import RouletteView from "../views/RouletteMain.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -49,6 +50,11 @@ const router = createRouter({
       path: '/group',
       name: 'group',
       component: GroupRoomView
+    },
+    {
+      path: '/roulettemain',
+      name: 'roulettemain',
+      component: RouletteView
     },
   ]
 })

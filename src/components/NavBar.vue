@@ -61,6 +61,10 @@
               <RouterLink class="nav-link active" to="/foodreciperoulette">Food Recipe Roulette</RouterLink>
             </li>
             <li class="nav-item p-2">
+              <!-- <a class="nav-link" href="#">restaurantroulette</a> -->
+              <RouterLink class="nav-link active" to="/roulettemain">Restaurant Roulette!</RouterLink>
+            </li>
+            <li class="nav-item p-2">
               <!-- <a class="nav-link" href="#">Pricing</a> -->
               <RouterLink class="nav-link active" to="/forum">Forum</RouterLink>
             </li>

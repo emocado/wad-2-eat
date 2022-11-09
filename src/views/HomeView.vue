@@ -19,6 +19,9 @@
         <div class="menu-item">
           <RouterLink class="link" to="/forum">Browse Forum</RouterLink>
         </div>
+        <div class="menu-item">
+          <RouterLink class="link" to="/roulettemain">Restauant Roulette!</RouterLink>
+        </div>
       </div>
       <div id="menu-background-pattern"></div>
       <div id="menu-background-image"></div>
