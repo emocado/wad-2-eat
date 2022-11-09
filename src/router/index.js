@@ -7,6 +7,8 @@ import GroupSwipeView from "../views/GroupSwipeView.vue";
 import GroupRoomView from "../views/GroupRoomView.vue";
 import FoodRecipeRoulette from "../components/roulette/FoodRecipeRoulette.vue";
 import RouletteView from "../views/RouletteMain.vue";
+import MealCard from "../components/Recipe.vue"
+import MealCard2 from "../components/IngredientFilter.vue"
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -56,6 +58,23 @@ const router = createRouter({
       name: 'roulettemain',
       component: RouletteView
     },
+    {
+      path: '/recipe',
+      name: 'recipe',
+      // route level code-splitting
+      // this generates a separate chunk (About.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: MealCard
+    },
+
+    {
+      path: '/ingredient_filter',
+      name: 'ingredient_filter',
+      // route level code-splitting
+      // this generates a separate chunk (About.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: MealCard2
+    }
   ]
 })
 
