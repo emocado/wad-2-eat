@@ -260,7 +260,6 @@ export default defineComponent ({
 @import url("https://cdn.jsdelivr.net/npm/tailwindcss@2.2/dist/tailwind.min.css");
 
 
-
 .wheel-container,
 .wheel-base,
 .wheel-base-container,
