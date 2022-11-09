@@ -1,29 +1,22 @@
 <template>
-    <div id="app" class="jumbotron align-center mx-4 pt-2 p-4 ">
-        <div class="row mx-5 mt-5">
-            <!-- <div class="col-10">
-                <input class="input form-control w-50" type="text" name="search"
-                    placeholder="search for areas, food type">
-                <button class="btn btn-primary btn-sm">Search</button>
-            </div> -->
+    <div id="app" class="jumbotron align-center mx-4 pt-2 p-4  mb-3 mt-3">
+        <div class="row mx-5-sm mt-5 ">
             <div class="search-bar input-group">
-                <input type="text" class="input-search form-control" placeholder="Search for areas, food type"
-                    aria-label="Recipient's username" aria-describedby="button-addon2">
-                <button class="btn btn-outline-secondary search" type="button" id="button-addon2"><img id="search-icon"
-                        src="src/assets/findFood.png"></button>
+                <input @keyup="filterPost" type="text" class="input-search form-control"
+                    placeholder="Search for areas, food type" aria-label="Recipient's username"
+                    aria-describedby="button-addon2" v-model="search">
+                <button @click="filterPost" class="btn btn-outline-secondary search" type="button"
+                    id="button-addon2"><img id="search-icon" src="src/assets/findFood.png"></button>
             </div>
             <div class="col-2">
 
             </div>
         </div>
-        <div class="row mx-5 mt-3 position-relative">
-            <button class="sort btn btn-primary btn-sm" href="#" role="button">Learn more</button>
-            <button class="sort btn btn-primary btn-sm" href="#" role="button">Learn more</button>
-            <button class="sort btn btn-primary btn-sm" href="#" role="button">Learn more</button>
+        <div class="row mx-5-sm mt-3 position-relative">
             <button @click="createPost" class="sort btn btn-primary btn-sm position-absolute end-0"
                 data-bs-toggle="collapse" href="#collapseExample" role="button" v-bind:aria-expanded="form_expand"
                 aria-controls="collapseExample">{{ openClose }}</button>
-            <div class="collapse" id="collapseExample">
+            <div class="collapse mt-4" id="collapseExample">
                 <div class="card card-body mt-4 w-100">
                     <form>
                         <div class="mb-3">
@@ -46,6 +39,31 @@
                 </p>
             </div>
         </div>
+
+        <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        HIII FUCK YOU 
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
     </div>
 </template>
 
@@ -60,9 +78,10 @@ import {
 } from "firebase/storage";
 import { getFirestore, collection, addDoc } from "firebase/firestore";
 // import { useAuth } from "../../firebase";
-import {getAuth } from 'firebase/auth'
+import { getAuth } from 'firebase/auth'
 
 export default {
+    emits: ['fetch_data'],
     data() {
         return {
             addForm: false,
@@ -72,9 +91,16 @@ export default {
             downloadUrl: "",
             // success_msg: false,
             form_expand: false,
+            search: "",
+            hide_error: true,
         }
     },
     methods: {
+        filterPost() {
+            console.log(this.search);
+            console.log("YOUR MOTHER ");
+            this.$emit('fetch_data', this.search)
+        },
         createPost() {
             if (this.addForm == false) {
                 this.addForm = true;
@@ -85,6 +111,13 @@ export default {
         submit_post() {
             const auth = getAuth();
             const user = auth.currentUser;
+            if (user == null) {
+                // alert("Please login to post");
+                // document.getElementById("faillogin").modal('toggle');
+                // this.$emit('fail_login');
+
+                return;
+            }
             const displayName = user.displayName;
             const db = getFirestore();
             var obj = {
@@ -170,7 +203,7 @@ export default {
                 return "Add Post";
             }
         }
-    }
+    },
 }
 </script>
 
@@ -198,7 +231,7 @@ export default {
 
 .jumbotron {
     /* background-color: rgb(243, 201, 125); */
-    background-color: none;
+    /* background-color: rgb(186, 167, 167); */
     border-radius: 20px;
 }
 

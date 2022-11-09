@@ -2,7 +2,7 @@
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import "firebase/compat/firestore";
-import {getAuth} from 'firebase/auth';
+import { getAuth } from "firebase/auth";
 import { getFirestore, collection, addDoc } from "firebase/firestore";
 import {
     ref as FBref,
@@ -27,17 +27,17 @@ const app = firebase.initializeApp({
 
 export default app;
 
-export function getPosts(){
+export function getPosts() {
     const posts = ref([]);
     const unsubscribe = postsQuery.onSnapshot((snapshot) => {
-        posts.value = snapshot.docs.map((doc)=>({
-            id: doc.id, ...doc.data()
+        posts.value = snapshot.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
         }));
-        console.log(posts.value)
+        console.log(posts.value);
     });
     onUnmounted(unsubscribe);
-    return  posts ;
-
+    return posts;
 }
 const db = getFirestore();
 // export async function addPost(obj) {
@@ -72,8 +72,11 @@ const messagesCollection = firestore.collection("messages");
 const messagesQuery = messagesCollection
     .orderBy("createdAt", "desc")
     .limit(100);
+const restaurantsCollection = firestore.collection("restaurants");
+const restaurantsQuery = restaurantsCollection
+    .orderBy("likes", "desc")
+    .limit(100);
 const postsQuery = firestore.collection("forum_post");
-
 export function useChat(chatRoomId) {
     const messages = ref([]);
     const unsubscribe = messagesQuery.onSnapshot((snapshot) => {
@@ -99,4 +102,51 @@ export function useChat(chatRoomId) {
     };
 
     return { messages, sendMessage };
+}
+
+export function useRestaurant(chatRoomId) {
+    const restaurants = ref([]);
+    const unsubscribe = restaurantsQuery.onSnapshot((snapshot) => {
+        restaurants.value = snapshot.docs
+            .map((doc) => ({ id: doc.id, ...doc.data() }))
+            .filter((doc) => doc.chatRoomId === chatRoomId)
+            .reverse();
+    });
+    onUnmounted(unsubscribe);
+
+    const { user, isLogin } = useAuth();
+    const addRestaurants = (restaurant, chatRoomId) => {
+        if (!isLogin.value) return;
+        const { uid, displayName } = user.value;
+        restaurantsCollection
+            .where("name", "==", restaurant.name)
+            .where("chatRoomId", "==", chatRoomId)
+            .get()
+            .then((querySnapshot) => {
+                if (querySnapshot.empty) {
+                    restaurantsCollection.add({
+                        name: restaurant.name,
+                        address: restaurant.address,
+                        photoURL: restaurant.photo?.images.original ?? "",
+                        userId: uid,
+                        userName: displayName,
+                        chatRoomId: chatRoomId,
+                        likes: 1,
+                        locationId: restaurant.location_id,
+                        webURL: restaurant.web_url,
+                        createdAt:
+                            firebase.firestore.FieldValue.serverTimestamp(),
+                    });
+                } else {
+                    // update doc likes by 1
+                    querySnapshot.forEach((doc) => {
+                        restaurantsCollection.doc(doc.id).update({
+                            likes: firebase.firestore.FieldValue.increment(1),
+                        });
+                    });
+                }
+            });
+    };
+
+    return { restaurants, addRestaurants };
 }

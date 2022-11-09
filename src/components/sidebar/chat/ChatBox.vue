@@ -1,6 +1,6 @@
 <template>
   <div class="container-fluid chat-container">
-    <div class="mx-5">
+    <div>
       <MessageComponent v-for="{ id, text, userPhotoURL, userName, userId } in messages" :key="id" :name="userName"
         :photo-url="userPhotoURL" :sender="userId === user?.uid">
         {{ text }}
@@ -8,7 +8,7 @@
     </div>
     <div ref="bottom" class="mt-5" />
   </div>
-  <div class="bottom fixed-bottom chat-input">
+  <div class="bottom chat-input">
     <div class="container-sm">
       <form v-if="isLogin" @submit.prevent="send">
         <div class="input-group mb-3">

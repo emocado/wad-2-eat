@@ -2,9 +2,12 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import ForumView from '../views/ForumView.vue'
 import Discussion from '../views/Discussion.vue'
-import GameCardsStackComponent from "../components/GameCardsStackComponent.vue";
-import MapView from "../components/MapView.vue";
-import ChatBox from "../components/ChatBox.vue";
+import GameCardsStackComponent from "../components/swipe/GameCardsStackComponent.vue";
+import MapView from "../views/MapView.vue";
+import GroupSwipeView from "../views/GroupSwipeView.vue";
+import GroupRoomView from "../views/GroupRoomView.vue";
+import FoodRecipeRoulette from "../components/roulette/FoodRecipeRoulette.vue";
+import RouletteView from "../views/RouletteMain.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -15,17 +18,19 @@ const router = createRouter({
       component: HomeView
     },
     {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import('../views/AboutView.vue')
-    },
-    {
       path: '/swipe',
       name: 'swipe',
       component: GameCardsStackComponent
+    },
+    {
+      path: '/foodreciperoulette',
+      name: 'foodreciperoulette',
+      component: FoodRecipeRoulette
+    },
+    {
+      path: '/chat/:chatroomid/swipe',
+      name: 'swipeGroup',
+      component: GroupSwipeView
     },
     {
       path: '/forum',
@@ -44,9 +49,19 @@ const router = createRouter({
       component: MapView
     },
     {
-      path: '/chat/:chatroomid',
-      name: 'chat',
-      component: ChatBox
+      path: '/chat/:chatroomid/map/locationid/:locationid',
+      name: 'map',
+      component: MapView
+    },
+    {
+      path: '/group',
+      name: 'group',
+      component: GroupRoomView
+    },
+    {
+      path: '/roulettemain',
+      name: 'roulettemain',
+      component: RouletteView
     },
   ]
 })
