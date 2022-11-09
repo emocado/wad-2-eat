@@ -24,6 +24,10 @@
               <RouterLink class="nav-link active" to="/foodreciperoulette">Food Recipe Roulette</RouterLink>
             </li>
             <li class="nav-item p-2" data-bs-toggle="offcanvas" data-bs-target="#offcancasNavbar">
+              <!-- <a class="nav-link" href="#">mealroulette</a> -->
+              <RouterLink class="nav-link active" to="/roulettemain">Meal Roulette!</RouterLink>
+            </li>
+            <li class="nav-item p-2" data-bs-toggle="offcanvas" data-bs-target="#offcancasNavbar">
               <!-- <a class="nav-link" href="#">Pricing</a> -->
               <RouterLink class="nav-link active" to="/forum">Forum</RouterLink>
             </li>
@@ -61,8 +65,8 @@
               <RouterLink class="nav-link active" to="/foodreciperoulette">Food Recipe Roulette</RouterLink>
             </li>
             <li class="nav-item p-2">
-              <!-- <a class="nav-link" href="#">restaurantroulette</a> -->
-              <RouterLink class="nav-link active" to="/roulettemain">Restaurant Roulette!</RouterLink>
+              <!-- <a class="nav-link" href="#">mealroulette</a> -->
+              <RouterLink class="nav-link active" to="/roulettemain">Meal Roulette!</RouterLink>
             </li>
             <li class="nav-item p-2">
               <!-- <a class="nav-link" href="#">Pricing</a> -->

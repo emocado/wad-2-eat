@@ -20,7 +20,7 @@
           <RouterLink class="link" to="/forum">Browse Forum</RouterLink>
         </div>
         <div class="menu-item">
-          <RouterLink class="link" to="/roulettemain">Restauant Roulette!</RouterLink>
+          <RouterLink class="link" to="/roulettemain">Meal Roulette!</RouterLink>
         </div>
       </div>
       <div id="menu-background-pattern"></div>

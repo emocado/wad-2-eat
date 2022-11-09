@@ -1,7 +1,7 @@
 <template>
   <div class="rouletteMain" data-theme="garden">
 
-    <h1 class="text-4xl">Restaurant Roulette</h1>
+    <h1 class="text-4xl">Meal Roulette</h1>
     <div class="py-10 relative">
       <div class="wheel-anim" :class="{'wheel-anim-started': startAnim}">
         <Roulette
@@ -47,7 +47,7 @@
       </div>
     </div>
 
-    <p class="text-xl text-gray-500 italic mb-10">A customizable and flexible fortune wheel made with vue3</p>
+    <p class="text-xl text-gray-500 italic mb-10">A customizable and flexible fortune wheel to combat pesky indecisiveness</p>
 
     <div class="tabs tabs-boxed justify-center">
       <a class="tab" :class="{'tab-active': managerId === 1 }" @click="managerId = 1">Items manager</a> 
@@ -151,7 +151,5 @@ export default {
     overflow-x: hidden;
   }
 
-
-
-
+  
 </style>
