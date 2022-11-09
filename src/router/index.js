@@ -1,12 +1,14 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import ForumView from '../views/ForumView.vue'
+import Discussion from '../views/Discussion.vue'
 import GameCardsStackComponent from "../components/swipe/GameCardsStackComponent.vue";
 import MapView from "../views/MapView.vue";
 import GroupSwipeView from "../views/GroupSwipeView.vue";
 import GroupRoomView from "../views/GroupRoomView.vue";
 import FoodRecipeRoulette from "../components/roulette/FoodRecipeRoulette.vue";
-import RouletteView from "../views/RouletteMain.vue";
+import MealRouletteView from "../views/MealRouletteMain.vue";
+import RestaurantRouletteView from '../views/RestaurantRouletteMain.vue';
 import MealCard from "../components/Recipe.vue"
 import MealCard2 from "../components/IngredientFilter.vue"
 
@@ -39,6 +41,12 @@ const router = createRouter({
       component: ForumView
     },
     {
+      path: '/comment/:postid',
+      name:'comment',
+      component: Discussion,
+      props: true
+    },
+    {
       path: '/map/locationid/:locationid',
       name: 'singleMap',
       component: MapView
@@ -54,9 +62,14 @@ const router = createRouter({
       component: GroupRoomView
     },
     {
-      path: '/roulettemain',
-      name: 'roulettemain',
-      component: RouletteView
+      path: '/mealroulettemain',
+      name: 'mealroulettemain',
+      component: MealRouletteView
+    },
+    {
+      path: '/restaurantroulettemain',
+      name: 'restaurantroulettemain',
+      component: RestaurantRouletteView
     },
     {
       path: '/recipe',

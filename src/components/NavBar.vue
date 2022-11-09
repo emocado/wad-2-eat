@@ -25,7 +25,11 @@
             </li>
             <li class="nav-item p-2" data-bs-toggle="offcanvas" data-bs-target="#offcancasNavbar">
               <!-- <a class="nav-link" href="#">mealroulette</a> -->
-              <RouterLink class="nav-link active" to="/roulettemain">Meal Roulette!</RouterLink>
+              <RouterLink class="nav-link active" to="/mealroulettemain">Meal Roulette!</RouterLink>
+            </li>
+            <li class="nav-item p-2" data-bs-toggle="offcanvas" data-bs-target="#offcancasNavbar">
+              <!-- <a class="nav-link" href="#">restaurantroulette</a> -->
+              <RouterLink class="nav-link active" to="/restaurantroulettemain">Restaurant Roulette!</RouterLink>
             </li>
             <li class="nav-item p-2" data-bs-toggle="offcanvas" data-bs-target="#offcancasNavbar">
               <!-- <a class="nav-link" href="#">Pricing</a> -->
@@ -66,7 +70,11 @@
             </li>
             <li class="nav-item p-2">
               <!-- <a class="nav-link" href="#">mealroulette</a> -->
-              <RouterLink class="nav-link active" to="/roulettemain">Meal Roulette!</RouterLink>
+              <RouterLink class="nav-link active" to="/mealroulettemain">Meal Roulette!</RouterLink>
+            </li>
+            <li class="nav-item p-2">
+              <!-- <a class="nav-link" href="#">restaurantroulette</a> -->
+              <RouterLink class="nav-link active" to="/restaurantroulettemain">Restaurant Roulette!</RouterLink>
             </li>
             <li class="nav-item p-2">
               <!-- <a class="nav-link" href="#">Pricing</a> -->

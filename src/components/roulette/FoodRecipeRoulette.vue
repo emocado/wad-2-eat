@@ -1,9 +1,9 @@
 <template>
 
     <div class="container">
-        <div class="row text-center">
+        <div class="row text-center mb-2 text-lg font-semibold text-gray-900 ">
             <h2>Stuck at Home and Feeling Hungry?</h2>
-            <h4>Cook up a random meal by clicking below</h4>
+            <h5>Cook up a random meal by clicking below</h5>
             <button class="button-primary" @click="retriveResult()">
                 Meal Roulette 🍔
             </button>
@@ -60,7 +60,7 @@ export default {
                                     </div>
                                     <div class="col-md-4">
                                         <div class="card-body">
-                                            <h5 class="card-title">${meal.strMeal}</h5>
+                                            <h5 class="card-title"><mark>${meal.strMeal}</mark></h5>
                                             ${meal.strCategory ? `<p class="card-text"><strong>Category:</strong> ${meal.strCategory}</p>` : ''}
                                             ${meal.strArea ? `<p class="card-text"><strong>Area:</strong> ${meal.strArea}</p>` : ''}
                                             ${meal.strTags ? `<p class="card-text"><strong>Tags:</strong> ${meal.strTags.split(',').join(', ')}</p>` : ''}
@@ -76,28 +76,38 @@ export default {
                                 <div class="row g-0">
                                     <div class="col-md-12">
                                         <div class="card-body">
-                                            <h5 class="card-title">Instructions</h5>
-                                            <ol>
-                                                ${newInstructionsList.join('')}
-                                            </ol>
+                                            <h5 class="card-title d-flex justify-content-center"><mark>Instructions</mark></h5>
+                                            <div class="d-flex justify-content-center">
+                                                <ol class="space-y-5 max-w-md list-decimal list-inside text-gray-500 dark:text-gray-400">
+                                                    ${newInstructionsList.join('')}
+                                                </ol>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card border-secondary mb-3" style="max-width: 100%;">
+                                <div class="row g-0">
+                                    <div class="col-md-12">
+                                        <div class="card-body">
+                                            <div class="card-title d-flex justify-content-center"><mark>Video Recipe</mark></div>
+                                            <div class="card-body text-secondary">
+                                                ${meal.strYoutube
+                                            ? `
+                                            <div class="videoWrapper">
+                                                <iframe width="420" height="315"
+                                                src="https://www.youtube.com/embed/${meal.strYoutube.slice(
+                                                    -11)}">
+                                                </iframe>
+                                            </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                            ${meal.strYoutube
-                                ? `
-                            <div class="modal-dialog modal-xl">
-                                <h3 class="text-center">Video Recipe</h3>
-                                <div class="videoWrapper">
-                                <iframe width="420" height="315"
-                                src="https://www.youtube.com/embed/${meal.strYoutube.slice(
-                                    -11
-                                )}">
-                                </iframe>
-                                </div>
-                            </div>`
-                                : ""
+`
+                                : ''
                             }
                     `;
 

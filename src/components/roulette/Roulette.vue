@@ -66,7 +66,7 @@
 <script>
 import { defineComponent } from 'vue'
 export default defineComponent ({
-  name: "Roulette",
+  name: "RouletteMain",
   emits: ["wheelStart", "wheelEnd"],
   props: {
     items: {
@@ -254,6 +254,12 @@ export default defineComponent ({
 </script>
 
 <style lang="scss" scoped>
+
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap");
+@import url("https://cdn.jsdelivr.net/npm/daisyui@2.38.1/dist/full.css");
+@import url("https://cdn.jsdelivr.net/npm/tailwindcss@2.2/dist/tailwind.min.css");
+
+
 .wheel-container,
 .wheel-base,
 .wheel-base-container,
