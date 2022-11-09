@@ -11,8 +11,8 @@
     </template>
     <a-card hoverable class="mb-2">
       <template #cover>
-        <img alt="food" width="255" height="182"
-          :src="post.photoURL !== '' ? post.photoURL.url : 'https://static.thehoneycombers.com/wp-content/uploads/sites/2/2020/07/local-food-singapore-dishes-on-a-table-900x643.png'" />
+        <img alt="food" id="foodImage"
+          :src="post.photoURL !== '' ? post.photoURL : 'https://static.thehoneycombers.com/wp-content/uploads/sites/2/2020/07/local-food-singapore-dishes-on-a-table-900x643.png'" />
       </template>
       <a-card-meta :title="post.name">
         <template #description>{{ post?.address }}</template>
@@ -44,3 +44,11 @@
     },
   }
 </script>
+
+<style scoped>
+#foodImage {
+  height: 230px;
+  object-fit: cover;
+}
+
+</style>

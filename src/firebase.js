@@ -126,14 +126,14 @@ export function useRestaurant(chatRoomId) {
                 if (querySnapshot.empty) {
                     restaurantsCollection.add({
                         name: restaurant.name,
-                        address: restaurant.address,
-                        photoURL: restaurant.photo?.images.original ?? "",
+                        address: restaurant.location.address1,
+                        photoURL: restaurant.image_url ?? "",
                         userId: uid,
                         userName: displayName,
                         chatRoomId: chatRoomId,
                         likes: 1,
-                        locationId: restaurant.location_id,
-                        webURL: restaurant.web_url,
+                        locationId: restaurant.id,
+                        webURL: restaurant.url,
                         createdAt:
                             firebase.firestore.FieldValue.serverTimestamp(),
                     });
