@@ -40,7 +40,7 @@ const router = createRouter({
     },
     {
       path: '/map/locationid/:locationid',
-      name: 'map',
+      name: 'singleMap',
       component: MapView
     },
     {

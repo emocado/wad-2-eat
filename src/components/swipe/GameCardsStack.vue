@@ -1,6 +1,6 @@
 <template>
   <div class="cards">
-    <GameCard v-for="(card, index) in cards" :key="card.location_id" :card="card" :is-current="index === 0" :trigger="trigger"
+    <GameCard v-for="(card, index) in cards" :key="card.id" :card="card" :is-current="index === 0" :trigger="trigger"
       @cardAccepted="$emit('cardAccepted');" @cardRejected="$emit('cardRejected');" @cardSkipped="$emit('cardSkipped');"
       @hideCard="$emit('hideCard');" />
   </div>

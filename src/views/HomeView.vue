@@ -78,8 +78,9 @@ main {
 #menu {
   align-items: start;
   display: flex;
-  height: calc(100vh - 70px);
+  height: calc(100vh - 80px);
   width: 100vw;
+  padding: 30px 0px;
 }
 
 #menu-items {
@@ -175,7 +176,7 @@ main {
   cursor: pointer;
   display: block;
   font-family: 'Ibarra Real Nova', serif;
-  font-size: clamp(3rem, 8vw, 8rem);
+  font-size: clamp(3rem, 8vw, 4rem);
   padding: clamp(0.25rem, 0.5vw, 1rem) 0rem;
   text-decoration: none;
   transition: opacity 400ms ease;

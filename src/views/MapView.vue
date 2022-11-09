@@ -1,25 +1,32 @@
 <template>
-  <div id="map" ref="map" style="position: unset;height: 100vh; width:100vw">
-    <MapInfoWindow :lat="Number(post.latitude)" :lng="Number(post.longitude)">
-      <MapInfoContent :post="post" />
-    </MapInfoWindow>
+  <div id="map" ref="map">
+    <div v-if="!post" id="halfCircleSpinner">
+      <HalfCircleSpinner />
+    </div>
+    <div v-else>
+      <MapInfoWindow :lat="post?.coordinates?.latitude" :lng="post?.coordinates?.longitude">
+        <MapInfoContent :post="post"/>
+      </MapInfoWindow>
+    </div>
   </div>
 </template>
 
 <script>
 import MapInfoWindow from '../components/map/MapInfoWindow.vue';
 import MapInfoContent from '../components/map/MapInfoContent.vue';
-import data from '../components/data.js'
+import HalfCircleSpinner from '../components/HalfCircleSpinner.vue';
+import axios from 'axios';
 
 export default {
   components: {
     MapInfoWindow,
     MapInfoContent,
+    HalfCircleSpinner,
   },
 
   data() {
     return {
-      center: { lat: 1.3099, lng: 103.8765 },
+      center: null,
       map: null,
       markers: [
         {
@@ -30,89 +37,26 @@ export default {
         }, // Along list of clusters
       ],
       post: null,
+      watchId: null,
     };
   },
-  mounted() {
-    navigator.geolocation.watchPosition((pos) => {
-      this.center = {
-        lat: pos.coords.latitude,
-        lng: pos.coords.longitude
-      };
-    }, (err) => {
-      console.log(err);
-    });
 
-    const lat = Number(this.post.latitude)
-    const lng = Number(this.post.longitude)
-    console.log(lat, lng);
-    
-    this.markers = [
-      {
-        position: {
-          lat: lat,
-          lng: lng
-        },
-      }
-    ];
-    this.map = new window.google.maps.Map(this.$refs["map"], {
-      center: this.center,
-      zoom: 17,
-    });
-    const directionsService = new window.google.maps.DirectionsService();
-    const directionsRenderer = new window.google.maps.DirectionsRenderer();
-    directionsRenderer.setMap(this.map);
-    directionsService
-      .route({
-        origin: this.center,
-        destination: { lat: lat, lng: lng },
-        travelMode: window.google.maps.TravelMode["DRIVING"],
-      })
-      .then((response) => {
-        directionsRenderer.setDirections(response);
-      })
-      .catch((e) => console.log(e));
-  },
   watch: {
-    center: function (newVal, oldVal) {
-      // round newVal to 4 dp
-      newVal = {
-        lat: Math.round(newVal.lat * 10000) / 10000,
-        lng: Math.round(newVal.lng * 10000) / 10000
-      };
-      // round oldVal to 4 dp
-      oldVal = {
-        lat: Math.round(oldVal.lat * 10000) / 10000,
-        lng: Math.round(oldVal.lng * 10000) / 10000
-      };
-      if (newVal.lat !== oldVal.lat && newVal.lng !== oldVal.lng) {
-        const lat = Number(this.post.latitude);
-        const lng = Number(this.post.longitude);
-        this.markers = [
-          {
-            position: {
-              lat: lat,
-              lng: lng
-            },
-          }
-        ];
-        this.map = new window.google.maps.Map(this.$refs["map"], {
-          center: this.center,
-          zoom: 17,
-        });
-        const directionsService = new window.google.maps.DirectionsService();
-        const directionsRenderer = new window.google.maps.DirectionsRenderer();
-        directionsRenderer.setMap(this.map);
-        directionsService
-          .route({
-            origin: this.center,
-            destination: { lat: lat, lng: lng },
-            travelMode: window.google.maps.TravelMode["DRIVING"],
-          })
-          .then((response) => {
-            directionsRenderer.setDirections(response);
-          })
-          .catch((e) => console.log(e));
-      }
+    center: function () {
+      const newNewCenter = { lat: this.center.lat, lng: this.center.lng }
+      const directionsService = new window.google.maps.DirectionsService();
+      const directionsRenderer = new window.google.maps.DirectionsRenderer();
+      directionsRenderer.setMap(this.map);
+      const destination = { lat: this.markers[0].position.lat, lng: this.markers[0].position.lng }
+      // console.log('newnewcenter', newNewCenter);
+      // console.log('destination', destination);
+      directionsService.route({
+        origin: newNewCenter,
+        destination: destination,
+        travelMode: window.google.maps.TravelMode["WALKING"],
+      }).then((response) => {
+        directionsRenderer.setDirections(response);
+      }).catch((e) => console.log(e));
     }
   },
 
@@ -124,35 +68,69 @@ export default {
         else setTimeout(checkForMap, 200)
       }
       checkForMap()
-    }
+    },
   },
 
-  created() {
-    // fetch api with location id
-    this.post = data.find((post) => post.location_id === this.$route.params.locationid);
-    console.log(this.post);
+  mounted() {
+    this.watchId = navigator.geolocation.watchPosition((pos) => {
+      this.center = {
+        lat: pos.coords.latitude,
+        lng: pos.coords.longitude
+      };
+    }, (err) => {
+      console.log(err);
+    });
 
-    // const api_key = "AIzaSyDJx4A_FqpmuCF40Tm-gs4F0Z3we45UH6c"
-    // const proxyurl = "https://cors-anywhere.herokuapp.com/";
-    // const url = `https://maps.googleapis.com/maps/api/directions/json?origin=Aljunied+Cres&destination=Singapore+Management+University&key=${api_key}`
-    // fetch(proxyurl + url)
-    //   .then(response => response.json())
-    //   .then(data => {
-    //     console.log(data)
-    //     const stepsArr = data.routes[0].legs[0].steps
-    //     console.log(stepsArr);
-    //     this.path = stepsArr.map(step => {
-    //       return {
-    //         lat: step.start_location.lat,
-    //         lng: step.start_location.lng,
-    //       }
-    //     })
-    //     this.path.push({
-    //       lat: stepsArr[stepsArr.length - 1].end_location.lat,
-    //       lng: stepsArr[stepsArr.length - 1].end_location.lng,
-    //     })
-    //     // this.path = data.routes[0].overview_polyline.points
-    //   })
+    const url = `/v3/businesses/${this.$route.params.locationid}`
+    // const proxy = "https://cors-anywhere.herokuapp.com/"
+
+    axios
+      .get(url, {
+        headers: {
+          Authorization: `Bearer ${import.meta.env.VITE_YELP_API_KEY}`,
+        },
+      })
+      .then((response) => {
+        const data = response.data;
+        this.post = data;
+
+        const lat = Number(data.coordinates.latitude);
+        const lng = Number(data.coordinates.longitude);
+        this.markers = [{
+          position: {
+            lat: lat,
+            lng: lng
+          },
+        }];
+
+        this.map = new window.google.maps.Map(this.$refs["map"], {
+          center: {lat: lat, lng: lng},
+          zoom: 17,
+        });
+
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  },
+
+  beforeUnmount() {
+    this.map = null;
+    navigator.geolocation.clearWatch(this.watchId);
   },
 }
 </script>
+
+<style scoped>
+#map {
+  height: calc(100vh - 80px);
+  width: 100vw;
+}
+#halfCircleSpinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+}
+</style>

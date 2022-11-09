@@ -2,10 +2,10 @@
   <div v-if="isShowing" ref="interactElement" :class="{
     isAnimating: isInteractAnimating,
     isCurrent: isCurrent
-  }" class="card" :style="{ transform: transformString, backgroundImage: card.photo ? `url(${card.photo.images.medium.url})` : `url(/src/assets/food-default.png)` }">
+  }" class="card" :style="{ transform: transformString, backgroundImage: card.image_url ? `url(${card.image_url})` : `url(/src/assets/food-default.png)` }">
     <div class="cardInfo">
       <h3>{{ card.name }}</h3>
-      <h5>{{ card.distance_string }} away</h5>
+      <h5>{{ card.distance.toFixed(2) }}m away</h5>
     </div>
   </div>
 </template>

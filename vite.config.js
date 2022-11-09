@@ -16,5 +16,14 @@ export default defineConfig({
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
-  }
+  },
+  server: {
+    proxy: {
+      "/v3": {
+        target: "https://api.yelp.com",
+        changeOrigin: true,
+        secure: false,
+      },
+    },
+  },
 })

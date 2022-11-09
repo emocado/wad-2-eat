@@ -1,14 +1,10 @@
 <template>
-  <!-- todo add loading spinner if loading is true -->
   <div class="container">
-    <GameCardsStack v-if="!loading" :cards="post" :trigger="trigger" @cardAccepted="handleCardAccepted"
-      @cardRejected="handleCardRejected" @cardSkipped="handleCardSkipped" @hideCard="removeCardFromDeck" />
-    <div v-else-if="loading">
-      <HalfCircleSpinner />
-    </div>
-    <!-- <div>
-      <HalfCircleSpinner/>
-    </div> -->
+      <div v-if="!post">
+        <HalfCircleSpinner />
+      </div>
+      <GameCardsStack v-else :cards="post" :trigger="trigger" @cardAccepted="handleCardAccepted"
+        @cardRejected="handleCardRejected" @cardSkipped="handleCardSkipped" @hideCard="removeCardFromDeck" />
   </div>
   <div class="d-flex justify-content-around">
     <button class="btn text-danger" @click="handleTriggerRemove">
@@ -30,8 +26,7 @@
 <script>
 import GameCardsStack from "./GameCardsStack.vue";
 import HalfCircleSpinner from "../HalfCircleSpinner.vue";
-// import axios from "axios";
-import data from "../data.js";
+import axios from "axios";
 
 export default {
   components: {
@@ -44,69 +39,48 @@ export default {
     return {
       visibleCards: [{ name: "bricklane", location_id: "1" }, { name: "macdonald", location_id: "2" }, { name: "subway", location_id: "3" }, { name: "wolfrik", location_id: "4" }],
       trigger: 0,
-      loading: false,
-      post: data,
-      error: null,
+      post: null,
     };
   },
 
-  created() {
-    // watch the params of the route to fetch the data again
-    this.$watch(
-      () => this.$route.params,
-      () => {
-        // this.fetchData()
+  mounted() {
+    navigator.geolocation.getCurrentPosition(
+      position => {
+        this.fetchData(position.coords.latitude, position.coords.longitude)
       },
-      // fetch the data when the view is created and the data is
-      // already being observed
-      { immediate: true }
+      error => {
+        console.log(error.message);
+      },
     )
   },
 
   methods: {
-    fetchData() {
-      console.log(import.meta.env.VITE_TRAVEL_ADVISOR_API_KEY);
+    fetchData(lat, lng) {
       let self = this
-      self.error = self.post = null
-      self.loading = true
-      
-      // comment out axios as the limit for api is only 500 per month
 
-      // eslint-disable-next-line no-unused-vars
-      const options = {
-        method: "GET",
-        url: "https://travel-advisor.p.rapidapi.com/restaurants/list-by-latlng",
-        params: {
-          latitude: "1.296568",
-          longitude: "103.852119",
-          limit: "10",
-          currency: "SGD",
-          distance: "1",
-          open_now: "false",
-          lunit: "km",
-          lang: "en_US",
-        },
-        headers: {
-          "X-RapidAPI-Key":
-            import.meta.env.VITE_TRAVEL_ADVISOR_API_KEY,
-          "X-RapidAPI-Host": "travel-advisor.p.rapidapi.com",
-        },
-      };
+      const url = "/v3/businesses/search"
+      // const proxy = "https://cors-anywhere.herokuapp.com/"
 
+      axios
+        .get(url, {
+          headers: {
+            Authorization: `Bearer ${import.meta.env.VITE_YELP_API_KEY}`,
+          },
+          params: {
+            term: "food",
+            limit: 50,
+            radius: 1000,
+            latitude: lat,
+            longitude: lng,
+          },
+        })
+        .then(function (response) {
+          self.post = response.data.businesses;
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
 
-      // axios
-      //   .request(options)
-      //   .then(function (response) {
-      //     console.log(response.data.data);
-      //     self.loading = false;
-      //     self.post = response.data.data;
-      //   })
-      //   .catch(function (error) {
-      //     // self.error = "Something went wrong " + error.toString();
-      //     console.log(error);
-      //   });
-
-      self.loading = false;
     },
 
     handleTriggerAdd() {
@@ -118,7 +92,7 @@ export default {
     handleCardAccepted() {
       console.log("handleCardAccepted");
       if (!this.$route.params.chatroomid) {
-        this.$router.push({ path: `/map/locationid/${this.post[0].location_id}` });
+        this.$router.push({ path: `/map/locationid/${this.post[0].id}` });
       }
       this.$emit("cardAccepted", this.post[0]);
     },

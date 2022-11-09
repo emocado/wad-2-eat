@@ -135,7 +135,7 @@ h3 span {
 }
 
 .full-height {
-  min-height: calc(100vh - 70px);
+  min-height: calc(100vh - 80px);
 }
 
 [type="checkbox"]:checked,
