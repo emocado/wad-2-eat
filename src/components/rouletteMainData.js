@@ -19,7 +19,7 @@ export default {
     indicatorPosition: "right",
     size: 400,
     displayShadow: true,
-    duration: 8,
+    duration: 4,
     resultVariation: 70,
     easing: "bounce",
     counterClockwise: false,
