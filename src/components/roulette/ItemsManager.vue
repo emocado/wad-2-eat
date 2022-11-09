@@ -4,9 +4,8 @@
       <thead class="text-center">
         <tr>
           <th v-if="initialFirstItemIndex != null">First Item</th>
-          <th>Name</th>
-          <th>Html content</th>
-          <th>Text color</th>
+
+          <th>Candidate</th>
           <th>Background</th>
           <th>Delete</th>
         </tr>
@@ -22,9 +21,9 @@
               v-model="firstItemIndex.value"
             />
           </td>
-          <td><input class="input input-bordered w-full" type="text" v-model="item.name" /></td>
+          <!-- <td><input class="input input-bordered w-full" type="text" v-model="item.name" /></td> -->
           <td><textarea class="textarea h-12 textarea-bordered textarea-primary w-full" v-model="item.htmlContent" /></td>
-          <td><input class="input input-bordered w-full" type="text" v-model="item.textColor" /></td>
+          <!-- <td><input class="input input-bordered w-full" type="text" v-model="item.textColor" /></td> -->
           <td><input class="input input-bordered w-full" type="text" v-model="item.background" /></td>
           <td class="text-center">
             <button class="btn btn-error btn-outline btn-circle btn-sm" @click="remove(index)">
@@ -38,9 +37,8 @@
       <tfoot class="text-center">
         <tr>
           <th v-if="initialFirstItemIndex != null">First Item</th>
-          <th>Name</th>
-          <th>Html content</th>
-          <th>Text color</th>
+
+          <th>Candidate</th>
           <th>Background</th>
           <th>Delete</th>
         </tr>

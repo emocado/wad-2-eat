@@ -9,7 +9,7 @@
         <!-- format the results into json format -->
         <!-- underline the results.name -->
 
-        <h3 class="text-2xl"><span style="text-decoration:underline; font-style: italic;">{{ result.name }}</span></h3>
+        <h3 class="text-2xl"><span style="text-decoration:underline; font-style: italic;">{{ result.htmlContent }}</span></h3>
       </div>
     </div>
 

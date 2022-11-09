@@ -84,20 +84,28 @@ export default {
                                     </div>
                                 </div>
                             </div>
-
-                            ${meal.strYoutube
-                                ? `
-                            <div class="modal-dialog modal-xl">
-                                <h3 class="text-center">Video Recipe</h3>
-                                <div class="videoWrapper">
-                                <iframe width="420" height="315"
-                                src="https://www.youtube.com/embed/${meal.strYoutube.slice(
-                                    -11
-                                )}">
-                                </iframe>
+                            <div class="card border-secondary mb-3" style="max-width: 100%;">
+                                <div class="row g-0">
+                                    <div class="col-md-12">
+                                        <div class="card-body">
+                                            <div class="card-title d-flex justify-content-center">Video Recipe</div>
+                                            <div class="card-body text-secondary">
+                                                ${meal.strYoutube
+                                            ? `
+                                            <div class="videoWrapper">
+                                                <iframe width="420" height="315"
+                                                src="https://www.youtube.com/embed/${meal.strYoutube.slice(
+                                                    -11)}">
+                                                </iframe>
+                                            </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>`
-                                : ""
+                            </div>
+
+`
+                                : ''
                             }
                     `;
 
