@@ -76,10 +76,12 @@ export default {
                                 <div class="row g-0">
                                     <div class="col-md-12">
                                         <div class="card-body">
-                                            <h5 class="card-title">Instructions</h5>
-                                            <ol class="space-y-1 max-w-md list-decimal list-inside text-gray-500 dark:text-gray-400">
-                                                ${newInstructionsList.join('')}
-                                            </ol>
+                                            <h5 class="card-title d-flex justify-content-center">Instructions</h5>
+                                            <div class="d-flex justify-content-center">
+                                                <ol class="space-y-5 max-w-md list-decimal list-inside text-gray-500 dark:text-gray-400">
+                                                    ${newInstructionsList.join('')}
+                                                </ol>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
