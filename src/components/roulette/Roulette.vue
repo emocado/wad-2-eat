@@ -66,7 +66,7 @@
 <script>
 import { defineComponent } from 'vue'
 export default defineComponent ({
-  name: "Roulette",
+  name: "RouletteMain",
   emits: ["wheelStart", "wheelEnd"],
   props: {
     items: {

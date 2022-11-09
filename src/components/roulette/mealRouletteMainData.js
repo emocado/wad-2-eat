@@ -25,7 +25,7 @@ export default {
     counterClockwise: false,
     horizontalContent: false,
     displayBorder: true,
-    displayIndicator: false,
+    displayIndicator: true,
     baseDisplay: true,
     baseSize: 100,
     baseDisplayShadow: true,
