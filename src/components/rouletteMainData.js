@@ -31,6 +31,6 @@ export default {
     baseDisplayShadow: true,
     baseDisplayIndicator: true,
     baseBackground: "#444",
-    baseHtmlContent: "<strong class=\"text-white\">What to<br>eat?</strong>",
+    baseHtmlContent: "<strong class=\"text-white\">WAD 2<br>EAT?</strong>",
   }
 }
