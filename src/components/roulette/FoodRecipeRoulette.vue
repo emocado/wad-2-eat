@@ -1,9 +1,9 @@
 <template>
 
     <div class="container">
-        <div class="row text-center">
+        <div class="row text-center mb-2 text-lg font-semibold text-gray-900 ">
             <h2>Stuck at Home and Feeling Hungry?</h2>
-            <h4>Cook up a random meal by clicking below</h4>
+            <h5>Cook up a random meal by clicking below</h5>
             <button class="button-primary" @click="retriveResult()">
                 Meal Roulette 🍔
             </button>
@@ -77,7 +77,7 @@ export default {
                                     <div class="col-md-12">
                                         <div class="card-body">
                                             <h5 class="card-title">Instructions</h5>
-                                            <ol>
+                                            <ol class="space-y-1 max-w-md list-decimal list-inside text-gray-500 dark:text-gray-400">
                                                 ${newInstructionsList.join('')}
                                             </ol>
                                         </div>

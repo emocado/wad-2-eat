@@ -13,7 +13,7 @@
       </div>
     </div>
 
-    <div class="py-10 relative">
+    <div class="py-5 relative">
       <div class="wheel-anim" :class="{'wheel-anim-started': startAnim}">
         <Roulette
           v-if="wheelActive"
@@ -149,7 +149,7 @@ export default {
   }
 }
 
-@import url("https://fonts.googleapis.com/css?family=Muli&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap");
 @import url("https://cdn.jsdelivr.net/npm/daisyui@2.38.1/dist/full.css");
 @import url("https://cdn.jsdelivr.net/npm/tailwindcss@2.2/dist/tailwind.min.css");
 
