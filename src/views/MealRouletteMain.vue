@@ -9,7 +9,7 @@
         <!-- format the results into json format -->
         <!-- underline the results.name -->
 
-        <h3 class="text-2xl"><span style="text-decoration:underline">{{ result.name }}</span></h3>
+        <h3 class="text-2xl"><span style="text-decoration:underline; font-style: italic;">{{ result.name }}</span></h3>
       </div>
     </div>
 
@@ -86,7 +86,7 @@
 import ItemsManager from "../components/roulette/ItemsManager.vue";
 import WheelManager from "../components/roulette/WheelManager.vue";
 import Roulette from "../components/roulette/Roulette.vue";
-import wheelData from "../components/rouletteMainData.js";
+import wheelData from "../components/roulette/mealRouletteMainData.js";
 
 export default {
   name: "RouletteMain",

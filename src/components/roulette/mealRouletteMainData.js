@@ -17,7 +17,7 @@ export default {
   wheelSettings: {
     centeredIndicator: false,
     indicatorPosition: "right",
-    size: 400,
+    size: 600,
     displayShadow: true,
     duration: 4,
     resultVariation: 70,
@@ -31,6 +31,6 @@ export default {
     baseDisplayShadow: true,
     baseDisplayIndicator: true,
     baseBackground: "#444",
-    baseHtmlContent: "<strong class=\"text-white\">WAD 2<br>EAT?</strong>",
+    baseHtmlContent: "<strong class=\"text-white\">MEAL<br>PICKER!</strong>",
   }
 }
