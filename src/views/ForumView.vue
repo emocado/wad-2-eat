@@ -1,12 +1,12 @@
 <script setup>
-import SearchJumbo from '../components/SearchJumbo.vue'
-import DisplayItems from '../components/DisplayItems.vue'
+import SearchJumbo from '../components/forum/SearchJumbo.vue'
+import DisplayItems from '../components/forum/DisplayItems.vue'
 </script>
 
 <template>
   <main>
     <SearchJumbo/>
-    <DisplayItems/> 
+    <DisplayItems @fetch_data="getData" page_name="forum"></DisplayItems> 
   </main>
 </template>
 

@@ -22,7 +22,7 @@
           </li>
           <li class="nav-item">
             <!-- <a class="nav-link" href="#">Pricing</a> -->
-            <RouterLink class="nav-link active" to="/forum">Forum</RouterLink>
+            <RouterLink id= "forum" class="nav-link active" to="/forum">Forum</RouterLink>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">

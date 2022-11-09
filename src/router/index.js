@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import ForumView from '../views/ForumView.vue'
+import Discussion from '../views/Discussion.vue'
 import GameCardsStackComponent from "../components/GameCardsStackComponent.vue";
 import MapView from "../components/MapView.vue";
 import ChatBox from "../components/ChatBox.vue";
@@ -30,6 +31,12 @@ const router = createRouter({
       path: '/forum',
       name:'forum',
       component: ForumView
+    },
+    {
+      path: '/comment/:postid',
+      name:'comment',
+      component: Discussion,
+      props: true
     },
     {
       path: '/map/locationid/:locationid',
