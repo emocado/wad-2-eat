@@ -139,7 +139,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .wheel-anim {
   transition: transform 4s cubic-bezier(.58,-0.26,.24,1.11);
   transform: rotate(-1800deg) scale(1.25);
