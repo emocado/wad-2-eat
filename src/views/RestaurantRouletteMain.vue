@@ -1,7 +1,7 @@
 <template>
   <div class="rouletteMain" data-theme="garden">
 
-    <h1 class="text-4xl">Meal Roulette</h1>
+    <h1 class="text-4xl">Restaurant Roulette</h1>
     <!-- display the wheel results here  -->
     <div class="rouletteResults" v-if="result">
       <div class="rouletteResult">
@@ -9,11 +9,11 @@
         <!-- format the results into json format -->
         <!-- underline the results.name -->
 
-        <h3 class="text-2xl"><span style="text-decoration:underline">{{ result.name }}</span></h3>
+        <h3 class="text-2xl"><strong><span style="text-decoration: underline; font-style: italic;">{{ result.htmlContent }}</span></strong></h3>
       </div>
     </div>
 
-    <div class="py-10 relative">
+    <div class="py-5 relative">
       <div class="wheel-anim" :class="{'wheel-anim-started': startAnim}">
         <Roulette
           v-if="wheelActive"
@@ -53,8 +53,8 @@
         v-show="result"
         class="absolute bottom-2 left-1/2 transform -translate-x-1/2"
       >
-        <button class="btn btn-xs mx-2" @click="onHardReset()">Hard reset</button>
-        <button class="btn btn-xs mx-2" @click="onSoftReset()">Soft reset</button>
+      <button class="btn btn-xs mx-2" @click="onHardReset()">Refresh Roulette Session</button>
+      <button class="btn btn-xs mx-2" @click="onSoftReset()">Re-spin from the beginning</button>
       </div>
     </div>
 
@@ -86,7 +86,7 @@
 import ItemsManager from "../components/roulette/ItemsManager.vue";
 import WheelManager from "../components/roulette/WheelManager.vue";
 import Roulette from "../components/roulette/Roulette.vue";
-import wheelData from "../components/rouletteMainData.js";
+import wheelData from "../components/roulette/restaurantRouletteMainData.js";
 
 export default {
   name: "RouletteMain",
@@ -139,7 +139,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .wheel-anim {
   transition: transform 4s cubic-bezier(.58,-0.26,.24,1.11);
   transform: rotate(-1800deg) scale(1.25);
@@ -148,11 +148,6 @@ export default {
     transform: rotate(0deg) scale(1);
   }
 }
-
-@import url("https://fonts.googleapis.com/css?family=Muli&display=swap");
-@import url("https://cdn.jsdelivr.net/npm/daisyui@2.38.1/dist/full.css");
-@import url("https://cdn.jsdelivr.net/npm/tailwindcss@2.2/dist/tailwind.min.css");
-
 
   .rouletteMain {
     font-family: 'Ubuntu', sans-serif;
