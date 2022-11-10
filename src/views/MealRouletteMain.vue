@@ -1,5 +1,5 @@
 <template>
-  <div class="rouletteMain" data-theme="winter">
+  <div class="rouletteMain" data-theme="cupcake">
 
     <h1 class="text-4xl">Meal Roulette</h1>
     <!-- display the wheel results here  -->
@@ -58,7 +58,7 @@
       </div>
     </div>
 
-    <p class="text-xl text-gray-500 italic mb-10">A customizable and flexible fortune wheel to combat pesky indecisiveness</p>
+    <p class="text-xl text-gray-500 italic mb-10">A customizable roulette wheel to combat pesky indecisiveness</p>
 
     <div class="tabs tabs-boxed justify-center">
       <a class="tab" :class="{'tab-active': managerId === 1 }" @click="managerId = 1">Items manager</a> 
