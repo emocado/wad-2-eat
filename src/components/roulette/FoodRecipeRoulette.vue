@@ -148,7 +148,7 @@ export default {
 }
 </style>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import url("https://fonts.googleapis.com/css?family=Muli&display=swap");
 
 * {
