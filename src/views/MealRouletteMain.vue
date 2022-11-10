@@ -1,5 +1,5 @@
 <template>
-  <div class="rouletteMain" data-theme="autumn">
+  <div class="rouletteMain" data-theme="winter">
 
     <h1 class="text-4xl">Meal Roulette</h1>
     <!-- display the wheel results here  -->
