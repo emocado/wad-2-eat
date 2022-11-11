@@ -9,9 +9,7 @@ export default {
     { id: 7, name: "Japanese", htmlContent: "Japanese", textColor: "white", background: "#3ab3f0" },
     { id: 8, name: "Pokebowl", htmlContent: "Pokebowl", textColor: "white", background: "#f0403a" },
     { id: 9, name: "Thai", htmlContent: "Thai", textColor: "white", background: "#f2831b" },
-    { id: 10, name: "Sandwich", htmlContent: "Sandwich", textColor: "white", background: "#37e307" },
-    { id: 11, name: "French", htmlContent: "French", textColor: "white", background: "#3ab3f0" },
-    { id: 12, name: "Pasta", htmlContent: "Pasta", textColor: "white", background: "#f0403a" },
+    { id: 10, name: "Sandwich", htmlContent: "Sandwich", textColor: "white", background: "#37e307" }
   ],
   firstItemIndex: { value: 0 },
   wheelSettings: {
