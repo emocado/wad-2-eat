@@ -1,13 +1,15 @@
 <template>
-    <div class="container-fluid" id="mainSection">
-        <div class="row text-center mb-2 d-grid gap-2 col-6 mx-auto font-mono">
-            <h2 class="text-5xl font-extrabold">Stuck at Home and Feeling Hungry?</h2>
-            <h5 class="text-2xl font-medium">Cook up a random meal by clicking below</h5>
-            <button class="button-primary" @click="retriveResult()">
-                Meal Roulette 🍔
-            </button>
+    <div class="container-fluid" id="backgroundSection">
+        <div id="mainSection">
+            <div class="row text-center mb-2 d-grid gap-2 col-6 mx-auto font-mono">
+                <h2 class="text-3xl font-bold">Stuck at Home and Feeling Hungry?</h2>
+                <h5 class="text-1xl font-semibold">Cook up a random meal by clicking below</h5>
+                <button class="button-primary" @click="retriveResult()">
+                    Meal Roulette 🍔
+                </button>
+            </div>
+            <div v-html="displayDiv" class="displayMeal"></div>
         </div>
-        <div v-html="displayDiv" class="displayMeal"></div>
     </div>
 </template>
 
@@ -125,12 +127,20 @@ export default {
 </script>
 
 <style scoped>
-#mainSection {
-    margin-top: 50px;
-    background-color: rgb(195, 221, 221);
+
+#backgroundSection {
+    background-image: url("../../assets/hungryBoy.webp");
+    background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+#mainSection {
+    padding-left: 40px;
+    padding-right: 70px;
+    padding-top: 530px;
+    padding-bottom: 250px;
 }
 
 .button-primary {
