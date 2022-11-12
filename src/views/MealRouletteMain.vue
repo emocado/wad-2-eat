@@ -6,7 +6,7 @@
     <div class="rouletteResults" v-if="result">
       <div class="rouletteResult">
         <h2 class="text-2xl mb-5"><mark>Final Results:</mark></h2>
-        <h3 class="text-3xl"><strong><span style="text-decoration: underline; font-style: italic; background-color: yellow; padding: 10px 10px;">{{ result.htmlContent }}</span></strong></h3>
+        <h3 class="text-3xl"><strong><button style="text-decoration: underline; font-style: italic; background-color: yellow; padding: 10px 10px;" @click="retrieveSearchResults(result.htmlContent)">{{ result.htmlContent }}</button></strong></h3>
       </div>
     </div>
 
@@ -76,7 +76,11 @@
       :initial-settings="wheelSettings"
       @hard-reset="onHardReset"
     />
+  
+    <div v-html="displayDiv" class="displayMeal"></div>
+
   </div>
+
 </template>
 
 <script>
@@ -84,9 +88,10 @@ import ItemsManager from "../components/roulette/ItemsManager.vue";
 import WheelManager from "../components/roulette/WheelManager.vue";
 import Roulette from "../components/roulette/Roulette.vue";
 import wheelData from "../components/roulette/mealRouletteMainData.js";
+import axios from "axios";
 
 export default {
-  name: "RouletteMain",
+  name: "RouletteMain", 
 
   components: {
     Roulette,
@@ -100,7 +105,9 @@ export default {
       wheelActive: true,
       startAnim: false,
       managerId: 1,
-      result: null
+      result: null,
+      displayDiv: '',
+      searchMeals: []
     }
   },
 
@@ -132,6 +139,165 @@ export default {
         this.wheelActive = true;
       }, 10);
     },
+    retrieveSearchResults(searchMeal) {
+
+      const url = "https://www.themealdb.com/api/json/v1/1/search.php?s=" + searchMeal;
+      axios
+          .get(url)
+          .then((response) => {
+
+              // case where there are 2 or more meals different from the searchMeal
+              if (response.data.meals.length > 1) {
+                  this.searchMeals = response.data.meals;
+                  this.displayDiv = '';
+                  this.searchMeals.forEach((meal) => {
+                      this.displayDiv += '<div class="card-body mt-3 mb-3 bg-light bg-opacity-75 d-flex align-items-center" style="max-width: 100%;"><h3 class="text-3xl"><strong>' + meal.strMeal + '</strong></h3><img src="' + meal.strMealThumb + '" alt="meal image" class="mealImage img-fluid rounded"><p class="text-xl text-black-900 italic mt-10 mb-10"><mark>Ingredients:</mark></p><ul class="ingredientsList">';
+                      for (let i = 1; i <= 20; i++) {
+                          if (meal['strIngredient' + i] !== null && meal['strIngredient' + i] !== '') {
+                              this.displayDiv += '<li class="ingredient">' + meal['strIngredient' + i] + '</li>';
+                          }
+                      }
+                      this.displayDiv += '</ul><p class="text-xl text-black-900 italic mt-10 mb-10"><mark>Instructions:</mark></p><p class="instructions">' + meal.strInstructions + '</p></div>';
+                  });
+              }
+
+              // case where there is only 1 meal different from the searchMeal
+              else if (response.data.meals.length === 1) {
+                  this.searchMeals = response.data.meals;
+                  this.displayDiv = '';
+                  this.searchMeals.forEach((meal) => {
+                      this.displayDiv += '<div class="card mt-3 mb-3 bg-light bg-opacity-75 d-flex align-items-center" style="max-width: 100%;"><h3 class="text-3xl"><strong>' + meal.strMeal + '</strong></h3><img src="' + meal.strMealThumb + '" alt="meal image" class="mealImage img-fluid rounded"><p class="text-xl text-black-900 italic mt-10 mb-10"><mark>Ingredients:</mark></p><ul class="ingredientsList">';
+                      for (let i = 1; i <= 20; i++) {
+                          if (meal['strIngredient' + i] !== null && meal['strIngredient' + i] !== '') {
+                              this.displayDiv += '<li class="ingredient">' + meal['strIngredient' + i] + '</li>';
+                          }
+                      }
+                      this.displayDiv += '</ul><p class="text-xl text-black-900 italic mt-10 mb-10"><mark>Instructions:</mark></p><p class="instructions">' + meal.strInstructions + '</p></div>';
+                  });
+              }
+
+              // case where there is no meal different from the searchMeal
+              else {
+                  this.displayDiv = '<p class="text-3xl text-black-900 italic mt-10 mb-10"><mark>Sorry, no meal found for this search.</mark></p>';
+              }
+
+
+
+              // where there are possible results, then random generate the index of the result
+
+              // if (response.data.meals) {
+              //     const randomIndex = Math.floor(Math.random() * response.data.meals.length);
+              //     const randomMeal = response.data.meals[randomIndex];
+                  
+              //     const ingredients = [];
+              //     // Get all ingredients from the object. Up to 20
+              //     for (let i = 1; i <= 20; i++) {
+              //         if (randomMeal[`strIngredient${i}`]) {
+              //             ingredients.push(
+              //                 `${randomMeal[`strIngredient${i}`]} - ${randomMeal[`strMeasure${i}`]}`
+              //             );
+              //         } else {
+              //             // Stop if no more ingredients
+              //             break;
+              //         }
+              //     }
+
+              //     // Build output
+              //     // splice the ${meal.strIntructions} in list format and display inside the card div as steps to cook
+
+              //     const newInstructions = randomMeal.strInstructions.split(". ");
+              //     const newInstructionsList = newInstructions.map((instruction) => {
+              //         return `<li>${instruction}</li>`;
+              //     });
+              //     // console.log(newInstructionsList);
+
+              //     const newInnerHTML = `
+              //         <div class="font-mono">
+              //             <div class="card mt-3 mb-3 bg-light bg-opacity-75" style="max-width: 100%;">
+              //                 <div class="row g-0">
+              //                     <div class="col-sm-12 col-md-6 col-lg-5">
+              //                         <img src="${randomMeal.strMealThumb}" class="img-fluid rounded" alt="MealImage">
+              //                     </div>
+
+              //                     <div class="col-sm-12 col-md-3 col-lg-3">
+              //                         <div class="card-body d-flex align-items-center">
+              //                             <h5 class="card-title text-center"><mark>${randomMeal.strMeal}</mark></h5>
+              //                             ${randomMeal.strCategory ? `<p class="card-text text-xl"><strong>Category:</strong> ${randomMeal.strCategory}</p>` : ''}
+              //                             ${randomMeal.strArea ? `<p class="card-text text-xl"><strong>Area:</strong> ${randomMeal.strArea}</p>` : ''}
+              //                             ${randomMeal.strTags ? `<p class="card-text text-xl"><strong>Tags:</strong> ${randomMeal.strTags.split(',').join(', ')}</p>` : ''}
+              //                             <p class="card-text text-decoration-underline"><a class="btn btn-warning btn-md" style="background-image: linear-gradient(to right,yellow,white,orange);" href="${randomMeal.strSource}"><medium>More Information About Recipe</medium></a></p>
+              //                         </div>
+              //                     </div>
+
+              //                     <div class="col-sm-12 col-md-3 col-lg-4">
+              //                         <div class="card-body d-flex justify-content-center">
+              //                             <h4 class="card-title text-center"><strong><mark>Try this recipe with the following ingredients:</mark></strong></h4>
+              //                             <ul class="list-group list-group-flush text-center">
+              //                                 ${ingredients.map(ing => `<li class="list-group-item">${ing}</li>`).join('')}
+              //                             </ul>
+              //                         </div>
+              //                     </div>
+              //                 </div>
+              //             </div>
+
+              //             <div class="card mb-3 bg-light bg-opacity-75" style="max-width: 100%;">
+              //                 <div class="row g-0">
+              //                     <div class="col-sm-12 col-md-6 col-lg-4">
+              //                         <div class="card-body">
+              //                             <h5 class="card-title d-flex justify-content-center"><mark>Instructions</mark></h5>
+              //                             <div class="d-flex justify-content-center">
+              //                                 <ol class="space-y-5 max-w-md list-decimal list-inside text-dark-700 dark:text-dark-400">
+              //                                     ${newInstructionsList.join('')}
+              //                                 </ol>
+              //                             </div>
+              //                         </div>
+              //                     </div>
+              //                     <div class="col-sm-12 col-md-6 col-lg-8">
+              //                         <div class="card-body">
+              //                             <div class="card-title d-flex justify-content-center"><mark>Video Recipe</mark></div>
+              //                                 <div class="card-body text-secondary">
+              //                                     ${randomMeal.strYoutube
+              //                                 ? `
+              //                                     <div class="videoWrapper d-flex justify-content-center">
+              //                                         <iframe width="853" height="505"
+              //                                         src="https://www.youtube.com/embed/${randomMeal.strYoutube.slice(
+              //                                             -11)}">
+              //                                         </iframe>
+              //                                     </div>
+              //                                 </div>
+              //                             </div>
+              //                         </div>`
+              //                         : ''}
+              //                     </div>
+              //                 </div>
+              //             </div>
+              //         </div>
+              //         `;
+
+              //     this.displayDiv = newInnerHTML;
+
+              // } 
+              
+              // else {
+              //     this.displayDiv = `
+              //     <div class="font-mono">
+              //         <div class="card mt-3 mb-3 bg-light bg-opacity-75" style="max-width: 100%;">
+              //             <div class="row g-0">
+              //                 <div class="col">
+              //                     <div class="card-body d-flex align-items-center">
+              //                         <h5 class="card-title text-center"><mark>Sorry, we couldn't find any results for ${searchMeal}</mark></h5>
+              //                     </div>
+              //                 </div>
+              //             </div>
+              //         </div>
+              //     </div>
+              //     `;
+              // }
+          })
+          .catch((error) => {
+              console.log(error);
+          });
+        },
   }
 }
 </script>
