@@ -1,5 +1,5 @@
 <template>
-    <div id="app" class="jumbotron align-center mx-4 pt-2 p-4  mb-3 mt-3">
+    <div id="app" class="jumbotron align-center mx-4 pt-2 p-4  mb-4 mt-3">
         <div class="row mx-5-sm mt-5 ">
             <div class="search-bar input-group">
                 <input @keyup="filterPost" type="text" class="input-search form-control"
@@ -13,7 +13,7 @@
             </div>
         </div>
         <div class="row mx-5-sm mt-3 position-relative">
-            <button @click="createPost" class="sort btn btn-primary btn-sm position-absolute end-0"
+            <button @click="createPost" class="sort btn btn-primary btn-sm position-absolute end-0" id="add_post"
                 data-bs-toggle="collapse" href="#collapseExample" role="button" v-bind:aria-expanded="form_expand"
                 aria-controls="collapseExample">{{ openClose }}</button>
             <div class="collapse mt-4" id="collapseExample">
@@ -31,13 +31,13 @@
                             <label for="image" class="form-label">Image</label>
                             <input @change="fileUpload" type="file" class="form-control" id="image">
                         </div>
-                        <button @click="submit_post" type="button" class="btn btn-primary">Submit</button>
+                        <button @click="submit_post" role="button" id="submit_btn" style="background: rgb(234, 156, 169);" class=" btn text-white">Submit Post ! </button>
                     </div>
                     <div v-if="success" class="alert alert-success" role="alert">
                         Added Post Successfully ! 
                     </div>
                     <div v-if="error" class="alert alert-danger" role="alert">
-                        Failed to add post , You are not logged in ! 
+                        {{error_message}}
                     </div>
                 </div>
             </div>
@@ -74,6 +74,7 @@ export default {
             hide_error: true,
             success:false,
             error:false,
+            error_message:"",
         }
     },
     methods: {
@@ -94,7 +95,12 @@ export default {
             const user = auth.currentUser;
             if (user == null) {
                 this.error = true;
-
+                this.error_message = "Failed to add post , You are not logged in ! "
+                return;
+            }
+            if(this.title == "" || this.description == "" || this.image == ""){
+                this.error = true;
+                this.error_message = "Please fill all the fields";
                 return;
             }
 
@@ -210,11 +216,20 @@ export default {
     border: none;
     background: rgb(234, 156, 169);
 }
+/* #submit_btn:active:hover{
+    background: rgb(234, 156, 169);
+
+} */
 
 .jumbotron {
     /* background-color: rgb(243, 201, 125); */
     /* background-color: rgb(186, 167, 167); */
     border-radius: 20px;
+}
+
+#add_post{
+    border: none;
+    background: rgb(234, 156, 169);
 }
 
 input::placeholder {

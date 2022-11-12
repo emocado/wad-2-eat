@@ -7,42 +7,38 @@
             </div>
             <!-- {{allPost}} -->
         </div>
-        <div class="row">
-            <div class="col d-flex justify-content-center"><img class="w-75" :src="allPost[0].image"></div>
-        </div>
-        <div class="row mt-5 p-2">
-            <h2>Caption</h2>
-            <div style="border:2px solid mistyrose; border-radius:15px ; padding:20px">
-                
-                <p>
-                    {{ allPost[0].description }}
-                </p>
-            </div>
+        <div class="row mb-3">
+            <div class="col d-flex justify-content-center mb-3"><img class="w-75" :src="allPost[0].image"></div>
+            <div class="text-center text-muted text-wrap text-break">{{ allPost[0].description }}</div>
         </div>
         <div class="row">
             <h5> Comments</h5>
-            <div class="col" v-if="allComments.length != 0">
+            <div class="col mb-3" v-if="allComments.length != 0" style="border:1px solid ; padding: 10px; box-shadow: 5px 10px #888888;border-radius: 15px;">
                 <!-- <div v-for="comment of allComments" class="row">
                     <p class="fs-4">{{ comment.author }}</p>
                     <p class=" p-4 border" style="border-radius:10px">
                         {{ comment.comment_text }}
                     </p>
                 </div> -->
-                <ul class="list-group">
-                    <li v-for="comment of allComments" class="list-group-item">
-                    <p class="fs-4" style="font-style:italic; text-decoration:underline">{{ comment.author }}</p>
-                    <p class=" p-4 border" style="border-radius:10px">
+                <div class="border p-4 my-3" v-for="comment of allComments" style="border-radius:10px">
+                    <p class="fs-6 " style="font-style:italic; text-decoration:underline;">{{ comment.author }}</p>
+                    <p class="px-3">
                         {{ comment.comment_text }}
-                    </p></li>
-                </ul>
+                    </p>
+                </div>
+
             </div>
             <div class='mb-3 mt-3'>
                 <label for='newCommentText' class='form-label'>Enter Your Comments here</label>
-                <textarea class='form-control' id='newCommentText' rows='3' v-model="comment_box"></textarea>
-                <button class="btn" @click="add_comment">Add comment!</button>
+                <textarea class='form-control mb-3' id='newCommentText' rows='3' v-model="comment_box"></textarea>
+                <button class="btn mb-3 border-0" id="add_comment_btn" @click="add_comment" style="color :white;background:rgb(234, 156, 169)">Add comment!</button>
+                <p v-if="error" class="alert alert-danger">
+                    {{error_message}}
+                </p>
             </div>
         </div>
     </div>
+    
 </template>
 
 <script>
@@ -55,38 +51,38 @@ import {
     addDoc,
     where,
 } from 'firebase/firestore'
+import { getAuth } from 'firebase/auth'
+
 const db = getFirestore();
 export default {
+    props:['allPost'],
     data() {
         return {
             postid: this.$route.params.postid,
-            allPost: [],
+            // allPost: [],
             dataReady: false,
             allComments: [],
             comment_box: "",
-        }
+            error: false,
+            error_message: "",
+        };
     },
     methods: {
         getId() {
             console.log(this.postid);
         },
-        async getPost() {
-            const post = query(
-                collection(db, 'forum_post'),
-                where('__name__', "==", this.postid));
-            const querySnapshot = await getDocs(post)
-            // console.log(doc(collection(db,'forum_post'),('S92YkYgAiBkwkQj5dw12')).data())
-            querySnapshot.forEach((doc) => {
-                this.allPost.push(doc.data());
-            });
-            console.log(this.allPost);
-        },
+        // async getPost() {
+        //     const post = query(collection(db, "forum_post"), where("__name__", "==", this.postid));
+        //     const querySnapshot = await getDocs(post);
+        //     // console.log(doc(collection(db,'forum_post'),('S92YkYgAiBkwkQj5dw12')).data())
+        //     querySnapshot.forEach((doc) => {
+        //         this.allPost.push(doc.data());
+        //     });
+        //     console.log(this.allPost);
+        // },
         async getComments() {
-            const comments = query(
-                collection(db, 'post_comment'),
-                where('postid', '==', this.postid));
-            const querySnapshot = await getDocs(comments)
-
+            const comments = query(collection(db, "post_comment"), where("postid", "==", this.postid));
+            const querySnapshot = await getDocs(comments);
             querySnapshot.forEach((doc) => {
                 // console.log(doc.data());
                 this.allComments.push(doc.data());
@@ -95,27 +91,60 @@ export default {
         },
         add_comment() {
             const db = getFirestore();
+            const auth = getAuth();
+            const user = auth.currentUser;
+            if (user == null) {
+                this.error = true;
+                this.error_message = "Please login to comment";
+                return;
+            }
+            if (this.comment_box == "") {
+                this.error = true;
+                this.error_message = "Please enter a comment";
+                console.log("Please enter a comment");
+                return;
+            }
+            const displayName = user.displayName;
             var obj = {
-                author: "MistakeAura", //try to find if can get the currently auth guy's name 
+                author: displayName,
                 comment_text: this.comment_box,
                 postid: this.postid,
             };
             const colRef = collection(db, "post_comment");
             addDoc(colRef, obj).then((response) => {
                 console.log(response);
-                console.log("Upload completed ")
-                this.comment_box = ""
-                this.allComments= [];
+                console.log("Upload completed ");
+                this.comment_box = "";
+                this.allComments = [];
                 this.getComments();
             });
-
+            this.error = false;
+            this.error_message = "";
         }
     },
     created() {
-        this.getPost();
+        // this.getPost();
         this.getComments();
     },
-
 }
 
 </script>
+<style scoped>
+#newCommentText:focus {
+    box-shadow: 0 10px 20px rgba(245, 164, 164, 0.6);
+    border-color: rgb(234, 156, 169);
+};
+
+#add_comment_btn{
+    height: 50px;
+    border: none;
+    background-color: rgb(234, 156, 169);
+    /* color: white; */
+    /* border-radius: 10px;
+    border: none;
+    padding: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer; */
+}
+</style>

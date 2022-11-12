@@ -8,11 +8,11 @@
           <div class=" col-sm-3 h-50-sm d-flex justify-content-center " style="max-height:50%">
             <img :src="obj.image" class="foodpic img-fluid rounded-start" alt="..." style="object-fit: scale-down;">
           </div>
-          <div class="col-sm-9 p-4-md" >
-            <div class="card-body" style="max-height:250px">
-              <h3 class="card-title d-flex justify-content-center text-start-sm">{{obj.title}}</h3>
-              <p class="card-text  d-none d-sm-block">{{obj.description}}</p>
-              <p class="card-text d-none d-sm-block"><small class="text-muted">{{obj.host}}</small></p>
+          <div class="col-sm-9 p-4-sm" >
+            <div class="card-body mt-3 px-4" style="max-height:250px">
+              <h1 class="card-title d-flex justify-content-center justify-content-start-sm">{{obj.title}}</h1>
+              <p class="card-text fs-5 d-none d-sm-block" style=" overflow: hidden;">{{obj.description}}</p>
+              <p class="card-text d-none d-sm-block pb-3"><small class="text-muted">{{obj.host}}</small></p>
             </div>
           </div>
         </div>
@@ -24,11 +24,11 @@
       <a :href="'/comment/'+obj.id">
         <div class="row g-0">
           <div class=" col-12">
-            <img :src="obj.image" class="foodpic img-fluid rounded-start" alt="...">
+            <img :src="obj.image" class="foodpic img-fluid rounded-start" alt="..." style="object-fit:fill">
           </div>
           <div class="col-12  d-none d-lg-block">
             <div class="card-body">
-              <h3 class="card-title">{{obj.title}}</h3>
+              <h3 class="card-title d-flex justify-content-center">{{obj.title}}</h3>
               <p class="card-text"><small class="text-muted">{{obj.host}}</small></p>
             </div>
           </div>
@@ -109,7 +109,7 @@ created() {
 .card {
 border-radius: 20px;
 border-color: rgba(234, 156, 169, 0.5);
-opacity: 80%;
+opacity: 70%;
 transition: 0.3s;
 }
 

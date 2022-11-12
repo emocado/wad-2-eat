@@ -24,12 +24,12 @@ const dabian = (search) => {
     padding:0;
     font-family:"arial",heletica,sans-serif;
     font-size:12px;
-      background: #2980b9 url('https://static.tumblr.com/03fbbc566b081016810402488936fbae/pqpk3dn/MRSmlzpj3/tumblr_static_bg3.png') repeat 0 0;
-    -webkit-animation: 10s linear 0s normal none infinite animate;
-    -moz-animation: 10s linear 0s normal none infinite animate;
-    -ms-animation: 10s linear 0s normal none infinite animate;
-    -o-animation: 10s linear 0s normal none infinite animate;
-    animation: 10s linear 0s normal none infinite animate;
+    background:url('https://img.freepik.com/free-photo/baby-food-frame-pink-background_23-2148580476.jpg?w=2000&t=st=1668265819~exp=1668266419~hmac=78bf74fc5549967da3bb6d0a28e8ff281986fe49102eb135b11e80214868f7f9') repeat ;
+    -webkit-animation: 10s linear 0s both none infinite animate;
+    -moz-animation: 10s linear 0s both none infinite animate;
+    -ms-animation: 10s linear 0s both none infinite animate;
+    -o-animation: 10s linear 0s both none infinite animate;
+    animation: 10s linear s both none infinite animate;
 
   }
 
