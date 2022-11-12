@@ -83,6 +83,16 @@
             <li class="nav-item p-2">
               <RouterLink class="nav-link active" to="/group">Room</RouterLink>
             </li>
+
+            <li class="nav-item p-2">
+              <RouterLink class="nav-link active" to="/recipe">Recipe Search</RouterLink>
+            </li>
+
+            <li class="nav-item p-2">
+              <RouterLink class="nav-link active" to="/ingredient_filter">Ingredient Filter</RouterLink>
+            </li>
+
+        
           </ul>
 
           <span class="p-2">
