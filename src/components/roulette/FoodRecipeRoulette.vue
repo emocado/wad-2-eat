@@ -2,8 +2,8 @@
     <div class="container-fluid" id="backgroundSection">
         <div id="mainSection">
             <div class="row text-center mb-2 d-grid gap-2 col-6 mx-auto font-mono">
-                <h2 class="text-3xl font-bold">Stuck at Home and Feeling Hungry?</h2>
-                <h5 class="text-1xl font-semibold">Cook up a random meal by clicking below</h5>
+                <h2 class="text-3xl font-bold"><mark class="bg-warning p-2 text-dark" style="--bs-bg-opacity: .5;">Stuck at Home and Feeling Hungry?</mark></h2>
+                <h5 class="text-1xl font-semibold"><mark>Cook up a random meal by clicking below</mark></h5>
                 <button class="button-primary" @click="retriveResult()">
                     Meal Roulette 🍔
                 </button>
@@ -139,7 +139,7 @@ export default {
 #mainSection {
     padding-left: 40px;
     padding-right: 70px;
-    padding-top: 530px;
+    padding-top: 350px;
     padding-bottom: 250px;
 }
 
