@@ -47,7 +47,7 @@
     <div class="divider"></div> 
 
     <div class="py-">
-      <button class="btn btn-primary" @click="add">Add Item</button>
+      <button class="btn btn-primary mb-4" @click="add">Add Item</button>
     </div>
   </div>
 </template>
