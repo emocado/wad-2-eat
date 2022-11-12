@@ -5,7 +5,7 @@
     <!-- display the wheel results here  -->
     <div class="rouletteResults" v-if="result">
       <div class="rouletteResult">
-        <h2 class="text-2xl"><mark>Final Results:</mark></h2>
+        <h2 class="text-2xl mb-5"><mark>Final Results:</mark></h2>
 
         <h3 class="text-3xl"><strong><span style="text-decoration: underline; font-style: italic; background-color: yellow; padding: 10px 10px;">{{ result.htmlContent }}</span></strong></h3>
       </div>
@@ -51,12 +51,12 @@
         v-show="result"
         class="absolute bottom-2 left-1/2 transform -translate-x-1/2"
       >
-      <button class="btn btn-xs mx-2" @click="onHardReset()">Refresh Roulette Session</button>
-      <button class="btn btn-xs mx-2" @click="onSoftReset()">Re-spin from the beginning</button>
+      <button class="btn btn-xs mx-2" @click="onHardReset()"><span style="background-color: lightcoral; padding: 5px 5px;">Refresh Roulette Session </span></button>
+      <button class="btn btn-xs mx-2" @click="onSoftReset()"><span style="background-color: lightblue; padding: 5px 5px;">Re-spin from the beginning</span></button>
       </div>
     </div>
 
-    <p class="text-xl text-black-900 italic mb-10"><mark>A customizable and flexible fortune wheel to combat pesky indecisiveness</mark></p>
+    <p class="text-xl text-black-900 italic mt-10 mb-10"><mark>A customizable and flexible fortune wheel to combat pesky indecisiveness</mark></p>
 
     <div class="tabs tabs-boxed justify-center pt-3 pb-3">
       <a class="tab" :class="{'tab-active': managerId === 1 }" @click="managerId = 1">Items manager</a> 
