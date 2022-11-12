@@ -166,7 +166,8 @@ export default {
                           strInstructionsArrayNumbered.push(i + 1 + '. ' + strInstructionsArray[i] + '<br>');
                       }
                       strInstructions = strInstructionsArrayNumbered.join('');
-                      this.displayDiv += '</ul><p class="text-xl text-black-900 italic mt-10 mb-10"><mark>Instructions:</mark></p><p class="instructions">' + strInstructions + '</p></div>';
+                      this.displayDiv += '</ul><p class="text-xl text-black-900 italic mt-10 mb-10"><mark>Instructions:</mark></p><p class="instructions">' + strInstructions + '</p>';
+                      this.displayDiv += '<p class="card-text text-decoration-underline"><a class="btn btn-info btn-md" href="' + meal.strSource + '"><medium>More Information About Recipe</medium></a></p></div>';
                   });
               }
 
