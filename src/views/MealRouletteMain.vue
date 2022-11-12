@@ -1,7 +1,7 @@
 <template>
-  <div class="rouletteMain" data-theme="winter">
+  <div class="rouletteMain" data-theme="autumn">
 
-    <h1 class="text-4xl">Meal Roulette</h1>
+    <h1 class="text-4xl mt-4">Meal Roulette</h1>
     <!-- display the wheel results here  -->
     <div class="rouletteResults" v-if="result">
       <div class="rouletteResult">
@@ -58,9 +58,9 @@
       </div>
     </div>
 
-    <p class="text-xl text-gray-500 italic mb-10">A customizable and flexible fortune wheel to combat pesky indecisiveness</p>
+    <p class="text-xl text-black-900 italic mb-10"><mark>A customizable roulette wheel to combat pesky indecisiveness</mark></p>
 
-    <div class="tabs tabs-boxed justify-center">
+    <div class="tabs tabs-boxed justify-center pt-3 pb-3">
       <a class="tab" :class="{'tab-active': managerId === 1 }" @click="managerId = 1">Items manager</a> 
       <a class="tab" :class="{'tab-active': managerId === 2 }" @click="managerId = 2">Wheel manager</a>
     </div>
@@ -155,6 +155,11 @@ export default {
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     overflow-x: hidden;
+    background-image: url(../assets/mealRouletteTemplate.webp);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
   }
 
   

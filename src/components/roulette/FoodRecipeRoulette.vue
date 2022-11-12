@@ -1,16 +1,16 @@
 <template>
-
-    <div class="container">
-        <div class="row text-center mb-2 text-lg font-semibold text-gray-900 ">
-            <h2>Stuck at Home and Feeling Hungry?</h2>
-            <h5>Cook up a random meal by clicking below</h5>
-            <button class="button-primary" @click="retriveResult()">
-                Meal Roulette 🍔
-            </button>
+    <div class="container-fluid" id="backgroundSection">
+        <div id="mainSection">
+            <div class="row text-center mb-2 d-grid gap-2 col-6 mx-auto font-mono">
+                <h2 class="text-3xl font-bold"><mark class="bg-warning p-2 text-dark" style="--bs-bg-opacity: .5;">Stuck at Home and Feeling Hungry?</mark></h2>
+                <h5 class="text-1xl font-semibold"><mark>Cook up a random meal by clicking below</mark></h5>
+                <button class="button-primary" @click="retriveResult()">
+                    Meal Roulette 🍔
+                </button>
+            </div>
+            <div v-html="displayDiv" class="displayMeal"></div>
         </div>
-        <div v-html="displayDiv" class="displayMeal"></div>
     </div>
-
 </template>
 
 <script>
@@ -53,61 +53,68 @@ export default {
                     // console.log(newInstructionsList);
 
                     const newInnerHTML = `
+                        <div class="font-mono">
                             <div class="card mt-3 mb-3" style="max-width: 100%;">
                                 <div class="row g-0">
-                                    <div class="col-md-8">
-                                        <img src="${meal.strMealThumb}" class="img-fluid rounded-start" alt="MealImage">
+                                    
+                                    <div class="col-sm-12 col-md-6 col-lg-5">
+                                        <img src="${meal.strMealThumb}" class="img-fluid rounded" alt="MealImage">
                                     </div>
-                                    <div class="col-md-4">
-                                        <div class="card-body">
-                                            <h5 class="card-title"><mark>${meal.strMeal}</mark></h5>
+
+                                    <div class="col-sm-12 col-md-3 col-lg-3">
+                                        <div class="card-body d-flex align-items-center">
+                                            <h5 class="card-title text-center"><mark>${meal.strMeal}</mark></h5>
                                             ${meal.strCategory ? `<p class="card-text"><strong>Category:</strong> ${meal.strCategory}</p>` : ''}
                                             ${meal.strArea ? `<p class="card-text"><strong>Area:</strong> ${meal.strArea}</p>` : ''}
                                             ${meal.strTags ? `<p class="card-text"><strong>Tags:</strong> ${meal.strTags.split(',').join(', ')}</p>` : ''}
-                                            <h4><strong>Ingredients:</strong></h4>
-                                            <ul>
-                                                ${ingredients.map(ing => `<li>${ing}</li>`).join('')}
+                                            <p class="card-text text-decoration-underline"><a class="btn btn-warning btn-md" style="background-image: linear-gradient(to right,yellow,white,orange);" href="${meal.strSource}"><medium>More Information About Recipe</medium></a></p>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-12 col-md-3 col-lg-4">
+                                        <div class="card-body d-flex justify-content-left">
+                                            <h4 class="card-title"><strong><mark>Try this recipe with the following ingredients:</mark></strong></h4>
+                                            <ul class="list-group list-group-flush">
+                                                ${ingredients.map(ing => `<li class="list-group-item">${ing}</li>`).join('')}
                                             </ul>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
                             <div class="card mb-3" style="max-width: 100%;">
                                 <div class="row g-0">
-                                    <div class="col-md-12">
+                                    <div class="col-sm-12 col-md-6 col-lg-4">
                                         <div class="card-body">
                                             <h5 class="card-title d-flex justify-content-center"><mark>Instructions</mark></h5>
                                             <div class="d-flex justify-content-center">
-                                                <ol class="space-y-5 max-w-md list-decimal list-inside text-gray-500 dark:text-gray-400">
+                                                <ol class="space-y-5 max-w-md list-decimal list-inside text-blue-700 dark:text-blue-300">
                                                     ${newInstructionsList.join('')}
                                                 </ol>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="card border-secondary mb-3" style="max-width: 100%;">
-                                <div class="row g-0">
-                                    <div class="col-md-12">
+                                    <div class="col-sm-12 col-md-6 col-lg-8">
                                         <div class="card-body">
                                             <div class="card-title d-flex justify-content-center"><mark>Video Recipe</mark></div>
-                                            <div class="card-body text-secondary">
-                                                ${meal.strYoutube
-                                            ? `
-                                            <div class="videoWrapper">
-                                                <iframe width="420" height="315"
-                                                src="https://www.youtube.com/embed/${meal.strYoutube.slice(
-                                                    -11)}">
-                                                </iframe>
+                                                <div class="card-body text-secondary">
+                                                    ${meal.strYoutube
+                                                ? `
+                                                    <div class="videoWrapper d-flex justify-content-center">
+                                                        <iframe width="853" height="505"
+                                                        src="https://www.youtube.com/embed/${meal.strYoutube.slice(
+                                                            -11)}">
+                                                        </iframe>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            </div>
-                                        </div>
+                                        </div>`
+                                        : ''}
                                     </div>
                                 </div>
-                            </div>`
-                                : ''
-                            }
-                    `;
+                            </div>
+                        </div>
+                        `;
 
                     this.displayDiv = newInnerHTML;
                 })
@@ -120,8 +127,20 @@ export default {
 </script>
 
 <style scoped>
-.container {
-    margin-top: 50px;
+
+#backgroundSection {
+    background-image: url("../../assets/hungryBoy.webp");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+#mainSection {
+    padding-left: 40px;
+    padding-right: 70px;
+    padding-top: 350px;
+    padding-bottom: 250px;
 }
 
 .button-primary {
@@ -138,15 +157,23 @@ export default {
 }
 
 .button-primary:hover {
-    background-color: lightblue;
+    background-color: lightcoral;
 }
 
 .displayMeal {
-    margin-top: 30px;
+    /* margin-top: 30px; */
+
+    margin: 20px 0;
 }
+
+.text-center {
+    text-align: center;
+}
+
 </style>
 
-<style lang="scss">
+<!-- <style lang="scss" scoped>
+
 @import url("https://fonts.googleapis.com/css?family=Muli&display=swap");
 
 * {
@@ -173,14 +200,6 @@ li {
     margin-bottom: 0;
 }
 
-.meal {
-    margin: 20px 0;
-}
-
-.text-center {
-    text-align: center;
-}
-
 .videoWrapper {
     position: relative;
     padding-bottom: 56.25%;
@@ -195,6 +214,6 @@ li {
     width: 100%;
     height: 100%;
 }
-</style>
 
+</style> -->
 
