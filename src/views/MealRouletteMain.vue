@@ -7,6 +7,7 @@
       <div class="rouletteResult">
         <h2 class="text-2xl mb-5"><mark>Final Results:</mark></h2>
         <h3 class="text-3xl"><strong><button style="text-decoration: underline; font-style: italic; background-color: yellow; padding: 10px 10px;" @click="retrieveSearchResults(result.htmlContent)">{{ result.htmlContent }}</button></strong></h3>
+        <div v-html="displayDiv" class="displayMeal"></div>
       </div>
     </div>
 
@@ -76,8 +77,6 @@
       :initial-settings="wheelSettings"
       @hard-reset="onHardReset"
     />
-  
-    <div v-html="displayDiv" class="displayMeal"></div>
 
   </div>
 
@@ -147,7 +146,7 @@ export default {
           .then((response) => {
 
               // case where there are 2 or more meals different from the searchMeal
-              if (response.data.meals.length > 1) {
+              if (searchMeal !== '' && response.data.meals !== null && response.data.meals.length > 0) {
                   this.searchMeals = response.data.meals;
                   this.displayDiv = '';
                   this.searchMeals.forEach((meal) => {
@@ -157,29 +156,63 @@ export default {
                               this.displayDiv += '<li class="ingredient">' + meal['strIngredient' + i] + '</li>';
                           }
                       }
-                      this.displayDiv += '</ul><p class="text-xl text-black-900 italic mt-10 mb-10"><mark>Instructions:</mark></p><p class="instructions">' + meal.strInstructions + '</p></div>';
+                      // number the strInstructions to make it easier to read by setting the step numbers for each instruction steps
+
+                      let strInstructions = meal.strInstructions;
+                      let strInstructionsArray = strInstructions.split('. ');
+                      let strInstructionsArrayLength = strInstructionsArray.length;
+                      let strInstructionsArrayNumbered = [];
+                      for (let i = 0; i < strInstructionsArrayLength; i++) {
+                          strInstructionsArrayNumbered.push(i + 1 + '. ' + strInstructionsArray[i] + '<br>');
+                      }
+                      strInstructions = strInstructionsArrayNumbered.join('');
+                      this.displayDiv += '</ul><p class="text-xl text-black-900 italic mt-10 mb-10"><mark>Instructions:</mark></p><p class="instructions">' + strInstructions + '</p></div>';
+                      // const newInstructions = meal.strInstructions.split(". ");
+                      // const newInstructionsList = newInstructions.map((instruction) => {
+                      //     return `<li>${instruction}</li>` + '<br>';
+                      // });
+                      // this.displayDiv += '</ul><p class="text-xl text-black-900 italic mt-10 mb-10"><mark>Instructions:</mark></p><ol class="instructionsList">' + newInstructionsList.join("") + '</ol></div>';
                   });
               }
 
-              // case where there is only 1 meal different from the searchMeal
-              else if (response.data.meals.length === 1) {
-                  this.searchMeals = response.data.meals;
-                  this.displayDiv = '';
-                  this.searchMeals.forEach((meal) => {
-                      this.displayDiv += '<div class="card mt-3 mb-3 bg-light bg-opacity-75 d-flex align-items-center" style="max-width: 100%;"><h3 class="text-3xl"><strong>' + meal.strMeal + '</strong></h3><img src="' + meal.strMealThumb + '" alt="meal image" class="mealImage img-fluid rounded"><p class="text-xl text-black-900 italic mt-10 mb-10"><mark>Ingredients:</mark></p><ul class="ingredientsList">';
-                      for (let i = 1; i <= 20; i++) {
-                          if (meal['strIngredient' + i] !== null && meal['strIngredient' + i] !== '') {
-                              this.displayDiv += '<li class="ingredient">' + meal['strIngredient' + i] + '</li>';
-                          }
-                      }
-                      this.displayDiv += '</ul><p class="text-xl text-black-900 italic mt-10 mb-10"><mark>Instructions:</mark></p><p class="instructions">' + meal.strInstructions + '</p></div>';
-                  });
-              }
+                // // case where there is only 1 meal different from the searchMeal
+                // else if (response.data.meals.length === 1) {
+                //     this.searchMeals = response.data.meals;
+                //     this.displayDiv = '';
+                //     this.searchMeals.forEach((meal) => {
+                //         this.displayDiv += '<div class="card mt-3 mb-3 bg-light bg-opacity-75 d-flex align-items-center" style="max-width: 100%;"><h3 class="text-3xl"><strong>' + meal.strMeal + '</strong></h3><img src="' + meal.strMealThumb + '" alt="meal image" class="mealImage img-fluid rounded"><p class="text-xl text-black-900 italic mt-10 mb-10"><mark>Ingredients:</mark></p><ul class="ingredientsList">';
+                //         for (let i = 1; i <= 20; i++) {
+                //             if (meal['strIngredient' + i] !== null && meal['strIngredient' + i] !== '') {
+                //                 this.displayDiv += '<li class="ingredient">' + meal['strIngredient' + i] + '</li>';
+                //             }
+                //         }
+                //         // number the strInstructions to make it easier to read
+                //         let strInstructions = meal.strInstructions;
+                //         let strInstructionsArray = strInstructions.split('. ');
+                //         let strInstructionsArrayLength = strInstructionsArray.length;
+                //         let strInstructionsArrayNumbered = [];
+                //         for (let i = 0; i < strInstructionsArrayLength; i++) {
+                //             strInstructionsArrayNumbered.push(i + 1 + '. ' + strInstructionsArray[i] + '<br>');
+                //         }
+                //         strInstructions = strInstructionsArrayNumbered.join('');
+                //         this.displayDiv += '</ul><p class="text-xl text-black-900 italic mt-10 mb-10"><mark>Instructions:</mark></p><p class="instructions">' + strInstructions + '</p></div>';
+
+                //         // const newInstructions = meal.strInstructions.split(". ");
+                //         // const newInstructionsList = newInstructions.map((instruction) => {
+                //         //     return `<li>${instruction}</li>` + '<br>';
+                //         // });
+                //         // this.displayDiv += '</ul><p class="text-xl text-black-900 italic mt-10 mb-10"><mark>Instructions:</mark></p><ol class="instructionsList">' + newInstructionsList.join("") + '</ol></div>';
+                //     });
+                // }
+              // }
 
               // case where there is no meal different from the searchMeal
               else {
-                  this.displayDiv = '<p class="text-3xl text-black-900 italic mt-10 mb-10"><mark>Sorry, no meal found for this search.</mark></p>';
+                  this.displayDiv = '<div class="card mt-3 mb-3 bg-danger bg-opacity-75 d-flex align-items-center" style="max-width: 100%;"><h3 class="text-3xl"><strong>Sorry, no meal found!</strong></h3></div>';
               }
+              // else {
+              //     this.displayDiv = '<p class="text-3xl text-black-900 italic mt-10 mb-10"><mark>Sorry, no meal found for this search.</mark></p>';
+              // }
 
 
 
