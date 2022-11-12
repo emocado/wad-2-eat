@@ -58,9 +58,9 @@
       </div>
     </div>
 
-    <p class="text-xl text-gray-700 italic mb-10">A customizable roulette wheel to combat pesky indecisiveness</p>
+    <p class="text-xl text-black-900 italic mb-10"><mark>A customizable roulette wheel to combat pesky indecisiveness</mark></p>
 
-    <div class="tabs tabs-boxed justify-center">
+    <div class="tabs tabs-boxed justify-center pt-3 pb-3">
       <a class="tab" :class="{'tab-active': managerId === 1 }" @click="managerId = 1">Items manager</a> 
       <a class="tab" :class="{'tab-active': managerId === 2 }" @click="managerId = 2">Wheel manager</a>
     </div>

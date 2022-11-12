@@ -104,10 +104,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.item {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-}
+// .item {
+//   display: flex;
+//   flex-direction: row;
+//   justify-content: center;
+//   align-items: center;
+// }
 </style>
