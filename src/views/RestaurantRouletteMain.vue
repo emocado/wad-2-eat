@@ -1,7 +1,7 @@
 <template>
-  <div class="rouletteMain" data-theme="garden">
+  <div class="rouletteMain" data-theme="lemonade">
 
-    <h1 class="text-4xl">Restaurant Roulette</h1>
+    <h1 class="text-4xl mt-4">Restaurant Roulette</h1>
     <!-- display the wheel results here  -->
     <div class="rouletteResults" v-if="result">
       <div class="rouletteResult">
@@ -155,6 +155,11 @@ export default {
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     overflow-x: hidden;
+    background-image: url(../assets/restaurantRouletteTemplate.webp);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
   }
 
   

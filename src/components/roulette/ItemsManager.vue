@@ -47,7 +47,7 @@
     
     <div class="divider"></div> 
 
-    <div>
+    <div class="py-3">
       <button class="btn btn-primary" @click="add">Add Item</button>
     </div>
   </div>
