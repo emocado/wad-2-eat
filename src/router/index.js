@@ -11,6 +11,8 @@ import MealRouletteView from "../views/MealRouletteMain.vue";
 import RestaurantRouletteView from '../views/RestaurantRouletteMain.vue';
 import MealCard from "../components/Recipe.vue"
 import MealCard2 from "../components/IngredientFilter.vue"
+import RecipeInfo from '../components/RecipeInfo.vue';
+
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -87,6 +89,15 @@ const router = createRouter({
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: MealCard2
+    },
+    {
+      path: '/recipe/:id',
+      name: 'RecipeInfo',
+    
+      // route level code-splitting
+      // this generates a separate chunk (About.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: RecipeInfo
     }
   ]
 })

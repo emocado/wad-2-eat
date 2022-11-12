@@ -6,7 +6,8 @@
     <div class="rouletteResults" v-if="result">
       <div class="rouletteResult">
         <h2 class="text-2xl mb-5"><mark>Final Results:</mark></h2>
-        <h3 class="text-3xl"><strong><span style="text-decoration: underline; font-style: italic; background-color: yellow; padding: 10px 10px;">{{ result.htmlContent }}</span></strong></h3>
+        <h3 class="text-3xl"><strong><button style="text-decoration: underline; font-style: italic; background-color: yellow; padding: 10px 10px;" @click="retrieveSearchResults(result.htmlContent)">{{ result.htmlContent }}</button></strong></h3>
+        <div v-html="displayDiv" class="displayMeal"></div>
       </div>
     </div>
 
@@ -76,7 +77,9 @@
       :initial-settings="wheelSettings"
       @hard-reset="onHardReset"
     />
+
   </div>
+
 </template>
 
 <script>
@@ -84,9 +87,10 @@ import ItemsManager from "../components/roulette/ItemsManager.vue";
 import WheelManager from "../components/roulette/WheelManager.vue";
 import Roulette from "../components/roulette/Roulette.vue";
 import wheelData from "../components/roulette/mealRouletteMainData.js";
+import axios from "axios";
 
 export default {
-  name: "RouletteMain",
+  name: "RouletteMain", 
 
   components: {
     Roulette,
@@ -100,7 +104,9 @@ export default {
       wheelActive: true,
       startAnim: false,
       managerId: 1,
-      result: null
+      result: null,
+      displayDiv: '',
+      searchMeals: []
     }
   },
 
@@ -132,6 +138,50 @@ export default {
         this.wheelActive = true;
       }, 10);
     },
+    retrieveSearchResults(searchMeal) {
+
+      const url = "https://www.themealdb.com/api/json/v1/1/search.php?s=" + searchMeal;
+      axios
+          .get(url)
+          .then((response) => {
+
+              // case where there are 2 or more meals different from the searchMeal
+              if (searchMeal !== '' && response.data.meals !== null && response.data.meals.length > 0) {
+                  this.searchMeals = response.data.meals;
+                  this.displayDiv = '';
+                  this.searchMeals.forEach((meal) => {
+                      this.displayDiv += '<div class="card-body mt-5 mb-5 pt-5 pb-5 bg-light bg-opacity-75 d-flex align-items-center" style="max-width: 100%;"><h3 class="text-3xl"><strong>' + meal.strMeal + '</strong></h3><img src="' + meal.strMealThumb + '" alt="meal image" class="mealImage img-fluid rounded"><p class="text-xl text-black-900 italic mt-10 mb-10"><mark>Ingredients:</mark></p><ul class="ingredientsList">';
+                      for (let i = 1; i <= 20; i++) {
+                          if (meal['strIngredient' + i] !== null && meal['strIngredient' + i] !== '') {
+                              this.displayDiv += '<li class="ingredient">' + `${meal[`strIngredient${i}`]} - ${meal[`strMeasure${i}`]}` + '</li>';
+                          }
+                      }
+                      // number the strInstructions to make it easier to read by setting the step numbers for each instruction steps
+
+                      let strInstructions = meal.strInstructions;
+                      let strInstructionsArray = strInstructions.split('. ');
+                      let strInstructionsArrayLength = strInstructionsArray.length;
+                      let strInstructionsArrayNumbered = [];
+                      for (let i = 0; i < strInstructionsArrayLength; i++) {
+                          strInstructionsArrayNumbered.push(i + 1 + '. ' + strInstructionsArray[i] + '<br>');
+                      }
+                      strInstructions = strInstructionsArrayNumbered.join('');
+                      this.displayDiv += '</ul><p class="text-xl text-black-900 italic mt-10 mb-10"><mark>Instructions:</mark></p><p class="instructions">' + strInstructions + '</p>';
+                      this.displayDiv += '<p class="card-text text-decoration-underline"><a class="btn btn-info btn-md" href="' + meal.strSource + '"><medium>More Information About Recipe</medium></a></p></div>';
+                  });
+              }
+
+              // case where there is no meal different from the searchMeal
+              else {
+                  this.displayDiv = '<div class="card mt-3 mb-3 bg-danger bg-opacity-75 d-flex align-items-center" style="max-width: 100%;"><h3 class="text-3xl"><strong>Sorry, no meal found!</strong></h3></div>';
+              }
+
+
+          })
+          .catch((error) => {
+              console.log(error);
+          });
+        },
   }
 }
 </script>
