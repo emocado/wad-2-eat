@@ -10,7 +10,7 @@
           </div>
           <div class="col-sm-9 p-4-md" >
             <div class="card-body" style="max-height:250px">
-              <h3 class="card-title">{{obj.title}}</h3>
+              <h3 class="card-title d-flex justify-content-center text-start-sm">{{obj.title}}</h3>
               <p class="card-text  d-none d-sm-block">{{obj.description}}</p>
               <p class="card-text d-none d-sm-block"><small class="text-muted">{{obj.host}}</small></p>
             </div>
@@ -75,7 +75,7 @@ methods: {
     console.log(this.allPosts);
     console.log(this.filterPost);
   },
-  testing(search){
+  filteringPosts(search){
     if(search == ""){
       this.allPosts=this.originalPosts;
     }else{

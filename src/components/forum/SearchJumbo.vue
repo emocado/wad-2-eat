@@ -18,7 +18,7 @@
                 aria-controls="collapseExample">{{ openClose }}</button>
             <div class="collapse mt-4" id="collapseExample">
                 <div class="card card-body mt-4 w-100">
-                    <form>
+                    <div>
                         <div class="mb-3">
                             <label for="title" class="form-label">Title</label>
                             <input v-model="title" type="text" class="form-control" id="title" aria-describedby="title">
@@ -32,37 +32,16 @@
                             <input @change="fileUpload" type="file" class="form-control" id="image">
                         </div>
                         <button @click="submit_post" type="button" class="btn btn-primary">Submit</button>
-                    </form>
+                    </div>
+                    <div v-if="success" class="alert alert-success" role="alert">
+                        Added Post Successfully ! 
+                    </div>
+                    <div v-if="error" class="alert alert-danger" role="alert">
+                        Failed to add post , You are not logged in ! 
+                    </div>
                 </div>
-                <p v-if="success_msg" id="success_msg" class="bg-success">
-                    Post uploaded
-                </p>
             </div>
         </div>
-
-        <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  Launch demo modal
-</button>
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        HIII FUCK YOU 
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
 
     </div>
 </template>
@@ -93,6 +72,8 @@ export default {
             form_expand: false,
             search: "",
             hide_error: true,
+            success:false,
+            error:false,
         }
     },
     methods: {
@@ -112,12 +93,11 @@ export default {
             const auth = getAuth();
             const user = auth.currentUser;
             if (user == null) {
-                // alert("Please login to post");
-                // document.getElementById("faillogin").modal('toggle');
-                // this.$emit('fail_login');
+                this.error = true;
 
                 return;
             }
+
             const displayName = user.displayName;
             const db = getFirestore();
             var obj = {
@@ -125,6 +105,7 @@ export default {
                 description: this.description,
                 image: this.downloadUrl,
                 host: displayName,
+                date_added: new Date().toLocaleString()
             };
             const colRef = collection(db, "forum_post");
             addDoc(colRef, obj).then((response) => {
@@ -137,6 +118,7 @@ export default {
                 this.description = ""
                 this.downloadUrl = "";
                 this.image = "";
+                this.success = true;
             });
         },
         fileUpload() {

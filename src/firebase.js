@@ -29,12 +29,14 @@ export default app;
 
 export function getPosts() {
     const posts = ref([]);
-    const unsubscribe = postsQuery.onSnapshot((snapshot) => {
+    const unsubscribe = postsQuery.orderBy('date_added').onSnapshot((snapshot) => {
         posts.value = snapshot.docs.map((doc) => ({
             id: doc.id,
             ...doc.data(),
         }));
-        console.log(posts.value);
+
+        //add the post in reverse order 
+        posts.value.reverse();
     });
     onUnmounted(unsubscribe);
     return posts;

@@ -5,7 +5,7 @@ import {ref} from 'vue';
 const displayItemsRef = ref()
 //add methods
 const dabian = (search) => {
-  displayItemsRef.value.testing(search);
+  displayItemsRef.value.filteringPosts(search);
 }
 
 </script>
