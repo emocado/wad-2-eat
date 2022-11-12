@@ -87,20 +87,21 @@ img {
 <template>
 
     <section class="meals">
-        <div v-for="(meal,index) in meals" :key="index">
+        <div v-for="(meal, index) in meals" :key="index">
 
-            <h1>{{meal.title}}</h1>
+            <h1>{{ meal.title }}</h1>
             <div class="meal_image">
-                <img :src="`https://spoonacular.com/recipeImages/`+meal.id+'-636x393.jpg'" :alt="meal.strMealThumb">
+                <img :src="`https://spoonacular.com/recipeImages/` + meal.id + '-636x393.jpg'" :alt="meal.strMealThumb">
             </div>
 
             <div class="meal_paragraph">
                 <!-- <p class="sub"> {{meal.sourceURL.substring(0,50)}}</p> -->
-                <p class="block"> {{meal.sourceURL}} </p>
-                <p>Servings: {{meal.servings}}</p>
-                <p>Preparation Time: {{meal.readyInMinutes}} Minutes </p>
-                <button @click="goTodetail(meal.sourceUrl)" >View More</button>
+                <p class="block"> {{ meal.sourceURL }} </p>
+                <p>Servings: {{ meal.servings }}</p>
+                <p>Preparation Time: {{ meal.readyInMinutes }} Minutes </p>
+                <button @click="goTodetail(meal.id)">View More</button>
                 <!-- <router-link to="/RecipeInfo">link</router-link> -->
+                
             </div>
         </div>
 
@@ -113,14 +114,15 @@ img {
 <script>
 import { VueElement } from 'vue';
 import RecipeInfo from './RecipeInfo.vue';
+import { createRouter, createWebHistory } from 'vue-router';
+import { RouterLink } from 'vue-router'
 export default {
     props: ['meals'],
     methods: {
-        goTodetail(food){
-            // this.$router.addRoute({ name: 'RecipeInfo', path: '/RecipeInfo', component: RecipeInfo })
-            console.log(food)
-            window.location.replace(food)
-
+        goTodetail(food) {            
+            const food1=food
+            food = this.$route.params.id
+            window.location.href = "/recipe/"+food1
             
 
         }
