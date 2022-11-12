@@ -153,7 +153,7 @@ export default {
                       this.displayDiv += '<div class="card-body mt-5 mb-5 pt-5 pb-5 bg-light bg-opacity-75 d-flex align-items-center" style="max-width: 100%;"><h3 class="text-3xl"><strong>' + meal.strMeal + '</strong></h3><img src="' + meal.strMealThumb + '" alt="meal image" class="mealImage img-fluid rounded"><p class="text-xl text-black-900 italic mt-10 mb-10"><mark>Ingredients:</mark></p><ul class="ingredientsList">';
                       for (let i = 1; i <= 20; i++) {
                           if (meal['strIngredient' + i] !== null && meal['strIngredient' + i] !== '') {
-                              this.displayDiv += '<li class="ingredient">' + meal['strIngredient' + i] + '</li>';
+                              this.displayDiv += '<li class="ingredient">' + `${meal[`strIngredient${i}`]} - ${meal[`strMeasure${i}`]}` + '</li>';
                           }
                       }
                       // number the strInstructions to make it easier to read by setting the step numbers for each instruction steps
