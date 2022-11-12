@@ -1,6 +1,6 @@
 <!-- eslint-disable vue/require-v-for-key -->
 <template>
-    <div class="container-fluid" v-if="allPost.length != 0">
+    <div class="container-fluid mx-2" v-if="allPost.length != 0">
         <div class="row">
             <div class="col pt-5 text-center">
                 <h3 class="font-weight-bold">{{ allPost[0].title }}</h3>
@@ -13,14 +13,14 @@
         </div>
         <div class="row">
             <h5> Comments</h5>
-            <div class="col mb-3" v-if="allComments.length != 0" style="border:1px solid ; padding: 10px; box-shadow: 5px 10px #888888;border-radius: 15px;">
+            <div class="col mb-3" v-if="allComments.length != 0" style="border:2px solid ; padding: 10px; box-shadow: 5px 10px #888897;border-radius: 15px;">
                 <!-- <div v-for="comment of allComments" class="row">
                     <p class="fs-4">{{ comment.author }}</p>
                     <p class=" p-4 border" style="border-radius:10px">
                         {{ comment.comment_text }}
                     </p>
                 </div> -->
-                <div class="border p-4 my-3" v-for="comment of allComments" style="border-radius:10px">
+                <div class=" p-4 my-3" v-for="comment of allComments" style="border:3px solid ;border-radius:15px;border-color: aliceblue;">
                     <p class="fs-6 " style="font-style:italic; text-decoration:underline;">{{ comment.author }}</p>
                     <p class="px-3">
                         {{ comment.comment_text }}

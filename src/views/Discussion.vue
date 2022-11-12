@@ -8,7 +8,7 @@ import HalfCircleSpinner from '../components/HalfCircleSpinner.vue';
 </script>
 
 <template>
-  <main>
+  <main id="background">
     <div v-if="post.length != 0" class="container-fluid">
       <div class="row">
         <div class="col-3 mt-4 d-none d-md-block scrollable " style="max-width: max-content;">
@@ -29,6 +29,9 @@ import HalfCircleSpinner from '../components/HalfCircleSpinner.vue';
 .scrollable {
   overflow-y: scroll;
   height: calc(100vh - 56px);
+}
+#background{
+  background-color: rgba(234, 156, 169,0.3);
 }
 </style>
 

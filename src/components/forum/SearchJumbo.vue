@@ -93,6 +93,8 @@ export default {
         submit_post() {
             const auth = getAuth();
             const user = auth.currentUser;
+            console.log(user.metadata);
+
             if (user == null) {
                 this.error = true;
                 this.error_message = "Failed to add post , You are not logged in ! "
