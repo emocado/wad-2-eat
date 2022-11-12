@@ -2,8 +2,8 @@
     <div class="container-fluid" id="backgroundSection">
         <div id="mainSection">
             <div class="row text-center mb-2 d-grid gap-2 col-6 mx-auto font-mono">
-                <h2 class="text-3xl font-bold"><mark class="bg-warning p-2 text-dark" style="--bs-bg-opacity: .5;">Stuck at Home and Feeling Hungry?</mark></h2>
-                <h5 class="text-1xl font-semibold"><mark>Cook up a random meal by clicking below</mark></h5>
+                <h2 class="text-3xl font-bold mb-4"><mark class="bg-warning p-2 text-dark" style="--bs-bg-opacity: .5;">Stuck at Home and Feeling Hungry?</mark></h2>
+                <h5 class="text-1xl font-semibold mb-5"><mark>Cook up a random meal by clicking below</mark></h5>
                 <button class="button-primary" @click="retriveResult()">
                     Meal Roulette 🍔
                 </button>
@@ -71,9 +71,9 @@ export default {
                                     </div>
 
                                     <div class="col-sm-12 col-md-3 col-lg-4">
-                                        <div class="card-body d-flex justify-content-left">
-                                            <h4 class="card-title"><strong><mark>Try this recipe with the following ingredients:</mark></strong></h4>
-                                            <ul class="list-group list-group-flush">
+                                        <div class="card-body d-flex justify-content-center">
+                                            <h4 class="card-title text-center"><strong><mark>Try this recipe with the following ingredients:</mark></strong></h4>
+                                            <ul class="list-group list-group-flush text-center">
                                                 ${ingredients.map(ing => `<li class="list-group-item">${ing}</li>`).join('')}
                                             </ul>
                                         </div>
