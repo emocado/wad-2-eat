@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col lg:flex-row items-top justify-around">
     <div>
-      <p class="text-xl mb-4">Wheel manager</p>
+      <p class="text-2xl mb-4"><mark>Wheel manager</mark></p>
       
       <!-- DISPLAY SHADOW -->
       <div class="form-control">
@@ -130,7 +130,7 @@
     <div class="divider lg:divider-vertical"></div> 
 
     <div>
-      <p class="text-xl mb-4">Wheel base manager</p>
+      <p class="text-2xl mb-4"><mark>Wheel base manager</mark></p>
       <!-- DISPLAY BASE -->      
       <div class="form-control">
         <label class="cursor-pointer label">

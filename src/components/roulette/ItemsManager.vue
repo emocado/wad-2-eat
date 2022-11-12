@@ -1,13 +1,13 @@
 <template>
-  <div>
-    <table class="table w-full">
+  <div class="table-responsive">
+    <table class="table w-full table-bordered table-secondary align-middle">
       <thead class="text-center">
         <tr>
-          <th v-if="initialFirstItemIndex != null">First Item</th>
+          <th v-if="initialFirstItemIndex != null" class="text-2xl">First Item</th>
 
-          <th>Candidate</th>
-          <th>Background</th>
-          <th>Delete</th>
+          <th class="text-2xl">Candidate</th>
+          <th class="text-2xl">Background</th>
+          <th class="text-2xl">Delete</th>
         </tr>
       </thead>
       <tbody>
@@ -26,7 +26,7 @@
           <!-- <td><input class="input input-bordered w-full" type="text" v-model="item.textColor" /></td> -->
           <td><input class="input input-bordered w-full" type="text" v-model="item.background" /></td>
           <td class="text-center">
-            <button class="btn btn-error btn-outline btn-circle btn-sm" @click="remove(index)">
+            <button class="btn btn-error btn-active btn-circle btn-sm" @click="remove(index)">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-4 h-4 stroke-current">   
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>                       
               </svg>
@@ -36,18 +36,17 @@
       </tbody>
       <tfoot class="text-center">
         <tr>
-          <th v-if="initialFirstItemIndex != null">First Item</th>
-
-          <th>Candidate</th>
-          <th>Background</th>
-          <th>Delete</th>
+          <th v-if="initialFirstItemIndex != null" class="text-2xl">First Item</th>
+          <th class="text-2xl">Candidate</th>
+          <th class="text-2xl">Background</th>
+          <th class="text-2xl">Delete</th>
         </tr>
       </tfoot>
     </table>
     
     <div class="divider"></div> 
 
-    <div class="py-3">
+    <div class="py-">
       <button class="btn btn-primary" @click="add">Add Item</button>
     </div>
   </div>
