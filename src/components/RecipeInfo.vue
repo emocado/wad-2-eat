@@ -1,9 +1,9 @@
 <template>
-
+<div class="background">
     <div class="container">
         <div v-html="displayDiv" class="displayMeal"></div>
     </div>
-
+</div>
 </template>
 
 <script>
@@ -58,7 +58,7 @@ export default {
                     // console.log(newInstructionsList);
 
                     const newInnerHTML = `
-                            <div class="card mt-3 mb-3" style="max-width: 100%;">
+                            <div class="card mt-3 mb-3 cardbg" style="max-width: 100%;">
                                 <div class="row g-0">
                                     <div class="col-md-8">
                                         <img src="${meal.image}" width="800" height="800" class="img-fluid rounded-start" alt="MealImage">
@@ -78,7 +78,7 @@ export default {
                                     </div>
                                 </div>
                             </div>
-                            <div class="card mb-3" style="max-width: 100%;">
+                            <div class="card mb-3 cardbg" style="max-width: 100%;">
                                 <div class="row g-0">
                                     <div class="col-md-12">
                                         <div class="card-body">
@@ -91,7 +91,7 @@ export default {
                                 </div>
                             </div>
 
-                            <div class="card mb-3" style="max-width: 100%;">
+                            <div class="card mb-3 cardbg" style="max-width: 100%;">
                                 <div class="row g-0">
                                     <div class="col-md-12">
                                         <div class="card-body">
@@ -196,6 +196,17 @@ li {
     width: 100%;
     height: 100%;
 }
+
+.background{
+    background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ),url("../assets/recipebackground.jpg");
+
+}
+
+.cardbg{
+    background-color: #F3E0DC;
+}
 </style>
+
+
 
 
