@@ -7,7 +7,7 @@
       <div class="rouletteResult">
         <h2 class="text-2xl mb-5"><mark>Final Results:</mark></h2>
 
-        <h3 class="text-3xl"><strong><span style="text-decoration: underline; font-style: italic; background-color: yellow; padding: 10px 10px;">{{ result.htmlContent }}</span></strong></h3>
+        <h3 class="text-3xl"><RouterLink class="router-link" :to="`/map/locationid/${result.restaurantId}`">{{ result.htmlContent }}</RouterLink></h3>
       </div>
     </div>
 
@@ -85,6 +85,8 @@ import ItemsManager from "../components/roulette/ItemsManager.vue";
 import WheelManager from "../components/roulette/WheelManager.vue";
 import Roulette from "../components/roulette/Roulette.vue";
 import wheelData from "../components/roulette/restaurantRouletteMainData.js";
+import { RouterLink } from 'vue-router'
+import axios from "axios";
 
 export default {
   name: "RouletteMain",
@@ -92,7 +94,8 @@ export default {
   components: {
     Roulette,
     ItemsManager,
-    WheelManager
+    WheelManager,
+    RouterLink,
   },
 
   data () {
@@ -109,6 +112,15 @@ export default {
     setTimeout(() =>{
       this.startAnim = true;
     }, 500)
+
+    navigator.geolocation.getCurrentPosition(
+      position => {
+        this.fetchData(position.coords.latitude, position.coords.longitude)
+      },
+      error => {
+        console.log(error.message);
+      },
+    )
   },
 
   methods: {
@@ -133,6 +145,38 @@ export default {
         this.wheelActive = true;
       }, 10);
     },
+    fetchData(lat, lng) {
+      let self = this
+      const url = "/v3/businesses/search"
+      axios
+        .get(url, {
+          headers: {
+            Authorization: `Bearer ${import.meta.env.VITE_YELP_API_KEY}`,
+          },
+          params: {
+            term: "food",
+            limit: 10,
+            radius: 1000,
+            latitude: lat,
+            longitude: lng,
+          },
+        })
+        .then(function (response) {
+          // self.items = response.data.businesses;
+          const allPost = response.data.businesses
+          self.items = self.items.map((item, index) => {
+            return {
+              ...item,
+              name: allPost[index].name,
+              htmlContent: allPost[index].name,
+              restaurantId: allPost[index].id,
+            }
+          })
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      },
   }
 }
 </script>
@@ -160,5 +204,8 @@ export default {
     background-attachment: fixed;
   }
 
+  .router-link {
+    text-decoration: none;
+  }
   
 </style>
