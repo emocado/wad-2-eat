@@ -25,7 +25,7 @@ export default {
     displayBorder: true,
     displayIndicator: true,
     baseDisplay: true,
-    baseSize: 100,
+    baseSize: 111,
     baseDisplayShadow: true,
     baseDisplayIndicator: true,
     baseBackground: "#444",

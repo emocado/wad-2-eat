@@ -56,7 +56,7 @@
             }deg)`,
           }"
         >
-          <span v-html="item.htmlContent" :style="{ color: item.textColor }"></span>
+          <span v-html="item.htmlContent" id="font_prob" :style="{ color: item.textColor}"></span>
         </div>
       </div>
     </div>
@@ -226,7 +226,8 @@ export default defineComponent ({
   },
   methods: {
     reset() {
-      this.itemSelected = null;
+      // this.itemSelected = null;
+      
       document.querySelector(
         `#wheel-container-${this.randomIdRoulette} .wheel`
       ).style.transform = `rotate(${this.startingAngle}deg)`;
@@ -261,6 +262,16 @@ export default defineComponent ({
 
 @import "../../styles/roulette.scss";
 
+@media(max-width: 650px) {
+  #font_prob{
+    font-size:8px;
+  }
+}
+@media(min-width:651px){
+  #font_prob{
+    font-size:16px;
+  }
+}
 
 .wheel-container,
 .wheel-base,

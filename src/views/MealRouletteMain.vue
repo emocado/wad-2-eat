@@ -42,18 +42,12 @@
             <div
               v-if="wheelSettings.baseHtmlContent"
               v-html="wheelSettings.baseHtmlContent"
+              id="font_prob"
             ></div>
           </template>
         </Roulette>
       </div>
-
-      <div 
-        v-show="result"
-        class="absolute bottom-2 left-1/2 transform -translate-x-1/2"
-      >
-        <button class="btn btn-xs mx-2" @click="onHardReset()"><span style="background-color: lightcoral; padding: 5px 5px;">Refresh Roulette Session </span></button>
-        <button class="btn btn-xs mx-2" @click="onSoftReset()"><span style="background-color: lightblue; padding: 5px 5px;">Re-spin from the beginning</span></button>
-      </div>
+      
     </div>
 
     <p class="text-xl text-black-900 italic mt-10 mb-10"><mark>A customizable roulette wheel to combat pesky indecisiveness</mark></p>
@@ -114,6 +108,7 @@ export default {
     wheelEndedCallback(resultItem) {
       console.log("wheel ended !", resultItem);
       this.result = resultItem;
+      this.$refs.wheel.reset();
     },
     onSoftReset(newItemList) {
       this.items = newItemList || this.items;
@@ -139,26 +134,9 @@ export default {
                   this.displayDiv = '';
                   this.searchMeals.forEach((meal) => {
                       this.displayDiv += '<div class="card-body mt-5 mb-5 pt-5 pb-5 bg-light bg-opacity-75 d-flex align-items-center" style="max-width: 100%;"><h3 class="text-3xl bg-success" style="text-decoration: underline; padding: 10px 10px;"><strong>' + meal.strMeal + '</strong></h3><img src="' + meal.strMealThumb + '" alt="meal image" class="mealImage img-fluid rounded">';
-                      // for (let i = 1; i <= 20; i++) {
-                      //     if (meal['strIngredient' + i] !== null && meal['strIngredient' + i] !== '') {
-                      //         this.displayDiv += '<li class="ingredient">' + `${meal[`strIngredient${i}`]} - ${meal[`strMeasure${i}`]}` + '</li>';
-                      //     }
-                      // }
-                      // // number the strInstructions to make it easier to read by setting the step numbers for each instruction steps
-
-                      // let strInstructions = meal.strInstructions;
-                      // let strInstructionsArray = strInstructions.split('. ');
-                      // let strInstructionsArrayLength = strInstructionsArray.length;
-                      // let strInstructionsArrayNumbered = [];
-                      // for (let i = 0; i < strInstructionsArrayLength; i++) {
-                      //     strInstructionsArrayNumbered.push(i + 1 + '. ' + strInstructionsArray[i] + '<br>');
-                      // }
-                      // strInstructions = strInstructionsArrayNumbered.join('');
-                      // this.displayDiv += '</ul><p class="text-xl text-black-900 italic mt-10 mb-10"><mark>Instructions:</mark></p><p class="instructions">' + strInstructions + '</p>';
                       this.displayDiv += '<p class="card-text text-decoration-underline mt-5"><a class="btn btn-info btn-md pt-2" href="' + meal.strSource + '"><medium>More Information About ' + meal.strMeal + '</medium></a></p></div>';
                   });
               }
-
               // case where there is no meal different from the searchMeal
               else {
                   this.displayDiv = '<div class="card mt-3 mb-3 bg-danger bg-opacity-75 d-flex align-items-center" style="max-width: 100%;"><h3 class="text-3xl"><strong>Sorry, no matched search meal results found!</strong></h3></div>';
@@ -175,6 +153,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@media(max-width: 650px) {
+  #font_prob{
+    font-size:8px;
+  }
+}
+@media(min-width:651px){
+  #font_prob{
+    font-size:16px;
+  }
+}
 .wheel-anim {
   transition: transform 4s cubic-bezier(.58,-0.26,.24,1.11);
   transform: rotate(-1800deg) scale(1.25);
