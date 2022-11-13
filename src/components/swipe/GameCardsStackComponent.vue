@@ -148,7 +148,7 @@ export default {
   position: absolute;
   bottom: 0;
   width: 100%;
-  padding-bottom: 50px;
+  padding-bottom: 75px;
 }
 </style>
   
