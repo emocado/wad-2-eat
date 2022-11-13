@@ -3,10 +3,10 @@
     <table class="table w-full table-bordered table-secondary align-middle">
       <thead class="text-center">
         <tr>
-          <th v-if="initialFirstItemIndex != null" class="text-2xl">First Item</th>
+          <th v-if="initialFirstItemIndex != null" class="text-2xl">First Selection</th>
 
-          <th class="text-2xl">Candidate</th>
-          <th class="text-2xl">Background</th>
+          <th class="text-2xl">Item Catalogue</th>
+          <th class="text-2xl">Background Colour</th>
           <th class="text-2xl">Delete</th>
         </tr>
       </thead>
@@ -36,9 +36,9 @@
       </tbody>
       <tfoot class="text-center">
         <tr>
-          <th v-if="initialFirstItemIndex != null" class="text-2xl">First Item</th>
-          <th class="text-2xl">Candidate</th>
-          <th class="text-2xl">Background</th>
+          <th v-if="initialFirstItemIndex != null" class="text-2xl">First Selection</th>
+          <th class="text-2xl">Item Catalogue</th>
+          <th class="text-2xl">Background Colour</th>
           <th class="text-2xl">Delete</th>
         </tr>
       </tfoot>
