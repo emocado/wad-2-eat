@@ -1,5 +1,5 @@
 <template>
-    <div id="app" class="jumbotron align-center mx-4 pt-2 p-4  mb-4 mt-3">
+    <div id="app" class="jumbotron align-center mx-4 pt-2 p-4  mb-4">
         <div class="row mx-5-sm mt-5 ">
             <div class="search-bar input-group">
                 <input @keyup="filterPost" type="text" class="input-search form-control"
@@ -16,8 +16,8 @@
             <button @click="createPost" class="sort btn btn-primary btn-sm position-absolute end-0" id="add_post"
                 data-bs-toggle="collapse" href="#collapseExample" role="button" v-bind:aria-expanded="form_expand"
                 aria-controls="collapseExample">{{ openClose }}</button>
-            <div class="collapse mt-4" id="collapseExample">
-                <div class="card card-body mt-4 w-100">
+            <div class="collapse mt-4" id="collapseExample" style="border-radius:20px">
+                <div class="card card-body mt-4 w-100 ">
                     <div>
                         <div class="mb-3">
                             <label for="title" class="form-label">Title</label>
