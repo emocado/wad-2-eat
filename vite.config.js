@@ -24,6 +24,11 @@ export default defineConfig({
         changeOrigin: true,
         secure: false,
       },
+      "/decision": {
+        target: "https://yapaloysius.pythonanywhere.com",
+        changeOrigin: true,
+        secure: false,
+      }
     },
   },
 })

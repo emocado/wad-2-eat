@@ -37,7 +37,7 @@ export default {
   position: relative;
   display: flex;
   margin: 50px;
-  width: 700px;
+  width: 1000px;
 }
 
 
