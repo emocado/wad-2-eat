@@ -56,22 +56,14 @@
       </div>
     </div>
 
-    <p class="text-xl text-black-900 italic mt-10 mb-10"><mark>A customizable and flexible fortune wheel to combat pesky indecisiveness</mark></p>
+    <p class="text-xl text-black-900 italic mt-10 mb-10"><mark>A flexible fortune wheel to combat pesky indecisiveness</mark></p>
 
-    <div class="divider"></div> 
+    <!-- <div class="divider"></div>  -->
 
-    <ItemsManager
-      v-if="managerId === 1"
-      class="item-manager overflow-scroll lg:overflow-auto"
-      :initial-items="items"
-      :initial-first-item-index="firstItemIndex"
-      @update-items="onSoftReset"
-    />
   </div>
 </template>
 
 <script>
-import ItemsManager from "../components/roulette/ItemsManager.vue";
 import Roulette from "../components/roulette/Roulette.vue";
 import wheelData from "../components/roulette/restaurantRouletteMainData.js";
 import { RouterLink } from 'vue-router'
@@ -82,7 +74,6 @@ export default {
 
   components: {
     Roulette,
-    ItemsManager,
     RouterLink,
   },
 
