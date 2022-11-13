@@ -29,7 +29,7 @@
           <RouterLink class="link" to="/recipe">Search for Recipe</RouterLink>
         </div>
         <div class="menu-item">
-          <RouterLink class="link" to="/ingredients_filter">Search Recipe by Ingredients</RouterLink>
+          <RouterLink class="link" to="/ingredient_filter">Search Recipe by Ingredients</RouterLink>
         </div>
         <!-- <div class="menu-item">
           <RouterLink class="link" to="/forum">Browse Forum</RouterLink>
