@@ -123,7 +123,7 @@ export default {
     },
     fetchData(lat, lng) {
       let self = this
-      const url = "/v3/businesses/search"
+      const url = "https://api.yelp.com/v3/businesses/search"
       axios
         .get(url, {
           headers: {

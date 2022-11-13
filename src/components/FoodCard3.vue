@@ -42,7 +42,7 @@ export default {
     }
   },
   mounted() {
-    const url = `/v3/businesses/${this.locationId}`
+    const url = `https://api.yelp.com/v3/businesses/${this.locationId}`
     axios
       .get(url, {
         headers: {

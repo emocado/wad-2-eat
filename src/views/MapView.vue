@@ -81,7 +81,7 @@ export default {
       console.log(err);
     });
 
-    const url = `/v3/businesses/${this.$route.params.locationid}`
+    const url = `https://api.yelp.com/v3/businesses/${this.$route.params.locationid}`
     // const proxy = "https://cors-anywhere.herokuapp.com/"
 
     axios
