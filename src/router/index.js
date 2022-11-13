@@ -10,7 +10,8 @@ import FoodRecipeRoulette from "../components/roulette/FoodRecipeRoulette.vue";
 import MealRouletteView from "../views/MealRouletteMain.vue";
 import RestaurantRouletteView from '../views/RestaurantRouletteMain.vue';
 import MealCard from "../components/Recipe.vue"
-import MealCard2 from "../components/IngredientFilter.vue"
+import IngredientFilter from "../components/IngredientFilter.vue"
+import MealCard2 from "../components/MealCard2.vue"
 import RecipeInfo from '../components/RecipeInfo.vue';
 import GroupResultView from '../views/GroupResultView.vue';
 
@@ -89,7 +90,15 @@ const router = createRouter({
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: MealCard2
+      component: IngredientFilter
+    },
+    {
+      path: '/ingredient_filter/:id',
+      name: 'ingredient_filter_id',
+      // route level code-splitting
+      // this generates a separate chunk (About.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: RecipeInfo
     },
     {
       path: '/recipe/:id',

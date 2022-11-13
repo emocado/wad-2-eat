@@ -8,15 +8,10 @@
 
 <script>
 import axios from "axios";
+import { routeLocationKey } from "vue-router";
 
-const url = window.location.href;
-const id = url.split("/").slice(-1)[0];
-
-
-
-
-
-
+// const url = window.location.href;
+// const id = url.split("/").slice(-1)[0];
 
 export default {
     name: "random_food_generator",
@@ -26,7 +21,7 @@ export default {
         };
     },
     methods: {
-        retriveResult() {
+        retriveResult(id) {
             axios
                 .get("https://api.spoonacular.com/recipes/"+id+"/information?apiKey=52e7e5abc8da43e3b0722667e3cec54d")
                 .then((response) => {
@@ -115,7 +110,8 @@ export default {
     },
 
     mounted(){
-        this.retriveResult()
+        this.retriveResult(this.$route.params.id)
+        
     }
 };
 </script>
