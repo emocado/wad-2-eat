@@ -1,5 +1,4 @@
 export default {
-
   // Data template for the restaurant roulette, will be used to create the restaurant roulette and act as the backbone for the Yelp API call
   items: [
     { id: 1, name: "Holycrab", htmlContent: "Holycrab", textColor: "black", background: "#9deb9e" },
