@@ -1,14 +1,16 @@
 <template>
-  <div class="container">
-    <div v-if="!post">
-      <HalfCircleSpinner />
+  <div id="backgroundSection">
+    <div class="container">
+      <div v-if="!post">
+        <HalfCircleSpinner />
+      </div>
+      <GameCardsStack v-else :cards="post" :trigger="trigger" @cardAccepted="handleCardAccepted"
+        @cardRejected="handleCardRejected" @cardSkipped="handleCardSkipped" @hideCard="removeCardFromDeck"/>
     </div>
-    <GameCardsStack v-else :cards="post" :trigger="trigger" @cardAccepted="handleCardAccepted"
-      @cardRejected="handleCardRejected" @cardSkipped="handleCardSkipped" @hideCard="removeCardFromDeck" />
-  </div>
-  <div class="d-flex justify-content-around">
-    <CrossButton @click="handleTriggerRemove" />
-    <HeartButton @click="handleTriggerAdd" />
+    <div class="d-flex justify-content-around" id="swipeButton">
+      <CrossButton @click="handleTriggerRemove"/>
+      <HeartButton @click="handleTriggerAdd" />
+    </div>
   </div>
 </template>
   
@@ -119,5 +121,28 @@ export default {
   justify-content: center;
   align-items: center;
 }
+
+#backgroundSection {
+  background-image: url(../../assets/swipeRestaurantTemplate.webp);
+  /* Full height */
+  height: 100%;
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding-top : 50px;
+  padding-bottom: 550px;
+}
+
+#swipeButton {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding-bottom: 50px;
+}
+
+
+
+
 </style>
   
