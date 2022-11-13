@@ -2,7 +2,6 @@
 
     <section class="meals">
         <div v-for="(meal, index) in meals" :key="index">
-
             
             <div class="meal_image" style="padding-top:20px">
                 <img :src="`https://spoonacular.com/recipeImages/` + meal.id + '-636x393.jpg'" :alt="meal.strMealThumb">
@@ -13,12 +12,13 @@
             <div class="meal_paragraph">
                 <!-- <p class="sub"> {{meal.sourceURL.substring(0,50)}}</p> -->
                 <p class="block"> {{ meal.sourceURL }} </p>
-                <p>Servings: {{ meal.servings }}</p>
-                <p>Preparation Time: {{ meal.readyInMinutes }} Minutes </p>
+                <p>Number Of Ingredients Used: {{ meal.usedIngredientCount }}</p>
+                <p>Number Of Ingredients Missing: {{ meal.missedIngredientCount }} Minutes </p>
                 <button @click="goTodetail(meal.id)" style="color:grey;text-decoration: underline;">View More</button>
                 <!-- <router-link to="/RecipeInfo">link</router-link> -->
                 
             </div>
+            
         </div>
 
     </section>

@@ -35,15 +35,6 @@
 
     </div>
 
-
-    <!-- 
-        <div id="meals">
-            <input type="text" v-model="search" class="search">
-            <button @click="fetchData(search)">search</button>
-        
-            <MealCard :meals="meals"></MealCard>
-        </div> -->
-
 </template>
         
 <script>
