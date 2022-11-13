@@ -140,6 +140,8 @@ export default {
               // case where there is no meal different from the searchMeal
               else {
                   this.displayDiv = '<div class="card mt-3 mb-3 bg-danger bg-opacity-75 d-flex align-items-center" style="max-width: 100%;"><h3 class="text-3xl"><strong>Sorry, no matched search meal results found!</strong></h3></div>';
+                  // display alert message
+                  alert("Sorry, no matched search meal results found!");
               }
 
 
