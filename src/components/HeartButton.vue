@@ -38,6 +38,7 @@ export default {
   position: absolute;
   left: 0;
   right: 0;
+  bottom: 9px;
   z-index: -1;
   stroke: none;
 }
