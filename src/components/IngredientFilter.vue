@@ -39,7 +39,7 @@
 
             </div>
 
-            <div class="col-6">
+            <div class="col-6" >
                 Add your own ingredient here:
                 <input v-model="extra" style="color:black">
                 <button class="btn btn-secondary" @click="add">Add</button>
@@ -110,12 +110,12 @@ export default {
     data() {
         return {
             list1: [
-                { name: "<img src='src/assets/apple.png' width=100 height=100 style='margin-left:auto; margin-right:auto'>", id:'apple'},
-                { name: "<img src='src/assets/broccoli.png' width=100 height=100 style='margin-left:auto; margin-right:auto'>", id:'broccoli' },
-                { name: "<img src='src/assets/potato.png' width=100 height=100 style='margin-left:auto; margin-right:auto'>" ,id:'potato'},
-                { name: "<img src='src/assets/mushroom.png' width=100 height=100 style='margin-left:auto; margin-right:auto'>", id:'mushroom' },
-                { name: "<img src='src/assets/chicken.png' width=100 height=100 style='margin-left:auto; margin-right:auto'>", id:'chicken' },
-                { name: "<img src='src/assets/carrot.png' width=100 height=100 style='margin-left:auto; margin-right:auto'>", id:'carrot' }
+                { name: "<img src='https://media.istockphoto.com/id/184276818/photo/red-apple.jpg?b=1&s=170667a&w=0&k=20&c=aAfiibS9LDxSzOmUvlL1vVIqq7unLny6C6uCnnEh59g=' width=100 height=100 style='margin-left:auto; margin-right:auto'>", id:'apple'},
+                { name: "<img src='https://media.istockphoto.com/id/1135308302/photo/broccoli-on-white.jpg?b=1&s=170667a&w=0&k=20&c=eXhaYWV8BuAyFUWUdRxuwfaQaDpkitUVI83hJgGgBqM=' width=100 height=100 style='margin-left:auto; margin-right:auto'>", id:'broccoli' },
+                { name: "<img src='https://media.istockphoto.com/id/585172756/photo/raw-potatoes.jpg?s=612x612&w=0&k=20&c=mLQgnmx3-qZrieb2HVjrOISh8H6_7_Aeb7w_eRCJCao=' width=100 style='margin-left:auto; margin-right:auto; min-height: 100px;'>" ,id:'potato'},
+                { name: "<img src='https://media.istockphoto.com/id/1276597176/photo/button-mushrooms.jpg?b=1&s=170667a&w=0&k=20&c=hVMfdcFgWsDga4mGLQvMc9xprfPBT44eqZxa5A9IUtg=' width=100 height=100 style='margin-left:auto; margin-right:auto'>", id:'mushroom' },
+                { name: "<img src='https://media.istockphoto.com/id/1324920494/photo/brown-chicken-with-an-egg.jpg?s=612x612&w=0&k=20&c=KVGh_20_fDALauXPblUrvQZ1x-FSRG85FlYIpkzlhzg=' width=100 style='margin-left:auto; margin-right:auto; min-height:100px;'>", id:'chicken' },
+                { name: "<img src='https://media.istockphoto.com/id/619252960/photo/carrot.jpg?s=612x612&w=0&k=20&c=C-PlZ2oHW2SDCkaZXn8rg1UFdeF5ismwiy3v7uQRVKE=' width=100 height=100 style='margin-left:auto; margin-right:auto; min-height:100px;'>", id:'carrot' }
             ],
             list2: [
                 //   { name: "Brocolli"},
@@ -132,7 +132,7 @@ export default {
     methods: {
         add: function () {
             const url = "https://spoonacular.com/cdn/ingredients_500x500/"+this.extra+".jpg"
-            const newing = { name: "<img src='"+url+"' width=100 style='min-height: 100px; margin-left:auto; margin-right:auto;'>", id:this.extra }
+            const newing = { name: "<img src='"+url+"' width=100 style='min-height: 100px; margin-left:auto; margin-right:auto;' alt="+this.extra+">", id:this.extra }
             this.list1.push(newing);
             console.log(newing)
         },
