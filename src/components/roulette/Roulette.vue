@@ -15,8 +15,8 @@
       class="wheel-base-container"
       :class="[{ 'wheel-base-container-shadow': baseDisplayShadow }]"
       :style="{
-        width: `${baseSize}px`,
-        height: `${baseSize}px`,
+        width: `22vw`,
+        height: `22vw`,
         background: `${baseBackground}`,
       }"
     >
@@ -30,8 +30,8 @@
       class="wheel"
       :class="[`easing-${easing}`, { 'wheel-border': displayBorder }]"
       :style="{
-        width: `${size}px`,
-        height: `${size}px`,
+        width: `66vw`,
+        height: `66vw`,
         transitionDuration: `${duration}s`,
         transform: `rotate(${this.startingAngle}deg)`,
       }"
@@ -56,7 +56,7 @@
             }deg)`,
           }"
         >
-          <span v-html="item.htmlContent" :style="{ color: item.textColor }"></span>
+          <span v-html="item.htmlContent" id="font_prob" :style="{ color: item.textColor}"></span>
         </div>
       </div>
     </div>
@@ -262,6 +262,16 @@ export default defineComponent ({
 
 @import "../../styles/roulette.scss";
 
+@media(max-width: 650px) {
+  #font_prob{
+    font-size:8px;
+  }
+}
+@media(min-width:651px){
+  #font_prob{
+    font-size:16px;
+  }
+}
 
 .wheel-container,
 .wheel-base,

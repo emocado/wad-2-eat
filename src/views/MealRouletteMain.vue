@@ -42,18 +42,12 @@
             <div
               v-if="wheelSettings.baseHtmlContent"
               v-html="wheelSettings.baseHtmlContent"
+              id="font_prob"
             ></div>
           </template>
         </Roulette>
       </div>
-
-      <div 
-        v-show="result"
-        class="absolute bottom-2 left-1/2 transform -translate-x-1/2"
-      >
-        <button class="btn btn-xs mx-2" @click="onHardReset()"><span style="background-color: lightcoral; padding: 5px 5px;">Refresh Roulette Session </span></button>
-        <button class="btn btn-xs mx-2" @click="onSoftReset()"><span style="background-color: lightblue; padding: 5px 5px;">Re-spin from the beginning</span></button>
-      </div>
+      
     </div>
 
     <p class="text-xl text-black-900 italic mt-10 mb-10"><mark>A customizable roulette wheel to combat pesky indecisiveness</mark></p>
@@ -159,6 +153,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@media(max-width: 650px) {
+  #font_prob{
+    font-size:8px;
+  }
+}
+@media(min-width:651px){
+  #font_prob{
+    font-size:16px;
+  }
+}
 .wheel-anim {
   transition: transform 4s cubic-bezier(.58,-0.26,.24,1.11);
   transform: rotate(-1800deg) scale(1.25);
