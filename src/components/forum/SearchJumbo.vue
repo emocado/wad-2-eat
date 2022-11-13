@@ -6,7 +6,7 @@
                     placeholder="Search for areas, food type" aria-label="Recipient's username"
                     aria-describedby="button-addon2" v-model="search">
                 <button @click="filterPost" class="btn btn-outline-secondary search" type="button"
-                    id="button-addon2"><img id="search-icon" src="src/assets/findFood.png"></button>
+                    id="button-addon2"><img id="search-icon" src="../../assets/findFood.png"></button>
             </div>
             <div class="col-2">
 
@@ -96,11 +96,13 @@ export default {
             console.log(user.metadata);
 
             if (user == null) {
+                console.log("User is not logged in");
                 this.error = true;
                 this.error_message = "Failed to add post , You are not logged in ! "
                 return;
             }
-            if(this.title == "" || this.description == "" || this.image == ""){
+            if(this.title == "" || this.description == "" || this.downloadUrl == ""){
+                console.log("User filed wrong ");
                 this.error = true;
                 this.error_message = "Please fill all the fields";
                 return;

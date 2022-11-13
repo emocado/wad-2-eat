@@ -1,9 +1,11 @@
 <!-- eslint-disable no-unused-vars -->
 <!-- eslint-disable vue/require-v-for-key -->
+
 <template>
   <div v-if="page_name == 'forum'">
     <div v-for="obj of allPosts" class="card mb-3 mx-4 p-4 overflow-hidden" style="height:300px;width:auto;object-fit:contain">
-      <a :href="'comment/'+obj.id">
+      <RouterLink class="nav-link active" :to="'/comment/'+obj.id">
+      <!-- <a :href="'comment/'+obj.id"> -->
         <div class="row g-0">
           <div class=" col-sm-3 h-50-sm d-flex justify-content-center " style="max-height:50%">
             <img :src="obj.image" class="foodpic img-fluid rounded-start" alt="..." style="object-fit: scale-down;">
@@ -16,7 +18,8 @@
             </div>
           </div>
         </div>
-      </a>
+      <!-- </a> -->
+    </RouterLink>
     </div>
   </div>
   <div v-if="page_name == 'discussion'">
@@ -46,7 +49,7 @@ collection,
 getDocs,
 query,
 } from 'firebase/firestore'
-
+import { RouterLink } from 'vue-router'
 import {getPosts} from '../../firebase';
 const db = getFirestore()
 export default {
