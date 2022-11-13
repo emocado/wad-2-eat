@@ -15,8 +15,8 @@
       class="wheel-base-container"
       :class="[{ 'wheel-base-container-shadow': baseDisplayShadow }]"
       :style="{
-        width: `${baseSize}px`,
-        height: `${baseSize}px`,
+        width: `22vw`,
+        height: `22vw`,
         background: `${baseBackground}`,
       }"
     >
@@ -30,8 +30,8 @@
       class="wheel"
       :class="[`easing-${easing}`, { 'wheel-border': displayBorder }]"
       :style="{
-        width: `${size}px`,
-        height: `${size}px`,
+        width: `66vw`,
+        height: `66vw`,
         transitionDuration: `${duration}s`,
         transform: `rotate(${this.startingAngle}deg)`,
       }"

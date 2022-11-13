@@ -1,3 +1,4 @@
+// import VueWindowSize from 'vue-window-size';
 export default {
   // Data template for the restaurant roulette, will be used to create the restaurant roulette and act as the backbone for the Yelp API call
   items: [
@@ -16,7 +17,7 @@ export default {
   wheelSettings: {
     centeredIndicator: true,
     indicatorPosition: "top",
-    size: 600,
+    size: window.innerWidth * 0.65,
     displayShadow: true,
     duration: 5,
     resultVariation: 95,
@@ -26,10 +27,11 @@ export default {
     displayBorder: true,
     displayIndicator: true,
     baseDisplay: true,
-    baseSize: 180,
+    baseSize: (window.innerWidth * 0.65)/3,
     baseDisplayShadow: true,
     baseDisplayIndicator: true,
     baseBackground: "rgb(255 69 69)",
-    baseHtmlContent: "<strong class=\"text-white\">RESTAURANT<br>PICKER!</strong>",
+    baseHtmlContent: "<span class=\"text-white\">RESTAURANT<br>PICKER!</span>",
   }
+  
 }

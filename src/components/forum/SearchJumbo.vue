@@ -31,7 +31,7 @@
                             <label for="image" class="form-label">Image</label>
                             <input @change="fileUpload" type="file" class="form-control" id="image">
                         </div>
-                        <button @click="submit_post" role="button" id="submit_btn" style="background: rgb(234, 156, 169);" class=" btn text-white">Submit Post ! </button>
+                        <button @click="submit_post" role="button" id="submit_btn" style="background: rgb(234, 156, 169);" class="btn text-white">Submit Post ! </button>
                     </div>
                     <div v-if="success" class="alert alert-success" role="alert">
                         Added Post Successfully ! 
