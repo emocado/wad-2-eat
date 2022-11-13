@@ -5,9 +5,9 @@
     <!-- display the wheel results here  -->
     <div class="rouletteResults" v-if="result">
       <div class="rouletteResult">
-        <h2 class="text-2xl mb-5"><mark>Final Results:</mark></h2>
+        <h2 class="text-2xl mt-4 mb-5"><mark>Final Results:</mark></h2>
 
-        <h3 class="text-3xl"><RouterLink class="router-link" :to="`/map/locationid/${result.restaurantId}`">{{ result.htmlContent }}</RouterLink></h3>
+        <h3 class="text-3xl"><RouterLink class="router-link px-2 py-2" :to="`/map/locationid/${result.restaurantId}`" style="background-color:azure;">{{ result.htmlContent }}</RouterLink></h3>
       </div>
     </div>
 
@@ -56,22 +56,14 @@
       </div>
     </div>
 
-    <p class="text-xl text-black-900 italic mt-10 mb-10"><mark>A customizable and flexible fortune wheel to combat pesky indecisiveness</mark></p>
+    <p class="text-xl text-black-900 italic mt-10 mb-10"><mark>A flexible fortune wheel to combat pesky indecisiveness</mark></p>
 
-    <div class="divider"></div> 
+    <div class="divider" style="margin-top: 250px;"></div> 
 
-    <ItemsManager
-      v-if="managerId === 1"
-      class="item-manager overflow-scroll lg:overflow-auto"
-      :initial-items="items"
-      :initial-first-item-index="firstItemIndex"
-      @update-items="onSoftReset"
-    />
   </div>
 </template>
 
 <script>
-import ItemsManager from "../components/roulette/ItemsManager.vue";
 import Roulette from "../components/roulette/Roulette.vue";
 import wheelData from "../components/roulette/restaurantRouletteMainData.js";
 import { RouterLink } from 'vue-router'
@@ -82,7 +74,6 @@ export default {
 
   components: {
     Roulette,
-    ItemsManager,
     RouterLink,
   },
 
@@ -190,6 +181,7 @@ export default {
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
+    padding-top: 70px;
   }
 
   .router-link {

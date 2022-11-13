@@ -58,7 +58,7 @@ export default {
                     // console.log(newInstructionsList);
 
                     const newInnerHTML = `
-                            <div class="card mt-3 mb-3 cardbg" style="max-width: 100%;">
+                            <div class="card mt-3 mb-3 cardbg" style="max-width: 100%; background-color:#F3E0DC; color:black ">
                                 <div class="row g-0">
                                     <div class="col-md-8">
                                         <img src="${meal.image}" width="800" height="800" class="img-fluid rounded-start" alt="MealImage">
@@ -78,7 +78,7 @@ export default {
                                     </div>
                                 </div>
                             </div>
-                            <div class="card mb-3 cardbg" style="max-width: 100%;">
+                            <div class="card mb-3" style="max-width: 100%; background-color:#F3E0DC; color:black">
                                 <div class="row g-0">
                                     <div class="col-md-12">
                                         <div class="card-body">
@@ -91,7 +91,7 @@ export default {
                                 </div>
                             </div>
 
-                            <div class="card mb-3 cardbg" style="max-width: 100%;">
+                            <div class="card mb-3 cardbg" style="max-width: 100%; background-color:#F3E0DC; color:black">
                                 <div class="row g-0">
                                     <div class="col-md-12">
                                         <div class="card-body">
