@@ -41,7 +41,7 @@
 
             <div class="col-6" >
                 Add your own ingredient here:
-                <input v-model="extra" style="color:black">
+                <input v-model="extra" style="color:black" class="form-control">
                 <button class="btn btn-secondary" @click="add">Add</button>
 
             </div>
