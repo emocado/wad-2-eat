@@ -13,7 +13,7 @@
                 <!-- <p class="sub"> {{meal.sourceURL.substring(0,50)}}</p> -->
                 <p class="block"> {{ meal.sourceURL }} </p>
                 <p>Number Of Ingredients Used: {{ meal.usedIngredientCount }}</p>
-                <p>Number Of Ingredients Missing: {{ meal.missedIngredientCount }} Minutes </p>
+                <p>Number Of Ingredients Missing: {{ meal.missedIngredientCount }}</p>
                 <button @click="goTodetail(meal.id)" style="color:grey;text-decoration: underline;">View More</button>
                 <!-- <router-link to="/RecipeInfo">link</router-link> -->
                 
