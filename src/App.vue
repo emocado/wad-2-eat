@@ -1,5 +1,5 @@
 <template>
-  <header>
+  <header class="sticky-top">
 
     <div class="wrapper">
       <NavBar/>

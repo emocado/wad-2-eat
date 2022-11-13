@@ -3,23 +3,17 @@
     <div class="container-fluid mx-2" v-if="allPost.length != 0">
         <div class="row">
             <div class="col pt-5 text-center">
-                <h3 class="font-weight-bold">{{ allPost[0].title }}</h3>
+               <h3 class="font-weight-bold"> <mark class="rounded">{{ allPost[0].title }}</mark></h3>
             </div>
             <!-- {{allPost}} -->
         </div>
-        <div class="row mb-3">
+        <div class="row mb-3 mt-3">
             <div class="col d-flex justify-content-center mb-3"><img class="w-75" :src="allPost[0].image"></div>
             <div class="text-center text-muted text-wrap text-break">{{ allPost[0].description }}</div>
         </div>
         <div class="row">
             <h5> Comments</h5>
-            <div class="col mb-3" v-if="allComments.length != 0" style="border:2px solid grey ; padding: 10px; box-shadow: 5px 10px #888897;border-radius: 15px;">
-                <!-- <div v-for="comment of allComments" class="row">
-                    <p class="fs-4">{{ comment.author }}</p>
-                    <p class=" p-4 border" style="border-radius:10px">
-                        {{ comment.comment_text }}
-                    </p>
-                </div> -->
+            <div class="col mb-3" v-if="allComments.length != 0" style="border:2px solid grey ; padding: 10px; box-shadow: 5px 10px #888997;border-radius: 15px;">
                 <div class=" p-4 my-3" v-for="comment of allComments" style="border:3px solid ;border-radius:15px;border-color: aliceblue;">
                     <p class="fs-6 " style="font-style:italic; text-decoration:underline;">{{ comment.author }}</p>
                     <p class="px-3">

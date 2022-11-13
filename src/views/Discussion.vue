@@ -31,7 +31,8 @@ import HalfCircleSpinner from '../components/HalfCircleSpinner.vue';
   height: calc(100vh - 56px);
 }
 #background{
-  background-color: rgba(234, 156, 169,0.3);
+  /* background-color: rgba(234, 156, 169,0.3); */
+  background: linear-gradient(45deg, white,rgba(234, 156, 169,0.3) );
 }
 </style>
 
