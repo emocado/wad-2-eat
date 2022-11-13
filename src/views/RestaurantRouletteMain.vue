@@ -44,13 +44,7 @@
             </template>
           </Roulette>
         </div>
-        <div
-          v-show="result"
-          class="absolute bottom-2 left-1/2 transform -translate-x-1/2"
-        >
-        <!-- <button class="btn btn-xs mx-2" @click="onHardReset()"><span style="background-color: lightcoral; padding: 5px 5px;">Refresh Roulette Session </span></button>
-        <button class="btn btn-xs mx-2" @click="onSoftReset()"><span style="background-color: lightblue; padding: 5px 5px;">Re-spin from the beginning</span></button> -->
-        </div>
+
       </div>
       <p class="text-xl text-black-900 italic mt-10 mb-10"><mark>A flexible fortune wheel to combat pesky indecisiveness</mark></p>
       <div class="divider" style="margin-top: 250px;"></div>
