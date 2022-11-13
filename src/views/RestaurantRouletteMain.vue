@@ -58,11 +58,6 @@
 
     <p class="text-xl text-black-900 italic mt-10 mb-10"><mark>A customizable and flexible fortune wheel to combat pesky indecisiveness</mark></p>
 
-    <div class="tabs tabs-boxed justify-center pt-3 pb-3">
-      <a class="tab" :class="{'tab-active': managerId === 1 }" @click="managerId = 1">Items manager</a> 
-      <a class="tab" :class="{'tab-active': managerId === 2 }" @click="managerId = 2">Wheel manager</a>
-    </div>
-
     <div class="divider"></div> 
 
     <ItemsManager
@@ -72,17 +67,11 @@
       :initial-first-item-index="firstItemIndex"
       @update-items="onSoftReset"
     />
-    <WheelManager
-      v-if="managerId === 2"
-      :initial-settings="wheelSettings"
-      @hard-reset="onHardReset"
-    />
   </div>
 </template>
 
 <script>
 import ItemsManager from "../components/roulette/ItemsManager.vue";
-import WheelManager from "../components/roulette/WheelManager.vue";
 import Roulette from "../components/roulette/Roulette.vue";
 import wheelData from "../components/roulette/restaurantRouletteMainData.js";
 import { RouterLink } from 'vue-router'
@@ -94,7 +83,6 @@ export default {
   components: {
     Roulette,
     ItemsManager,
-    WheelManager,
     RouterLink,
   },
 
