@@ -138,30 +138,30 @@ export default {
                   this.searchMeals = response.data.meals;
                   this.displayDiv = '';
                   this.searchMeals.forEach((meal) => {
-                      this.displayDiv += '<div class="card-body mt-5 mb-5 pt-5 pb-5 bg-light bg-opacity-75 d-flex align-items-center" style="max-width: 100%;"><h3 class="text-3xl"><strong>' + meal.strMeal + '</strong></h3><img src="' + meal.strMealThumb + '" alt="meal image" class="mealImage img-fluid rounded"><p class="text-xl text-black-900 italic mt-10 mb-10"><mark>Ingredients:</mark></p><ul class="ingredientsList">';
-                      for (let i = 1; i <= 20; i++) {
-                          if (meal['strIngredient' + i] !== null && meal['strIngredient' + i] !== '') {
-                              this.displayDiv += '<li class="ingredient">' + `${meal[`strIngredient${i}`]} - ${meal[`strMeasure${i}`]}` + '</li>';
-                          }
-                      }
-                      // number the strInstructions to make it easier to read by setting the step numbers for each instruction steps
+                      this.displayDiv += '<div class="card-body mt-5 mb-5 pt-5 pb-5 bg-light bg-opacity-75 d-flex align-items-center" style="max-width: 100%;"><h3 class="text-3xl bg-success" style="text-decoration: underline; padding: 10px 10px;"><strong>' + meal.strMeal + '</strong></h3><img src="' + meal.strMealThumb + '" alt="meal image" class="mealImage img-fluid rounded">';
+                      // for (let i = 1; i <= 20; i++) {
+                      //     if (meal['strIngredient' + i] !== null && meal['strIngredient' + i] !== '') {
+                      //         this.displayDiv += '<li class="ingredient">' + `${meal[`strIngredient${i}`]} - ${meal[`strMeasure${i}`]}` + '</li>';
+                      //     }
+                      // }
+                      // // number the strInstructions to make it easier to read by setting the step numbers for each instruction steps
 
-                      let strInstructions = meal.strInstructions;
-                      let strInstructionsArray = strInstructions.split('. ');
-                      let strInstructionsArrayLength = strInstructionsArray.length;
-                      let strInstructionsArrayNumbered = [];
-                      for (let i = 0; i < strInstructionsArrayLength; i++) {
-                          strInstructionsArrayNumbered.push(i + 1 + '. ' + strInstructionsArray[i] + '<br>');
-                      }
-                      strInstructions = strInstructionsArrayNumbered.join('');
-                      this.displayDiv += '</ul><p class="text-xl text-black-900 italic mt-10 mb-10"><mark>Instructions:</mark></p><p class="instructions">' + strInstructions + '</p>';
-                      this.displayDiv += '<p class="card-text text-decoration-underline"><a class="btn btn-info btn-md" href="' + meal.strSource + '"><medium>More Information About Recipe</medium></a></p></div>';
+                      // let strInstructions = meal.strInstructions;
+                      // let strInstructionsArray = strInstructions.split('. ');
+                      // let strInstructionsArrayLength = strInstructionsArray.length;
+                      // let strInstructionsArrayNumbered = [];
+                      // for (let i = 0; i < strInstructionsArrayLength; i++) {
+                      //     strInstructionsArrayNumbered.push(i + 1 + '. ' + strInstructionsArray[i] + '<br>');
+                      // }
+                      // strInstructions = strInstructionsArrayNumbered.join('');
+                      // this.displayDiv += '</ul><p class="text-xl text-black-900 italic mt-10 mb-10"><mark>Instructions:</mark></p><p class="instructions">' + strInstructions + '</p>';
+                      this.displayDiv += '<p class="card-text text-decoration-underline mt-5"><a class="btn btn-info btn-md pt-2" href="' + meal.strSource + '"><medium>More Information About ' + meal.strMeal + '</medium></a></p></div>';
                   });
               }
 
               // case where there is no meal different from the searchMeal
               else {
-                  this.displayDiv = '<div class="card mt-3 mb-3 bg-danger bg-opacity-75 d-flex align-items-center" style="max-width: 100%;"><h3 class="text-3xl"><strong>Sorry, no meal found!</strong></h3></div>';
+                  this.displayDiv = '<div class="card mt-3 mb-3 bg-danger bg-opacity-75 d-flex align-items-center" style="max-width: 100%;"><h3 class="text-3xl"><strong>Sorry, no matched search meal results found!</strong></h3></div>';
               }
 
 
