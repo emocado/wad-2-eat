@@ -1,5 +1,5 @@
 <template>
-  <nav id="navbar" class="navbar navbar-expand-lg bg-light">
+  <nav id="navbar" class="navbar navbar-expand-lg">
     <div class="container-fluid">
       <RouterLink class="navbar-brand" to="/">WAD-2-EAT</RouterLink>
       <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcancasNavbar"
@@ -148,16 +148,19 @@ export default {
   @media (max-width: 992px) {
     #offcancasNavbar {
       width: 200px;
+      background: linear-gradient(135deg, #C8F3FF , white);
     }
     #offcancasNavbar > div {
       flex-direction: column;
       align-items: start !important;
       padding: 10px;
+      background: linear-gradient(135deg, #C8F3FF , white);
     }
   }
 
   #navbar {
     z-index: 15;
+    background: linear-gradient(135deg, #C8F3FF , white);
   }
 
   .dropdown-menu {

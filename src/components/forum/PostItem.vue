@@ -13,7 +13,7 @@
         </div>
         <div class="row">
             <h5> Comments</h5>
-            <div class="col mb-3" v-if="allComments.length != 0" style="border:2px solid ; padding: 10px; box-shadow: 5px 10px #888897;border-radius: 15px;">
+            <div class="col mb-3" v-if="allComments.length != 0" style="border:2px solid grey ; padding: 10px; box-shadow: 5px 10px #888897;border-radius: 15px;">
                 <!-- <div v-for="comment of allComments" class="row">
                     <p class="fs-4">{{ comment.author }}</p>
                     <p class=" p-4 border" style="border-radius:10px">

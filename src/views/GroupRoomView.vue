@@ -15,11 +15,11 @@
                     <div class="section text-center">
                       <h4 class="mb-4 pb-3">Enter Room</h4>
                       <div class="form-group">
-                        <input type="email" name="logemail" class="form-style" placeholder="Room Number" id="logemail"
+                        <input v-model="roomId" type="email" name="logemail" class="form-style" placeholder="Room Number" id="logemail"
                           autocomplete="none">
                         <DoorOpen class="input-icon" />
                       </div>
-                      <a href="#" class="btn mt-4">submit</a>
+                      <RouterLink class="link btn mt-4" :to="'/chat/'+roomId+'/swipe'">Submit</RouterLink>
                       <!-- <p class="mb-0 mt-4 text-center">
                         <a href="#0" class="link">Don't have room? Create Here</a>
                       </p> -->
@@ -35,14 +35,12 @@
                       <h4 class="mb-4 pb-3">Create Room</h4>
                       <div class="form-group">
                         <input type="text" name="logname" class="form-style" placeholder="Your Room Name" id="logname"
-                          autocomplete="none">
+                          autocomplete="none" v-model="roomName">
                           <DoorOpen class="input-icon" />
                       </div>
-                      <a href="#" class="btn mt-4 mx-2">submit</a>
-                      <a @click="randomRoomNameGenerator" class="btn my-4">Generate Random Room</a>
-                      <div v-if="roomName">
-                        Click here to enter your room:
-                        <RouterLink class="link" :to="'/chat/'+roomName+'/swipe'">{{roomName}}</RouterLink>
+                      <a @click="randomRoomNameGenerator" class="btn mt-4">Generate Random Room</a>
+                      <div>
+                        <RouterLink class="link btn mt-4" :to="'/chat/'+roomName+'/swipe'">Submit</RouterLink>
                       </div>
                     </div>
                   </div>
@@ -66,6 +64,7 @@ export default {
   data() {
     return {
       roomName: '',
+      roomId: '',
     }
   },
   methods: {

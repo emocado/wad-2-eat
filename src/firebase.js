@@ -79,6 +79,8 @@ const restaurantsQuery = restaurantsCollection
     .orderBy("likes", "desc")
     .limit(100);
 const postsQuery = firestore.collection("forum_post");
+const chatRoomCollection = firestore.collection("chat_room");
+
 export function useChat(chatRoomId) {
     const messages = ref([]);
     const unsubscribe = messagesQuery.onSnapshot((snapshot) => {
@@ -106,6 +108,31 @@ export function useChat(chatRoomId) {
     return { messages, sendMessage };
 }
 
+export function useChatRoom(chatRoomId) {
+    const users = ref([]);
+    const unsubscribe = chatRoomCollection.onSnapshot((snapshot) => {
+        users.value = snapshot.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+        })).filter((doc) => doc.chatRoomId === chatRoomId)
+    });
+    onUnmounted(unsubscribe);
+
+    const { user, isLogin } = useAuth();
+    const doneSwippingFirebase = (chatRoomId) => {
+        if (!isLogin.value) return;
+        const { photoURL, uid, displayName } = user.value;
+        chatRoomCollection.where("chatRoomId", "==", chatRoomId).where("userId", "==", uid).get().then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                doc.ref.update({
+                    doneSwipping: true,
+                });
+            });
+        });
+    }
+    return { users, doneSwippingFirebase };
+}
+
 export function useRestaurant(chatRoomId) {
     const restaurants = ref([]);
     const unsubscribe = restaurantsQuery.onSnapshot((snapshot) => {
@@ -119,7 +146,22 @@ export function useRestaurant(chatRoomId) {
     const { user, isLogin } = useAuth();
     const addRestaurants = (restaurant, chatRoomId) => {
         if (!isLogin.value) return;
-        const { uid, displayName } = user.value;
+        const { uid, displayName, photoURL } = user.value;
+
+        restaurantsCollection.where("chatRoomId", "==", chatRoomId).where("userId", "==", uid).get()
+            .then((querySnapshot) => {
+                if (querySnapshot.empty) {
+                    chatRoomCollection.add({
+                        chatRoomId: chatRoomId,
+                        userName: displayName,
+                        userId: uid,
+                        doneSwipping: false,
+                        userPhotoURL: photoURL,
+                        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+                    });
+                }
+            })
+
         restaurantsCollection
             .where("name", "==", restaurant.name)
             .where("chatRoomId", "==", chatRoomId)
@@ -130,8 +172,8 @@ export function useRestaurant(chatRoomId) {
                         name: restaurant.name,
                         address: restaurant.location.address1,
                         photoURL: restaurant.image_url ?? "",
-                        userId: uid,
-                        userName: displayName,
+                        userId: [uid],
+                        userName: [displayName],
                         chatRoomId: chatRoomId,
                         likes: 1,
                         locationId: restaurant.id,
@@ -144,6 +186,8 @@ export function useRestaurant(chatRoomId) {
                     querySnapshot.forEach((doc) => {
                         restaurantsCollection.doc(doc.id).update({
                             likes: firebase.firestore.FieldValue.increment(1),
+                            userId: [...doc.data().userId, uid],
+                            userName: [...doc.data().userName, displayName],
                         });
                     });
                 }
