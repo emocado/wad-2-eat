@@ -213,7 +213,7 @@ $fs-card-title: 1.125em;
   background-position: center;
   background-size: cover;
   display: flex;
-  max-height: 500px;
+  max-height: 350px;
   margin: auto;
   font-size: $fs-h2;
   font-weight: $fw-bold;
