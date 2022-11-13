@@ -1,30 +1,39 @@
 
 <template>
-  <!-- <main>
-    <h1>TODO: Add vue-typed-js here</h1>
-  </main> -->
   <main>
     <div id="menu" ref="menu">
       <div id="menu-items" ref="menus">
-        <!-- I made these divs instead of links so you can click on mobile to view the effect -->
+        <div class="menu-header">
+          Eat Out
+        </div>
         <div class="menu-item">
           <RouterLink class="link" to="/swipe">Eat Alone Outside?</RouterLink>
         </div>
         <div class="menu-item">
-          <RouterLink class="link" to="/foodreciperoulette">Eat At Home?</RouterLink>
+          <RouterLink class="link" to="/restaurantroulettemain">Restaurant Roulette!</RouterLink>
         </div>
         <div class="menu-item">
           <RouterLink class="link" to="/group">Eat with Friends?</RouterLink>
         </div>
+
+        <div class="menu-header">
+          Eat at Home
+        </div>
         <div class="menu-item">
-          <RouterLink class="link" to="/forum">Browse Forum</RouterLink>
+          <RouterLink class="link" to="/foodreciperoulette">Recipe Roulette</RouterLink>
         </div>
         <div class="menu-item">
           <RouterLink class="link" to="/mealroulettemain">Meal Roulette!</RouterLink>
         </div>
         <div class="menu-item">
-          <RouterLink class="link" to="/restaurantroulettemain">Restaurant Roulette!</RouterLink>
+          <RouterLink class="link" to="/recipe">Search for Recipe</RouterLink>
         </div>
+        <div class="menu-item">
+          <RouterLink class="link" to="/ingredients_filter">Search Recipe by Ingredients</RouterLink>
+        </div>
+        <!-- <div class="menu-item">
+          <RouterLink class="link" to="/forum">Browse Forum</RouterLink>
+        </div> -->
       </div>
       <div id="menu-background-pattern"></div>
       <div id="menu-background-image"></div>
@@ -40,7 +49,6 @@ export default {
     RouterLink,
   },
   mounted() {
-    console.log(this.$refs.menus.children);
     Array.from(this.$refs.menus.children)
       .forEach((item, index) => {
         item.onmouseover = () => {
@@ -52,20 +60,13 @@ export default {
 </script>
 
 <style scoped>
-/* main {
-    background-image: url(/src/assets/foodmain.jpg);
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    height: calc(100vh - 70px);
-  }
-  h1 {
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: calc(100vh - 70px);
-  } */
+
+.menu-header {
+  color: #fff;
+  font-family: 'Ibarra Real Nova', serif;
+  font-size: clamp(3rem, 8vw, 3rem);
+  padding: clamp(0.25rem, 0.5vw, 0rem) 0rem;
+}
 
 .link {
   color: #fff;
@@ -83,7 +84,6 @@ main {
   display: flex;
   height: calc(100vh - 80px);
   width: 100vw;
-  padding: 30px 0px;
 }
 
 #menu-items {
@@ -93,18 +93,42 @@ main {
 }
 
 #menu[data-active-index="0"]>#menu-background-pattern {
-  background-position: 0% -25%;
+  background-position: 0% -11%;
 }
 
 #menu[data-active-index="1"]>#menu-background-pattern {
-  background-position: 0% -50%;
+  background-position: 0% -22%;
 }
 
 #menu[data-active-index="2"]>#menu-background-pattern {
-  background-position: 0% -75%;
+  background-position: 0% -33%;
 }
 
 #menu[data-active-index="3"]>#menu-background-pattern {
+  background-position: 0% -44%;
+}
+
+#menu[data-active-index="4"]>#menu-background-pattern {
+  background-position: 0% -55%;
+}
+
+#menu[data-active-index="5"]>#menu-background-pattern {
+  background-position: 0% -66%;
+}
+
+#menu[data-active-index="6"]>#menu-background-pattern {
+  background-position: 0% -77%;
+}
+
+#menu[data-active-index="7"]>#menu-background-pattern {
+  background-position: 0% -88%;
+}
+
+#menu[data-active-index="8"]>#menu-background-pattern {
+  background-position: 0% -100%;
+}
+
+#menu[data-active-index="5"]>#menu-background-pattern {
   background-position: 0% -100%;
 }
 
@@ -122,6 +146,26 @@ main {
 
 #menu[data-active-index="3"]>#menu-background-image {
   background-position: center 60%;
+}
+
+#menu[data-active-index="4"]>#menu-background-image {
+  background-position: center 65%;
+}
+
+#menu[data-active-index="5"]>#menu-background-image {
+  background-position: center 70%;
+}
+
+#menu[data-active-index="6"]>#menu-background-image {
+  background-position: center 75%;
+}
+
+#menu[data-active-index="7"]>#menu-background-image {
+  background-position: center 80%;
+}
+
+#menu[data-active-index="8"]>#menu-background-image {
+  background-position: center 85%;
 }
 
 #menu-background-pattern {
@@ -179,8 +223,9 @@ main {
   cursor: pointer;
   display: block;
   font-family: 'Ibarra Real Nova', serif;
-  font-size: clamp(3rem, 8vw, 4rem);
-  padding: clamp(0.25rem, 0.5vw, 1rem) 0rem;
+  font-size: clamp(2rem, 8vw, 2rem);
+  padding: clamp(0.25rem, 0.5vw, 0rem) 0rem;
+  margin-left: 50px;
   text-decoration: none;
   transition: opacity 400ms ease;
 }

@@ -12,27 +12,27 @@
           <ul class="navbar-nav px-3 ">
             
             <li class="nav-item p-2" data-bs-toggle="offcanvas" data-bs-target="#offcancasNavbar">
-              <!-- <a class="nav-link active" aria-current="page" href="#">Home</a> -->
               <RouterLink class="nav-link active" to="/">Home</RouterLink>
             </li>
             <li class="nav-item p-2" data-bs-toggle="offcanvas" data-bs-target="#offcancasNavbar">
-              <!-- <a class="nav-link" href="#">Pricing</a> -->
               <RouterLink class="nav-link active" to="/swipe">Swipe</RouterLink>
             </li>
             <li class="nav-item p-2" data-bs-toggle="offcanvas" data-bs-target="#offcancasNavbar">
-              <!-- <a class="nav-link" href="#">foodreciperoulette</a> -->
               <RouterLink class="nav-link active" to="/foodreciperoulette">Food Recipe Roulette</RouterLink>
             </li>
             <li class="nav-item p-2" data-bs-toggle="offcanvas" data-bs-target="#offcancasNavbar">
-              <!-- <a class="nav-link" href="#">mealroulette</a> -->
               <RouterLink class="nav-link active" to="/mealroulettemain">Meal Roulette!</RouterLink>
             </li>
             <li class="nav-item p-2" data-bs-toggle="offcanvas" data-bs-target="#offcancasNavbar">
-              <!-- <a class="nav-link" href="#">restaurantroulette</a> -->
               <RouterLink class="nav-link active" to="/restaurantroulettemain">Restaurant Roulette!</RouterLink>
             </li>
             <li class="nav-item p-2" data-bs-toggle="offcanvas" data-bs-target="#offcancasNavbar">
-              <!-- <a class="nav-link" href="#">Pricing</a> -->
+              <RouterLink class="nav-link active" to="/recipe">Recipe Search</RouterLink>
+            </li>
+            <li class="nav-item p-2" data-bs-toggle="offcanvas" data-bs-target="#offcancasNavbar">
+              <RouterLink class="nav-link active" to="/ingredient_filter">Ingredient Filter</RouterLink>
+            </li>
+            <li class="nav-item p-2" data-bs-toggle="offcanvas" data-bs-target="#offcancasNavbar">
               <RouterLink class="nav-link active" to="/forum">Forum</RouterLink>
             </li>
             <li class="nav-item p-2" data-bs-toggle="offcanvas" data-bs-target="#offcancasNavbar">
@@ -57,42 +57,46 @@
           <ul class="navbar-nav px-3 ">
             
             <li class="nav-item p-2">
-              <!-- <a class="nav-link active" aria-current="page" href="#">Home</a> -->
               <RouterLink class="nav-link active" to="/">Home</RouterLink>
             </li>
-            <li class="nav-item p-2">
-              <!-- <a class="nav-link" href="#">Pricing</a> -->
-              <RouterLink class="nav-link active" to="/swipe">Swipe</RouterLink>
+            <li class="nav-item dropdown p-2">
+              <a class="nav-link active dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Eat Out
+              </a>
+              <ul class="dropdown-menu">
+                <li>
+                  <RouterLink class="nav-link active" to="/swipe">Swipe</RouterLink>
+                </li>
+                <li>
+                  <RouterLink class="nav-link active" to="/restaurantroulettemain">Restaurant Roulette!</RouterLink>
+                </li>
+                <li>
+                  <RouterLink class="nav-link active" to="/group">Room</RouterLink>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown p-2">
+              <a class="nav-link active dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Eat at home
+              </a>
+              <ul class="dropdown-menu">
+                <li>
+                  <RouterLink class="nav-link active" to="/foodreciperoulette">Food Recipe Roulette</RouterLink>
+                </li>
+                <li>
+                  <RouterLink class="nav-link active" to="/mealroulettemain">Meal Roulette!</RouterLink>
+                </li>
+                <li>
+                  <RouterLink class="nav-link active" to="/recipe">Recipe Search</RouterLink>
+                </li>
+                <li>
+                  <RouterLink class="nav-link active" to="/ingredient_filter">Ingredient Filter</RouterLink>
+                </li>
+              </ul>
             </li>
             <li class="nav-item p-2">
-              <!-- <a class="nav-link" href="#">foodreciperoulette</a> -->
-              <RouterLink class="nav-link active" to="/foodreciperoulette">Food Recipe Roulette</RouterLink>
-            </li>
-            <li class="nav-item p-2">
-              <!-- <a class="nav-link" href="#">mealroulette</a> -->
-              <RouterLink class="nav-link active" to="/mealroulettemain">Meal Roulette!</RouterLink>
-            </li>
-            <li class="nav-item p-2">
-              <!-- <a class="nav-link" href="#">restaurantroulette</a> -->
-              <RouterLink class="nav-link active" to="/restaurantroulettemain">Restaurant Roulette!</RouterLink>
-            </li>
-            <li class="nav-item p-2">
-              <!-- <a class="nav-link" href="#">Pricing</a> -->
               <RouterLink class="nav-link active" to="/forum">Forum</RouterLink>
             </li>
-            <li class="nav-item p-2">
-              <RouterLink class="nav-link active" to="/group">Room</RouterLink>
-            </li>
-
-            <li class="nav-item p-2">
-              <RouterLink class="nav-link active" to="/recipe">Recipe Search</RouterLink>
-            </li>
-
-            <li class="nav-item p-2">
-              <RouterLink class="nav-link active" to="/ingredient_filter">Ingredient Filter</RouterLink>
-            </li>
-
-        
           </ul>
 
           <span class="p-2">
@@ -154,5 +158,9 @@ export default {
 
   #navbar {
     z-index: 15;
+  }
+
+  .dropdown-menu {
+    min-width: 200px;
   }
 </style>
