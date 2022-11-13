@@ -80,6 +80,35 @@ const restaurantsQuery = restaurantsCollection
     .limit(100);
 const postsQuery = firestore.collection("forum_post");
 const chatRoomCollection = firestore.collection("chat_room");
+const singleSelectionCollection = firestore.collection("single_selection");
+
+export function useSingleSelection() {
+    const singleSelection = ref(null);
+    const unsubscribe = singleSelectionCollection.onSnapshot((snapshot) => {
+        singleSelection.value = snapshot.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+        }));
+    });
+    onUnmounted(unsubscribe);
+    
+    const { user, isLogin } = useAuth();
+    const likeRestaurant = (restaurantId) => {
+        console.log("hello");
+        if (!isLogin.value) return;
+        const { photoURL, uid, displayName } = user.value;
+        singleSelectionCollection.add({
+            locationId: restaurantId,
+            userName: displayName,
+            userId: uid,
+            userPhotoURL: photoURL,
+            createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+        });
+        console.log("world2");
+    }
+
+    return { singleSelection, likeRestaurant };
+}
 
 export function useChat(chatRoomId) {
     const messages = ref([]);

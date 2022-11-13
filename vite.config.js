@@ -28,6 +28,11 @@ export default defineConfig({
         target: "https://yapaloysius.pythonanywhere.com",
         changeOrigin: true,
         secure: false,
+      },
+      "/recommendations": {
+        target: "https://yapaloysius.pythonanywhere.com",
+        changeOrigin: true,
+        secure: false,
       }
     },
   },

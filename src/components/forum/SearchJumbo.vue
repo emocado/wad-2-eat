@@ -6,7 +6,7 @@
                     placeholder="Search for areas, food type" aria-label="Recipient's username"
                     aria-describedby="button-addon2" v-model="search">
                 <button @click="filterPost" class="btn btn-outline-secondary search" type="button"
-                    id="button-addon2"><img id="search-icon" src="src/assets/findFood.png"></button>
+                    id="button-addon2"><img id="search-icon" src="../../assets/findFood.png"></button>
             </div>
             <div class="col-2">
 

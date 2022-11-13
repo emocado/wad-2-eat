@@ -230,6 +230,15 @@ main {
   transition: opacity 400ms ease;
 }
 
+@media (max-width: 575px) {
+  .menu-item {
+    font-size: clamp(1rem, 8vw, 1rem);
+  }
+  .menu-header {
+    font-size: clamp(2rem, 8vw, 2rem);
+  }
+}
+
 /* -- YouTube Link Styles -- */
 
 body.menu-toggled>.meta-link>span {

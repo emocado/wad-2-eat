@@ -14,6 +14,10 @@
       </button>
       <HeartButton @click="handleTriggerAdd" />
     </div>
+    <h1 v-if="!isGroup" class="text-center">Recommendations Below</h1>
+    <div v-if="!isGroup" class="d-flex flex-wrap justify-content-center">
+      <FoodCard3Vue v-for="(recommend, index) in recommendations.slice(0,5)" :key="index" :locationId="recommend" />
+    </div>
   </div>
 </template>
   
@@ -22,7 +26,9 @@ import GameCardsStack from "./GameCardsStack.vue";
 import HalfCircleSpinner from "../HalfCircleSpinner.vue";
 import CrossButton from "../CrossButton.vue";
 import HeartButton from "../HeartButton.vue";
+import FoodCard3Vue from "../FoodCard3.vue";
 import axios from "axios";
+import { useSingleSelection, useAuth } from "@/firebase";
 
 export default {
   props: {
@@ -37,14 +43,22 @@ export default {
     HalfCircleSpinner,
     CrossButton,
     HeartButton,
+    FoodCard3Vue,
   },
   emits: ["cardAccepted", "cardRejected", "cardSkipped", "hideCard", "doneSwipping"],
+
+  setup() {
+    const { singleSelection, likeRestaurant } = useSingleSelection();
+    const { user } = useAuth()
+    return { singleSelection, likeRestaurant, user };
+  },
 
   data() {
     return {
       visibleCards: [{ name: "bricklane", location_id: "1" }, { name: "macdonald", location_id: "2" }, { name: "subway", location_id: "3" }, { name: "wolfrik", location_id: "4" }],
       trigger: 0,
       post: null,
+      recommendations: [],
     };
   },
 
@@ -57,6 +71,25 @@ export default {
         console.log(error.message);
       },
     )
+  },
+
+  watch: {
+    singleSelection: {
+      handler: function () {
+        const newSingleSelection = this.singleSelection
+          .filter((item) => item.userId === this.user.uid)
+          .filter((value, index, self) =>
+            index === self.findIndex((t) => (
+              t.locationId === value.locationId
+            )))
+          .map((item1) => {
+            return item1.locationId
+          })
+
+      this.fetchRecommnedations({"liked": newSingleSelection})
+      },
+      deep: true,
+    },
   },
 
   methods: {
@@ -85,7 +118,27 @@ export default {
         .catch(function (error) {
           console.log(error);
         });
+    },
 
+    fetchRecommnedations(likesArrObj) {
+      const url = "/recommendations"
+    //   const likesArrObj =  {
+    //     "liked": [
+    //       "5Z0DVwlOtra6CSx_HWf04Q",
+    //       "b-q1UdGaEazAxhCtJeKRKQ",
+    //       "M-PobdAR2gJhPyLR_WzMCQ"
+    //     ]
+    // }
+
+      axios
+        .post(url, likesArrObj)
+        .then((response) => {
+          this.recommendations = Object.values(response.data);
+          console.log(this.recommendations);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
 
     handleTriggerAdd() {
@@ -96,6 +149,18 @@ export default {
     },
     handleCardAccepted() {
       console.log("handleCardAccepted");
+      this.likeRestaurant(this.post[0].id)
+      const newSingleSelection = this.singleSelection
+        .filter((item) => item.userId === this.user.uid)
+        .filter((value, index, self) =>
+          index === self.findIndex((t) => (
+            t.locationId === value.locationId
+          )))
+        .map((item1) => {
+          return item1.locationId
+        })
+
+      this.fetchRecommnedations({"liked": newSingleSelection})
       if (!this.$route.params.chatroomid) {
         this.$router.push({ path: `/map/locationid/${this.post[0].id}` });
       }
@@ -140,8 +205,6 @@ export default {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  padding-top: 50px;
-  padding-bottom: 550px;
 }
 
 #swipeButton {
