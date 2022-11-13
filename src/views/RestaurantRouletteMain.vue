@@ -177,6 +177,7 @@ export default {
     background-repeat: no-repeat;
     background-attachment: fixed;
     padding-top: 70px;
+    padding-bottom: 50px;
   }
 
   .router-link {
