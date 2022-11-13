@@ -105,7 +105,8 @@ export default {
       console.log("wheel started !");
     },
     wheelEndedCallback(resultItem) {
-      console.log("wheel ended !", resultItem);
+      // console.log("wheel ended !", resultItem);
+      console.log("wheel ended !");
       this.result = resultItem;
       this.$refs.wheel.reset();
     },
