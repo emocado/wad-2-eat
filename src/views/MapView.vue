@@ -82,10 +82,10 @@ export default {
     });
 
     const url = `https://api.yelp.com/v3/businesses/${this.$route.params.locationid}`
-    // const proxy = "https://cors-anywhere.herokuapp.com/"
+    const proxy = "https://cors-anywhere.herokuapp.com/"
 
     axios
-      .get(url, {
+      .get(proxy+url, {
         headers: {
           Authorization: `Bearer ${import.meta.env.VITE_YELP_API_KEY}`,
         },
