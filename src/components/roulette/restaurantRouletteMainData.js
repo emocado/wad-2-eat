@@ -16,7 +16,7 @@ export default {
   wheelSettings: {
     centeredIndicator: true,
     indicatorPosition: "top",
-    size: 600,
+    size: 333,
     displayShadow: true,
     duration: 5,
     resultVariation: 95,
@@ -26,7 +26,7 @@ export default {
     displayBorder: true,
     displayIndicator: true,
     baseDisplay: true,
-    baseSize: 180,
+    baseSize: 111,
     baseDisplayShadow: true,
     baseDisplayIndicator: true,
     baseBackground: "rgb(255 69 69)",
