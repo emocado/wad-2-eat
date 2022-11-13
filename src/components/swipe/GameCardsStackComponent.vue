@@ -121,7 +121,7 @@ export default {
     },
 
     fetchRecommnedations(likesArrObj) {
-      const url = "/recommendations"
+      const url = "https://yapaloysius.pythonanywhere.com/recommendations"
     //   const likesArrObj =  {
     //     "liked": [
     //       "5Z0DVwlOtra6CSx_HWf04Q",

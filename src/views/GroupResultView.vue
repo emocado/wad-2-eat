@@ -48,7 +48,7 @@ export default {
   },
   methods: {
     selectedRestaurants() {
-      const url = "/decision"
+      const url = "https://yapaloysius.pythonanywhere.com/decision"
       const newRestaurantsArr = this.restaurants.map((restaurant, index) => {
         return JSON.parse(`{ "${restaurant.locationId}": {
           "index": "${index}",
