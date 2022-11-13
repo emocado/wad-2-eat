@@ -8,6 +8,7 @@
   </div>
   <div class="d-flex justify-content-around">
     <CrossButton @click="handleTriggerRemove" />
+    <button v-if="isGroup" class="btn btn-primary" @click="$emit('doneSwipping')" style="position:absolute;">Done Swipping</button>
     <HeartButton @click="handleTriggerAdd" />
   </div>
 </template>
@@ -20,13 +21,20 @@ import HeartButton from "../HeartButton.vue";
 import axios from "axios";
 
 export default {
+  props: {
+    isGroup: {
+      type: Boolean,
+      default: false,
+      required: false,
+    },
+  },
   components: {
     GameCardsStack,
     HalfCircleSpinner,
     CrossButton,
     HeartButton,
   },
-  emits: ["cardAccepted", "cardRejected", "cardSkipped", "hideCard"],
+  emits: ["cardAccepted", "cardRejected", "cardSkipped", "hideCard", "doneSwipping"],
 
   data() {
     return {

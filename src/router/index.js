@@ -12,6 +12,7 @@ import RestaurantRouletteView from '../views/RestaurantRouletteMain.vue';
 import MealCard from "../components/Recipe.vue"
 import MealCard2 from "../components/IngredientFilter.vue"
 import RecipeInfo from '../components/RecipeInfo.vue';
+import GroupResultView from '../views/GroupResultView.vue';
 
 
 const router = createRouter({
@@ -98,6 +99,11 @@ const router = createRouter({
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: RecipeInfo
+    },
+    {
+      path: '/groupresult/:chatroomid',
+      name: 'GroupResult',
+      component: GroupResultView
     }
   ]
 })
