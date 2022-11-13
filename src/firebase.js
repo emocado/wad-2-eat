@@ -168,7 +168,7 @@ export function useRestaurant(chatRoomId) {
         restaurants.value = snapshot.docs
             .map((doc) => ({ id: doc.id, ...doc.data() }))
             .filter((doc) => doc.chatRoomId === chatRoomId)
-            .reverse();
+           ;
     });
     onUnmounted(unsubscribe);
 
