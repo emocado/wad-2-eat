@@ -107,9 +107,6 @@ export default {
                 .then(res => {
                     this.meals = res.data;
                     console.log(res.data)
-                    if (this.meals == null) {
-
-                    }
                 }).catch(err => console.log(err));
 
         }, components: { MealCard2 }
