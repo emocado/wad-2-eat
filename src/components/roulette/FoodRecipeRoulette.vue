@@ -66,7 +66,7 @@ export default {
                                             ${meal.strCategory ? `<p class="card-text text-xl"><strong>Category:</strong> ${meal.strCategory}</p>` : ''}
                                             ${meal.strArea ? `<p class="card-text text-xl"><strong>Area:</strong> ${meal.strArea}</p>` : ''}
                                             ${meal.strTags ? `<p class="card-text text-xl"><strong>Tags:</strong> ${meal.strTags.split(',').join(', ')}</p>` : ''}
-                                            <p class="card-text text-decoration-underline"><a class="btn btn-warning btn-md" style="background-image: linear-gradient(to right,yellow,white,orange);" href="${meal.strSource}"><medium>More Information About Recipe</medium></a></p>
+                                            <p class="card-text text-decoration-underline"><a class="btn btn-info btn-md pt-2" href="${meal.strSource}"><medium>More Information About Recipe</medium></a></p>
                                         </div>
                                     </div>
 
