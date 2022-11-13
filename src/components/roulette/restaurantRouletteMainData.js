@@ -21,7 +21,7 @@ export default {
     duration: 5,
     resultVariation: 95,
     easing: "ease",
-    counterClockwise: true,
+    counterClockwise: false,
     horizontalContent: false,
     displayBorder: true,
     displayIndicator: true,

@@ -1,65 +1,63 @@
 <template>
-  <div class="rouletteMain" data-theme="lemonade">
-
-    <h1 class="text-4xl mt-4">Restaurant Roulette</h1>
-    <!-- display the wheel results here  -->
-    <div class="rouletteResults" v-if="result">
-      <div class="rouletteResult">
-        <h2 class="text-2xl mt-4 mb-5"><mark>Final Results:</mark></h2>
-
-        <h3 class="text-3xl"><RouterLink class="router-link px-2 py-2" :to="`/map/locationid/${result.restaurantId}`" style="background-color:azure;">{{ result.htmlContent }}</RouterLink></h3>
+  <div v-if="items[0].name != '' " >
+    <div class="rouletteMain" data-theme="lemonade">
+      <h1 class="text-4xl mt-4">Restaurant Roulette</h1>
+      <!-- display the wheel results here  -->
+      <div class="rouletteResults" v-if="result">
+        <div class="rouletteResult">
+          <h2 class="text-2xl mt-4 mb-5"><mark>Final Results:</mark></h2>
+          <h3 class="text-3xl"><RouterLink class="router-link px-2 py-2" :to="`/map/locationid/${result.restaurantId}`" style="background-color:azure;">{{ result.htmlContent }}</RouterLink></h3>
+        </div>
       </div>
-    </div>
-
-    <div class="py-5 relative">
-      <div class="wheel-anim" :class="{'wheel-anim-started': startAnim}">
-        <Roulette
-          v-if="wheelActive"
-          ref="wheel"
-          @click="launchWheel"
-          :items="items"
-          :first-item-index="firstItemIndex"
-          :centered-indicator="wheelSettings.centeredIndicator"
-          :indicator-position="wheelSettings.indicatorPosition"
-          :size="wheelSettings.size"
-          :display-Shadow="wheelSettings.displayShadow"
-          :display-border="wheelSettings.displayBorder"
-          :display-indicator="wheelSettings.displayIndicator"
-          :duration="wheelSettings.duration"
-          :result-variation="wheelSettings.resultVariation"
-          :easing="wheelSettings.easing"
-          @wheel-start="wheelStartedCallback"
-          @wheel-end="wheelEndedCallback"
-          :counter-clockwise="wheelSettings.counterClockwise"
-          :horizontal-content="wheelSettings.horizontalContent"
-          :base-display="wheelSettings.baseDisplay"
-          :base-size="wheelSettings.baseSize"
-          :base-display-indicator="wheelSettings.baseDisplayIndicator"
-          :base-display-shadow="wheelSettings.baseDisplayShadow"
-          :base-background="wheelSettings.baseBackground"
+      <div class="py-5 relative">
+        <div class="wheel-anim" :class="{'wheel-anim-started': startAnim}">
+          <Roulette
+            v-if="wheelActive"
+            ref="wheel"
+            @click="launchWheel"
+            :items="items"
+            :first-item-index="firstItemIndex"
+            :centered-indicator="wheelSettings.centeredIndicator"
+            :indicator-position="wheelSettings.indicatorPosition"
+            :size="wheelSettings.size"
+            :display-Shadow="wheelSettings.displayShadow"
+            :display-border="wheelSettings.displayBorder"
+            :display-indicator="wheelSettings.displayIndicator"
+            :duration="wheelSettings.duration"
+            :result-variation="wheelSettings.resultVariation"
+            :easing="wheelSettings.easing"
+            @wheel-start="wheelStartedCallback"
+            @wheel-end="wheelEndedCallback"
+            :counter-clockwise="wheelSettings.counterClockwise"
+            :horizontal-content="wheelSettings.horizontalContent"
+            :base-display="wheelSettings.baseDisplay"
+            :base-size="wheelSettings.baseSize"
+            :base-display-indicator="wheelSettings.baseDisplayIndicator"
+            :base-display-shadow="wheelSettings.baseDisplayShadow"
+            :base-background="wheelSettings.baseBackground"
+          >
+            <template #baseContent>
+              <div
+                v-if="wheelSettings.baseHtmlContent"
+                v-html="wheelSettings.baseHtmlContent"
+              ></div>
+            </template>
+          </Roulette>
+        </div>
+        <div
+          v-show="result"
+          class="absolute bottom-2 left-1/2 transform -translate-x-1/2"
         >
-          <template #baseContent>
-            <div
-              v-if="wheelSettings.baseHtmlContent"
-              v-html="wheelSettings.baseHtmlContent"
-            ></div>
-          </template>
-        </Roulette>
+        <!-- <button class="btn btn-xs mx-2" @click="onHardReset()"><span style="background-color: lightcoral; padding: 5px 5px;">Refresh Roulette Session </span></button>
+        <button class="btn btn-xs mx-2" @click="onSoftReset()"><span style="background-color: lightblue; padding: 5px 5px;">Re-spin from the beginning</span></button> -->
+        </div>
       </div>
-
-      <div 
-        v-show="result"
-        class="absolute bottom-2 left-1/2 transform -translate-x-1/2"
-      >
-      <button class="btn btn-xs mx-2" @click="onHardReset()"><span style="background-color: lightcoral; padding: 5px 5px;">Refresh Roulette Session </span></button>
-      <button class="btn btn-xs mx-2" @click="onSoftReset()"><span style="background-color: lightblue; padding: 5px 5px;">Re-spin from the beginning</span></button>
-      </div>
+      <p class="text-xl text-black-900 italic mt-10 mb-10"><mark>A flexible fortune wheel to combat pesky indecisiveness</mark></p>
+      <div class="divider" style="margin-top: 250px;"></div>
     </div>
-
-    <p class="text-xl text-black-900 italic mt-10 mb-10"><mark>A flexible fortune wheel to combat pesky indecisiveness</mark></p>
-
-    <div class="divider" style="margin-top: 250px;"></div> 
-
+  </div>
+  <div style="height:100vh" class="d-flex justify-content-center align-items-center" v-else>
+    <HalfCircleSpinner/>
   </div>
 </template>
 
@@ -67,6 +65,7 @@
 import Roulette from "../components/roulette/Roulette.vue";
 import wheelData from "../components/roulette/restaurantRouletteMainData.js";
 import { RouterLink } from 'vue-router'
+import HalfCircleSpinner from '../components/HalfCircleSpinner.vue'
 import axios from "axios";
 
 export default {
@@ -75,6 +74,7 @@ export default {
   components: {
     Roulette,
     RouterLink,
+    HalfCircleSpinner
   },
 
   data () {
@@ -112,6 +112,7 @@ export default {
     wheelEndedCallback(resultItem) {
       console.log("wheel ended !", resultItem);
       this.result = resultItem;
+      this.$refs.wheel.reset();
     },
     onSoftReset(newItemList) {
       this.items = newItemList || this.items;

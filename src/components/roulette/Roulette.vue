@@ -226,7 +226,8 @@ export default defineComponent ({
   },
   methods: {
     reset() {
-      this.itemSelected = null;
+      // this.itemSelected = null;
+      
       document.querySelector(
         `#wheel-container-${this.randomIdRoulette} .wheel`
       ).style.transform = `rotate(${this.startingAngle}deg)`;
