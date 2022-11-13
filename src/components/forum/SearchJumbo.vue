@@ -31,7 +31,7 @@
                             <label for="image" class="form-label">Image</label>
                             <input @change="fileUpload" type="file" class="form-control" id="image">
                         </div>
-                        <button @click="submit_post" role="button" id="submit_btn" style="background: rgb(234, 156, 169);" class=" btn text-white">Submit Post ! </button>
+                        <button @click="submit_post" role="button" id="submit_btn" style="background: rgb(234, 156, 169);" class="btn text-white">Submit Post ! </button>
                     </div>
                     <div v-if="success" class="alert alert-success" role="alert">
                         Added Post Successfully ! 
@@ -96,11 +96,13 @@ export default {
             console.log(user.metadata);
 
             if (user == null) {
+                console.log("User is not logged in");
                 this.error = true;
                 this.error_message = "Failed to add post , You are not logged in ! "
                 return;
             }
-            if(this.title == "" || this.description == "" || this.image == ""){
+            if(this.title == "" || this.description == "" || this.downloadUrl == ""){
+                console.log("User filed wrong ");
                 this.error = true;
                 this.error_message = "Please fill all the fields";
                 return;

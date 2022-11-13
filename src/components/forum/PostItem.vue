@@ -3,7 +3,7 @@
     <div class="container-fluid mx-2" v-if="allPost.length != 0">
         <div class="row">
             <div class="col pt-5 text-center">
-               <h3 class="font-weight-bold"> <mark class="rounded">{{ allPost[0].title }}</mark></h3>
+               <h3 class="font-weight-bold"> {{ allPost[0].title }}</h3>
             </div>
             <!-- {{allPost}} -->
         </div>

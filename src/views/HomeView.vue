@@ -173,7 +173,7 @@ main {
       transparent 9%);
   background-position: 0% 0%;
   background-size: 12vmin 12vmin;
-  height: 100vh;
+  height: 100%;
   left: 0px;
   position: absolute;
   top: 0px;

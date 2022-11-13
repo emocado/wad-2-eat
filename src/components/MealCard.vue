@@ -38,7 +38,9 @@ export default {
         goTodetail(food) {            
             const food1=food
             food = this.$route.params.id
-            window.location.href = "/recipe/"+food1
+            // window.location.href = "/recipe/"+food1
+            this.$router.push({ path: `/recipe/${food1}`});
+            
             
 
         }
