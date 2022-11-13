@@ -101,7 +101,6 @@ export default {
                 ingredientlist += ingredients
                 ingredientlist += ','
             }
-
             ingredientlist.slice(0, -1)
             axios.get(`https://api.spoonacular.com/recipes/findByIngredients?apiKey=52e7e5abc8da43e3b0722667e3cec54d&ingredients=` + ingredientlist)
                 .then(res => {
