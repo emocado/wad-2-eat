@@ -5,10 +5,13 @@
         <HalfCircleSpinner />
       </div>
       <GameCardsStack v-else :cards="post" :trigger="trigger" @cardAccepted="handleCardAccepted"
-        @cardRejected="handleCardRejected" @cardSkipped="handleCardSkipped" @hideCard="removeCardFromDeck"/>
+        @cardRejected="handleCardRejected" @cardSkipped="handleCardSkipped" @hideCard="removeCardFromDeck" />
     </div>
-    <div class="d-flex justify-content-around" id="swipeButton">
-      <CrossButton @click="handleTriggerRemove"/>
+    <div class="d-flex justify-content-around">
+      <CrossButton @click="handleTriggerRemove" />
+      <button v-if="isGroup" class="btn btn-primary" @click="$emit('doneSwipping')" style="position:absolute;">
+        Done Swipping
+      </button>
       <HeartButton @click="handleTriggerAdd" />
     </div>
   </div>
@@ -22,13 +25,20 @@ import HeartButton from "../HeartButton.vue";
 import axios from "axios";
 
 export default {
+  props: {
+    isGroup: {
+      type: Boolean,
+      default: false,
+      required: false,
+    },
+  },
   components: {
     GameCardsStack,
     HalfCircleSpinner,
     CrossButton,
     HeartButton,
   },
-  emits: ["cardAccepted", "cardRejected", "cardSkipped", "hideCard"],
+  emits: ["cardAccepted", "cardRejected", "cardSkipped", "hideCard", "doneSwipping"],
 
   data() {
     return {
@@ -130,7 +140,7 @@ export default {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  padding-top : 50px;
+  padding-top: 50px;
   padding-bottom: 550px;
 }
 
@@ -138,9 +148,7 @@ export default {
   position: absolute;
   bottom: 0;
   width: 100%;
-  padding-bottom: 75px;
+  padding-bottom: 50px;
 }
-
-
 </style>
   

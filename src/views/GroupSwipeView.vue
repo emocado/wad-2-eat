@@ -3,7 +3,7 @@
     <a-layout>
       <a-layout-content style="margin: 0 16px">
         <div>
-          <GameCardsStackComponentVue @cardAccepted="handleCardAccepted" />
+          <GameCardsStackComponentVue isGroup @doneSwipping="doneSwipping" @cardAccepted="handleCardAccepted" />
         </div>
       </a-layout-content>
     </a-layout>
@@ -78,7 +78,7 @@ import ChatBox from '../components/sidebar/chat/ChatBox.vue';
 import SingleDrawer from '../components/sidebar/SingleDrawer.vue';
 import DrawerTabs from '../components/sidebar/DrawerTabs.vue';
 import { useRoute } from 'vue-router';
-import { useRestaurant } from '@/firebase'
+import { useRestaurant, useChatRoom } from '@/firebase'
 export default defineComponent({
   components: {
     GameCardsStackComponentVue,
@@ -100,9 +100,9 @@ export default defineComponent({
   setup() {
     const route = useRoute()
     const chatRoomId = route.params.chatroomid;
-    console.log(chatRoomId);
     const { restaurants, addRestaurants } = useRestaurant(chatRoomId)
-    return { restaurants, addRestaurants, chatRoomId }
+    const { users, doneSwippingFirebase } = useChatRoom(chatRoomId);
+    return { restaurants, addRestaurants, chatRoomId, users, doneSwippingFirebase }
   },
   mounted() {
     window.addEventListener("resize", this.myEventHandler);
@@ -117,6 +117,10 @@ export default defineComponent({
     myEventHandler() {
       this.width = window.innerWidth >= 1400 ? 520 : window.innerWidth >= 768 ? 320 : window.innerWidth >= 576 ? 220 : 200
     },
+    doneSwipping() {
+      this.doneSwippingFirebase(this.chatRoomId)
+      this.$router.push({ path: `/groupresult/${this.chatRoomId}` });
+    }
   },
 
 });
