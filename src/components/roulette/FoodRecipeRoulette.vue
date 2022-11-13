@@ -5,7 +5,7 @@
                 <h2 class="text-3xl font-bold mb-4"><mark class="bg-warning p-2 text-dark" style="--bs-bg-opacity: .5;">Stuck at Home and Feeling Hungry?</mark></h2>
                 <h5 class="text-1xl font-semibold mb-5"><mark>Cook up a random meal by clicking below</mark></h5>
                 <button class="button-primary" @click="retriveResult()">
-                    Meal Roulette 🍔
+                    Food Recipe Roulette 🍔
                 </button>
             </div>
             <div v-html="displayDiv" class="displayMeal"></div>
@@ -133,6 +133,7 @@ export default {
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
+    padding-bottom: 200px;
 }
 
 #mainSection {
