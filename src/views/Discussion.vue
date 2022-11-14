@@ -30,9 +30,10 @@ import HalfCircleSpinner from '../components/HalfCircleSpinner.vue';
   overflow-y: scroll;
   height: calc(100vh - 56px);
 }
-#background{
+
+#background {
   /* background-color: rgba(234, 156, 169,0.3); */
-  background: linear-gradient(45deg, white,rgba(234, 156, 169,0.3) );
+  background: linear-gradient(45deg, white, rgba(234, 156, 169, 0.3));
 }
 </style>
 
@@ -52,22 +53,35 @@ export default {
   data() {
     return {
       post: [],
-      postid: this.$route.params.postid,
+    }
+  },
+  watch: {
+    postid: {
+      handler: function () {
+        this.getPost()
+      },
+      deep: true,
     }
   },
   methods: {
     async getPost() {
+      // this.post=[]
       const post = query(collection(db, "forum_post"), where("__name__", "==", this.postid));
       const querySnapshot = await getDocs(post);
       // console.log(doc(collection(db,'forum_post'),('S92YkYgAiBkwkQj5dw12')).data())
       querySnapshot.forEach((doc) => {
-        this.post.push(doc.data());
+        this.post[0]= (doc.data());
       });
       console.log(this.post);
     },
   },
   created() {
     this.getPost();
+  },
+  computed: {
+    postid() {
+      return this.$route.params.postid;
+    }
   }
 }
 </script>

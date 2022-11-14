@@ -24,8 +24,9 @@
   </div>
   <div v-if="page_name == 'discussion'">
     <div v-for="obj of allPosts" class="card mb-3 mx-4 p-4">
-      <a :href="'/comment/'+obj.id">
-        <div class="row g-0">
+      <!-- <a :href="'/comment/'+obj.id"> -->
+        <!-- <RouterLink class="nav-link active"  :to="'/comment/'+obj.id"> -->
+        <div @click="change_post(obj.id)" class="row g-0">
           <div class=" col-12">
             <img :src="obj.image" class="foodpic img-fluid rounded-start" alt="..." style="object-fit:fill">
           </div>
@@ -36,7 +37,8 @@
             </div>
           </div>
         </div>
-      </a>
+        <!-- </RouterLink> -->
+      <!-- </a> -->
     </div>
   </div>
 </template>
@@ -78,6 +80,10 @@ methods: {
     console.log(this.allPosts);
     console.log(this.filterPost);
   },
+  change_post(id){
+    this.$router.push({name: 'comment', params: {postid: id}});
+  },
+
   filteringPosts(search){
     if(search == ""){
       this.allPosts=this.originalPosts;
