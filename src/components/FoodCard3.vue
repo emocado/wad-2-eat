@@ -44,7 +44,7 @@ export default {
   mounted() {
     // const url = `https://api.yelp.com/v3/businesses/${this.locationId}`
     // const proxy = "https://cors-anywhere.herokuapp.com/"
-    const url = `/api/businesses/${this.locationId}`
+    const url = `/api/${this.locationId}`
     axios
       .get(url, {
         headers: {

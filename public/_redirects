@@ -1,2 +1,2 @@
-/api/* https://api.yelp.com/v3/businesses/search
+/api/* https://api.yelp.com/v3/businesses/:splat 200
 /* /index.html 200

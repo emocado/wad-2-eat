@@ -83,7 +83,7 @@ export default {
 
     // const url = `https://api.yelp.com/v3/businesses/${this.$route.params.locationid}`
     // const proxy = "https://cors-anywhere.herokuapp.com/"
-    const url = `/api/businesses/${this.$route.params.locationid}`
+    const url = `/api/${this.$route.params.locationid}`
 
     axios
       .get(url, {
