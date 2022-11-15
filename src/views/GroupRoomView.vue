@@ -4,7 +4,7 @@
       <div class="row justify-content-center">
         <div class="col-12 text-center align-self-center py-5">
           <div class="text-center" id="innerCard">
-            <h3 class="mb-0 py-3 text-light"><span>Enter Room </span><span>Create Room</span></h3>
+            <h3 class="mb-0 py-3"><span>Enter Room </span><span>Create Room</span></h3>
             <input class="checkbox" type="checkbox" id="reg-log" name="reg-log" />
             <label for="reg-log"></label>
             

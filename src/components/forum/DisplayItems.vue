@@ -51,7 +51,6 @@ collection,
 getDocs,
 query,
 } from 'firebase/firestore'
-import { RouterLink } from 'vue-router'
 import {getPosts} from '../../firebase';
 const db = getFirestore()
 export default {
@@ -73,12 +72,9 @@ methods: {
     querySnapshot.forEach((doc) => {
       var toAdd = doc.data();
       toAdd['id'] = doc.id;
-      console.log(toAdd);
       this.allPosts.push(toAdd);
     });
     this.filterPost = this.allPosts;
-    console.log(this.allPosts);
-    console.log(this.filterPost);
   },
   change_post(id){
     this.$router.push({name: 'comment', params: {postid: id}});

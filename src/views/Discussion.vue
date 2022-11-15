@@ -68,11 +68,9 @@ export default {
       // this.post=[]
       const post = query(collection(db, "forum_post"), where("__name__", "==", this.postid));
       const querySnapshot = await getDocs(post);
-      // console.log(doc(collection(db,'forum_post'),('S92YkYgAiBkwkQj5dw12')).data())
       querySnapshot.forEach((doc) => {
         this.post[0]= (doc.data());
       });
-      console.log(this.post);
     },
   },
   created() {

@@ -1,10 +1,8 @@
 <template>
-  <a-layout style="min-height: 100vh">
+  <a-layout style="min-height: calc(100vh - 80px)">
     <a-layout>
-      <a-layout-content style="margin: 0 16px">
-        <div>
-          <GameCardsStackComponentVue isGroup @doneSwipping="doneSwipping" @cardAccepted="handleCardAccepted" />
-        </div>
+      <a-layout-content >
+        <GameCardsStackComponentVue isGroup @doneSwipping="doneSwipping" @cardAccepted="handleCardAccepted" />
       </a-layout-content>
     </a-layout>
     <a-layout-sider class="sider" theme="light" v-model:collapsed="collapsed" collapsible reverseArrow>
@@ -91,7 +89,7 @@ export default defineComponent({
 
   data() {
     return {
-      collapsed: ref(false),
+      collapsed: ref(true),
       selectedKeys: ref(['1']),
       width: window.innerWidth >= 1400 ? 520 : window.innerWidth >= 768 ? 320 : window.innerWidth >= 576 ? 220 : 200,
     };

@@ -1,6 +1,7 @@
 <template>
   <div id="chatBox">
     <div class="container-fluid chat-container">
+      <h1 class="text-center bg-info p-2 rounded">Chat Group: {{ chatRoomId }}</h1>
       <div>
         <MessageComponent v-for="{ id, text, userPhotoURL, userName, userId } in messages" :key="id" :name="userName"
           :photo-url="userPhotoURL" :sender="userId === user?.uid">
@@ -57,7 +58,7 @@ export default {
       sendMessage(message.value, chatRoomId)
       message.value = ''
     }
-    return { user, isLogin, messages, bottom, message, send }
+    return { user, isLogin, messages, bottom, message, send, chatRoomId }
   }
 }
 </script>

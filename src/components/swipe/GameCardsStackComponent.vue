@@ -9,7 +9,7 @@
     </div>
     <div class="d-flex justify-content-around">
       <CrossButton @click="handleTriggerRemove" />
-      <button v-if="isGroup" class="btn btn-primary" @click="$emit('doneSwipping')" style="position:absolute;">
+      <button v-if="isGroup" id="doneSwipping" class="btn btn-primary" @click="$emit('doneSwipping')" style="position:absolute;">
         Done Swipping
       </button>
       <HeartButton @click="handleTriggerAdd" />
@@ -114,7 +114,6 @@ export default {
           },
         })
         .then(function (response) {
-          console.log(response);
           self.post = response.data.businesses;
         })
         .catch(function (error) {
@@ -136,7 +135,6 @@ export default {
         .post(url, likesArrObj)
         .then((response) => {
           this.recommendations = Object.values(response.data);
-          console.log(this.recommendations);
         })
         .catch((error) => {
           console.log(error);
@@ -202,7 +200,8 @@ export default {
 #backgroundSection {
   background-image: url(../../assets/swipeRestaurantTemplate.webp);
   /* Full height */
-  height: 100%;
+  // height: 100%;
+  height: calc(100vh - 80px);
   /* Center and scale the image nicely */
   background-position: center;
   background-repeat: no-repeat;
@@ -214,6 +213,13 @@ export default {
   bottom: 0;
   width: 100%;
   padding-bottom: 50px;
+}
+
+@media (max-width: 767px) {
+  #doneSwipping {
+    bottom: 130px;
+    width: 250px;
+  }
 }
 </style>
   

@@ -79,8 +79,6 @@ export default {
     },
     methods: {
         filterPost() {
-            console.log(this.search);
-            console.log("YOUR MOTHER ");
             this.$emit('fetch_data', this.search)
         },
         createPost() {
@@ -93,16 +91,13 @@ export default {
         submit_post() {
             const auth = getAuth();
             const user = auth.currentUser;
-            console.log(user.metadata);
 
             if (user == null) {
-                console.log("User is not logged in");
                 this.error = true;
                 this.error_message = "Failed to add post , You are not logged in ! "
                 return;
             }
             if(this.title == "" || this.description == "" || this.downloadUrl == ""){
-                console.log("User filed wrong ");
                 this.error = true;
                 this.error_message = "Please fill all the fields";
                 return;
@@ -120,7 +115,6 @@ export default {
             const colRef = collection(db, "forum_post");
             addDoc(colRef, obj).then((response) => {
                 console.log(response);
-                console.log("Upload completed ")
                 this.createPost();
                 this.form_expand = false;
                 document.getElementById('collapseExample').setAttribute("class", "collapse");
@@ -137,11 +131,8 @@ export default {
                 contentType: "image/jpeg",
             };
             const storage = getStorage();
-            console.log(storage);
-            console.log("storage");
             const storageRef = FBref(storage, "images/" + file.name);
             const uploadTask = uploadBytesResumable(storageRef, file, metadata);
-            console.log("uploading image");
             // Listen for state changes, errors, and completion of the upload.
             uploadTask.on(
                 "state_changed",

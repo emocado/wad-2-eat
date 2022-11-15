@@ -1,9 +1,6 @@
 <template>
-
     <section class="meals">
         <div v-for="(meal, index) in meals" :key="index">
-
-            
             <div class="meal_image" style="padding-top:20px">
                 <img :src="`https://spoonacular.com/recipeImages/` + meal.id + '-636x393.jpg'" :alt="meal.strMealThumb">
             </div>
@@ -11,44 +8,29 @@
             <h5>{{ meal.title }}</h5>
 
             <div class="meal_paragraph">
-                <!-- <p class="sub"> {{meal.sourceURL.substring(0,50)}}</p> -->
                 <p class="block"> {{ meal.sourceURL }} </p>
                 <p>Servings: {{ meal.servings }}</p>
                 <p>Preparation Time: {{ meal.readyInMinutes }} Minutes </p>
                 <button @click="goTodetail(meal.id)" style="color:grey;text-decoration: underline;">View More</button>
-                <!-- <router-link to="/RecipeInfo">link</router-link> -->
-                
             </div>
         </div>
-
     </section>
-
-
 </template>
     
     
 <script>
-import { VueElement } from 'vue';
-import RecipeInfo from './RecipeInfo.vue';
-import { createRouter, createWebHistory } from 'vue-router';
-import { RouterLink } from 'vue-router'
 export default {
     props: ['meals'],
     methods: {
         goTodetail(food) {            
             const food1=food
             food = this.$route.params.id
-            // window.location.href = "/recipe/"+food1
             this.$router.push({ path: `/recipe/${food1}`});
-            
-            
-
         }
     }
-
 }
 </script>
-    
+
 <style scoped>
 * {
     font-family: 'Mali', monospace;

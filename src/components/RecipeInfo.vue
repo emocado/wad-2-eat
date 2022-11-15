@@ -8,10 +8,6 @@
 
 <script>
 import axios from "axios";
-import { routeLocationKey } from "vue-router";
-
-// const url = window.location.href;
-// const id = url.split("/").slice(-1)[0];
 
 export default {
     name: "random_food_generator",
@@ -23,24 +19,15 @@ export default {
     methods: {
         retriveResult(id) {
             axios
-                .get("https://api.spoonacular.com/recipes/"+id+"/information?apiKey=52e7e5abc8da43e3b0722667e3cec54d")
+                .get(`https://api.spoonacular.com/recipes/${id}/information?apiKey=${import.meta.env.VITE_SPOONACULAR_API_KEY}`)
                 .then((response) => {
                     const meal = response.data
-                    console.log(response.data)
-                    // const meal = response.data.meals[0];
-                    // console.log(meal);
-
                     const ingredients = [];
-                    // Get all ingredients from the object. Up to 20
-
                     for (const ingredient of meal.extendedIngredients) {
                             ingredients.push(
                                 `${ingredient.original}`
                             );                    
                     }
-
-                    // Build output
-                    // splice the ${meal.strIntructions} in list format and display inside the card div as steps to cook
 
                     const newInstructions = meal.analyzedInstructions[0].steps;
                     const newInstructionsList = newInstructions.map((instruction) => {
@@ -49,9 +36,6 @@ export default {
                     });
 
                     const summary = meal.summary.split('Try')[0]
-                    
-                    // console.log(newInstructionsList);
-
                     const newInnerHTML = `
                             <div class="card mt-3 mb-3 cardbg" style="max-width: 100%; background-color:#F3E0DC; color:black ">
                                 <div class="row g-0">
@@ -98,7 +82,6 @@ export default {
                                     </div>
                                 </div>
                             </div>
-
                     `;
 
                     this.displayDiv = newInnerHTML;
@@ -111,7 +94,6 @@ export default {
 
     mounted(){
         this.retriveResult(this.$route.params.id)
-        
     }
 };
 </script>

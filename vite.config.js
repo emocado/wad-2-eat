@@ -19,21 +19,12 @@ export default defineConfig({
   },
   server: {
     proxy: {
-      "/v3": {
-        target: "https://api.yelp.com",
+      "/api": {
+        target: "https://api.yelp.com/v3/businesses",
         changeOrigin: true,
         secure: false,
+        rewrite: (path) => path.replace(/^\/api/, ""),
       },
-      "/decision": {
-        target: "https://yapaloysius.pythonanywhere.com",
-        changeOrigin: true,
-        secure: false,
-      },
-      "/recommendations": {
-        target: "https://yapaloysius.pythonanywhere.com",
-        changeOrigin: true,
-        secure: false,
-      }
     },
   },
 })

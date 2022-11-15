@@ -9,9 +9,8 @@ import GroupRoomView from "../views/GroupRoomView.vue";
 import FoodRecipeRoulette from "../components/roulette/FoodRecipeRoulette.vue";
 import MealRouletteView from "../views/MealRouletteMain.vue";
 import RestaurantRouletteView from '../views/RestaurantRouletteMain.vue';
-import MealCard from "../components/Recipe.vue"
+import RecipeView from "../views/RecipeView.vue"
 import IngredientFilter from "../components/IngredientFilter.vue"
-import MealCard2 from "../components/MealCard2.vue"
 import RecipeInfo from '../components/RecipeInfo.vue';
 import GroupResultView from '../views/GroupResultView.vue';
 
@@ -78,35 +77,22 @@ const router = createRouter({
     {
       path: '/recipe',
       name: 'recipe',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: MealCard
+      component: RecipeView
     },
 
     {
       path: '/ingredient_filter',
       name: 'ingredient_filter',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
       component: IngredientFilter
     },
     {
       path: '/ingredient_filter/:id',
       name: 'ingredient_filter_id',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
       component: RecipeInfo
     },
     {
       path: '/recipe/:id',
       name: 'RecipeInfo',
-    
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
       component: RecipeInfo
     },
     {

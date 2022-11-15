@@ -1,6 +1,6 @@
 <template>
     <div class="background">
-        <div class="row">
+        <div class="row mb-4">
             <div class="col-3"></div>
             <div class="col-3">
                 <h3 style="color:white; text-align: center; font-size: 3vw">Ingredients Available</h3>
@@ -12,7 +12,6 @@
                 </draggable>
             </div>
 
-
             <div class="col-3">
                 <h3 style="color:white; text-align: center; font-size: 3vw;">Added Ingredients</h3>
                 <draggable style="height:80%" class="list-group" :list="list2" group="people" @change="log" itemKey="name">
@@ -23,62 +22,24 @@
                 <div class="col-3"></div>
             </div>
         </div>
-        
-
-        <!-- <rawDisplayer class="col-3" :value="list1" title="List 1" />
-  
-        <rawDisplayer class="col-3" :value="list2" title="List 2" /> -->
-        <div class="row">
-            <div class="col-12 p-3">
-
-            </div>
-        </div>
 
         <div class="row">
-            <div class="col-3">
-
-            </div>
-
-            <div class="col-6" >
+            <div class="col-6 m-auto">
                 Add your own ingredient here:
                 <input v-model="extra" style="color:black" class="form-control">
-                <button class="btn btn-secondary" @click="add">Add</button>
-
+                <button class="btn btn-secondary w-100" @click="add">Add</button>
             </div>
-
-            <div class="col-3">
-
-
-            </div>
-
         </div>
 
-        <div class="row">
-            <div class="col-3">
-
-            </div>
-
-            <div class="col-6">
+        <div class="row mb-5">
+            <div class="col-6 m-auto">
                 <span>Current Ingredient In Pot 🍲: </span>
-                <span class="item" v-for="(item, index) in list2">
+                <span class="item" v-for="(item, index) in list2" :key="index">
                     <span v-if="index != list2.length-1">{{item.id}}, </span>
-                    <span v-else="">{{item.id}}</span> 
+                    <span v-else>{{item.id}}</span> 
                 </span>
             </div>
-
-            <div class="col-3">
-
-
-            </div>
-
         </div>
-
-        <div class="row">
-            <div class="col-12 p-3">
-
-            </div>
-        </div>
-
 
         <div class="row" style="margin: 0;">
             <div class='col-3'></div>
@@ -86,11 +47,9 @@
                 <button style="color:white; border: none;" @click="filter(list2)" type="button" class="btn btn-secondary w-100">Filter</button>
             </div>
             <div class='col-3'></div>
-
         </div>
         
         <MealCard2 :meals="meals"></MealCard2>
-        
     </div>
 
 </template>
@@ -134,7 +93,6 @@ export default {
             const url = "https://spoonacular.com/cdn/ingredients_500x500/"+this.extra+".jpg"
             const newing = { name: "<img src='"+url+"' width=100 style='min-height: 100px; margin-left:auto; margin-right:auto;' alt="+this.extra+">", id:this.extra }
             this.list1.push(newing);
-            console.log(newing)
         },
         replace: function () {
             this.list = [{ name: "Carrot" }];
@@ -155,21 +113,16 @@ export default {
                 checkedIngredients.push(list2[item].id)
             }
 
-            console.log(checkedIngredients)
-
             let ingredientlist = ''
             for (let ingredients of checkedIngredients) {
                 ingredientlist += ingredients
                 ingredientlist += ','
             }
 
-            console.log('the ingredient is '+ingredientlist)
-
             ingredientlist.slice(0, -1)
-            axios.get(`https://api.spoonacular.com/recipes/findByIngredients?apiKey=52e7e5abc8da43e3b0722667e3cec54d&ingredients=` + ingredientlist)
+            axios.get(`https://api.spoonacular.com/recipes/findByIngredients?apiKey=${import.meta.env.VITE_SPOONACULAR_API_KEY}&ingredients=${ingredientlist}`)
                 .then(res => {
                     this.meals = res.data;
-                    console.log(res.data)
                 }).catch(err => console.log(err));
 
         }, components: { MealCard2 }
@@ -204,8 +157,4 @@ export default {
     width: 300px;
     height: 48px;
 }
-
-/* .border {
-    border-style: groove;
-} */
 </style>

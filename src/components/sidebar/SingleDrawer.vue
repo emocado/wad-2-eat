@@ -4,9 +4,12 @@
     <ChatIcon v-if="titleIcon === 'chat'" />
     <span>{{titleIcon}}</span>
   </div>
-  <a-drawer width="100%" v-model:visible="visible" placement="right"
+  <a-drawer width="100%" v-model:visible="visible" placement="right" closable
     @after-visible-change="afterVisibleChange">
     <slot></slot>
+    <template #footer>
+      <a-button style="width: 100%;" @click="onClose">Cancel</a-button>
+    </template>
   </a-drawer>
 </template>
 <script>
@@ -35,10 +38,15 @@ export default defineComponent({
       visible.value = true;
     };
 
+    const onClose = () => {
+      visible.value = false;
+    };
+
     return {
       visible,
       afterVisibleChange,
       showDrawer,
+      onClose,
     };
   },
 

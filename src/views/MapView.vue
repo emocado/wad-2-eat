@@ -48,8 +48,6 @@ export default {
       const directionsRenderer = new window.google.maps.DirectionsRenderer();
       directionsRenderer.setMap(this.map);
       const destination = { lat: this.markers[0].position.lat, lng: this.markers[0].position.lng }
-      // console.log('newnewcenter', newNewCenter);
-      // console.log('destination', destination);
       directionsService.route({
         origin: newNewCenter,
         destination: destination,

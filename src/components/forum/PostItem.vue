@@ -66,16 +66,12 @@ export default {
     watch: {
         allPost: {
             handler: function () {
-                console.log("watcher is workign ")
                 this.getComments()
             },
             deep: true,
         },
     },
     methods: {
-        getId() {
-            console.log(this.postid);
-        },
         // async getPost() {
         //     const post = query(collection(db, "forum_post"), where("__name__", "==", this.postid));
         //     const querySnapshot = await getDocs(post);
@@ -93,7 +89,6 @@ export default {
                 // console.log(doc.data());
                 this.allComments.push(doc.data());
             });
-            console.log(this.allComments);
         },
         add_comment() {
             const db = getFirestore();
@@ -107,7 +102,6 @@ export default {
             if (this.comment_box == "") {
                 this.error = true;
                 this.error_message = "Please enter a comment";
-                console.log("Please enter a comment");
                 return;
             }
             const displayName = user.displayName;
@@ -118,8 +112,7 @@ export default {
             };
             const colRef = collection(db, "post_comment");
             addDoc(colRef, obj).then((response) => {
-                console.log(response);
-                console.log("Upload completed ");
+                console.log(response)
                 this.comment_box = "";
                 this.allComments = [];
                 this.getComments();

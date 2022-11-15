@@ -40,6 +40,14 @@ export default {
   width: 1000px;
 }
 
+// add media query for small screen
+@media (max-width: 575px) {
+  .cards {
+    margin: 0;
+    bottom: 50px;
+  }
+}
+
 
 </style>
   

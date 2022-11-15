@@ -28,8 +28,6 @@ export default {
                 .get("https://www.themealdb.com/api/json/v1/1/random.php")
                 .then((response) => {
                     const meal = response.data.meals[0];
-                    console.log(meal);
-
                     const ingredients = [];
                     // Get all ingredients from the object. Up to 20
                     for (let i = 1; i <= 20; i++) {
