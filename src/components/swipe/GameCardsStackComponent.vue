@@ -114,6 +114,7 @@ export default {
           },
         })
         .then(function (response) {
+          console.log(response);
           self.post = response.data.businesses;
         })
         .catch(function (error) {
