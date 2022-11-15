@@ -123,10 +123,11 @@ export default {
     },
     fetchData(lat, lng) {
       let self = this
-      const url = "https://api.yelp.com/v3/businesses/search"
-      const proxy = "https://cors-anywhere.herokuapp.com/"
+      // const url = "https://api.yelp.com/v3/businesses/search"
+      // const proxy = "https://cors-anywhere.herokuapp.com/"
+      const url = "/api/businesses/search"
       axios
-        .get(proxy+url, {
+        .get(url, {
           headers: {
             Authorization: `Bearer ${import.meta.env.VITE_YELP_API_KEY}`,
           },
