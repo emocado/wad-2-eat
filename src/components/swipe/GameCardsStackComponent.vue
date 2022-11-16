@@ -201,7 +201,6 @@ export default {
   background-image: url(../../assets/swipeRestaurantTemplate.webp);
   /* Full height */
   height: 100%;
-  height: calc(100vh - 80px);
   /* Center and scale the image nicely */
   background-position: center;
   background-repeat: no-repeat;
